@@ -8,8 +8,8 @@ Page({
     countDown: 60,
     
     // 登录表单
-    username: '',
-    password: '',
+    username: 'test_user1',
+    password: '$2b$10$YourHashedPasswordHere',
     
     // 注册和重置密码表单
     phone: '',

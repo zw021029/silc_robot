@@ -1,0 +1,91 @@
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T14:54:41.857Z"}
+{"errorLabelSet":{},"level":"error","message":"connect ECONNREFUSED 127.0.0.1:27017","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"localhost:27017":{"$clusterTime":null,"address":"localhost:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":16355561,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2025-03-24T14:54:46.854Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T14:55:47.186Z"}
+{"errorLabelSet":{},"level":"error","message":"connect ECONNREFUSED 127.0.0.1:27017","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"localhost:27017":{"$clusterTime":null,"address":"localhost:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":16420887,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2025-03-24T14:55:52.185Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T14:55:55.080Z"}
+{"errorLabelSet":{},"level":"error","message":"connect ECONNREFUSED 127.0.0.1:27017","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"localhost:27017":{"$clusterTime":null,"address":"localhost:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":16428781,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2025-03-24T14:56:00.078Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T14:58:55.183Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T14:58:55.207Z"}
+{"level":"warn","message":"MongoDB 连接断开，尝试重新连接...","timestamp":"2025-03-24T15:54:00.501Z"}
+{"level":"warn","message":"MongoDB 连接断开，尝试重新连接...","timestamp":"2025-03-24T15:54:10.505Z"}
+{"errorLabelSet":{},"level":"error","message":"connect ECONNREFUSED 127.0.0.1:27017","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"localhost:27017":{"$clusterTime":null,"address":"localhost:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":19919225,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2025-03-24T15:54:10.520Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T15:57:45.492Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T15:57:45.509Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T15:58:12.178Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T15:58:12.204Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T16:00:18.113Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:00:18.132Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:14:09.638Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:14:09.658Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:14:22.199Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:14:22.222Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:13.825Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:13.852Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:17.049Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:17.066Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:29.836Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:29.859Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:43.256Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:43.275Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:51.259Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:51.290Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:15:58.779Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:15:58.803Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:16:00.426Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:16:00.444Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:16:03.582Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:16:03.604Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:16:08.176Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:16:08.194Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:25:22.426Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:25:22.443Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:35:19","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:35:20","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:35:22","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:36:07","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:36:14","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:40:10.608Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:40:10.635Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:40:26","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:43:04.357Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:43:04.378Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T16:43:11.283Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T16:43:11.300Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:43:52","url":"/user/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:49:07","url":"/?username=test_user1&password=$2b$10$YourHashedPasswordHere","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"0ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:49:56","url":"/","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 00:50:11","url":"/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:02:50.720Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:02:50.751Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 01:03:01","url":"/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:03:31.755Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:03:31.777Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:03:36.462Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:03:36.495Z"}
+{"duration":"9ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 01:03:39","url":"/api/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 01:07:27","url":"/api/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 01:07:28","url":"/api/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"0ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","status":404,"timestamp":"2025-03-25 01:08:26","url":"/health","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"0ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","status":404,"timestamp":"2025-03-25 01:08:48","url":"/health","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","status":200,"timestamp":"2025-03-25 01:10:50","url":"/health","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":404,"timestamp":"2025-03-25 01:11:09","url":"/api/user/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:12:17.162Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:12:17.183Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:12:28.141Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:12:28.159Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:12:55.461Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:12:55.478Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:12:58.396Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:12:58.413Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:13:10.827Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:13:10.846Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:13:18.468Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:13:18.486Z"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:13:23","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:14:56.137Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:14:56.154Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:14:58.830Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:14:58.847Z"}
+{"duration":"6ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:15:07","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"3ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:15:42","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:15:45","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
