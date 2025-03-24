@@ -3,6 +3,7 @@
   "projectname": "client",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": true
-  }
+    "urlCheck": false
+  },
+  "libVersion": "3.7.9"
 }

@@ -1,5 +1,5 @@
 {
-  "appid": "wx66fe6f7535a7ef8d",
+  "appid": "wx17ef251ff20eae63",
   "compileType": "miniprogram",
   "libVersion": "3.7.9",
   "packOptions": {
@@ -7,12 +7,26 @@
     "include": []
   },
   "setting": {
-    "coverView": true,
+    "urlCheck": false,
     "es6": true,
-    "postcss": true,
-    "minified": true,
     "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
     "packNpmRelationList": [],
     "babelSetting": {
       "ignore": [],

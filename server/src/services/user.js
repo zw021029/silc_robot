@@ -39,11 +39,11 @@ class UserService {
     return this.generateToken(user);
   }
 
-  async login(credentials) {
-    const { username, password, phone, openid } = credentials;
+  async login({ username, password, code }) {
+    console.log('service收到的登录参数:', { username, password, code });
     let user;
 
-    // 通过用户名登录
+    // 通过用户名密码登录
     if (username && password) {
       user = await User.findOne({ username }).select('+password');
       if (!user) {
@@ -54,35 +54,23 @@ class UserService {
         throw new Error('密码错误');
       }
     }
-    // 通过手机号登录
-    else if (phone && password) {
-      user = await User.findOne({ phone }).select('+password');
-      if (!user) {
-        throw new Error('手机号未注册');
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        throw new Error('密码错误');
-      }
-    }
-    // 通过微信openid登录
-    else if (openid) {
-      user = await User.findOne({ openid });
-      if (!user) {
-        throw new Error('用户未绑定微信');
-      }
-    } else {
-      throw new Error('无效的登录方式');
+    // 通过微信code登录
+    else if (code) {
+      // TODO: 实现微信登录逻辑
+      throw new Error('微信登录功能尚未实现');
+    } 
+    else {
+      throw new Error('请提供用户名和密码'); 
     }
 
     // 更新最后登录时间
     user.lastLoginTime = new Date();
     await user.save();
 
-    return this.generateToken(user);
+    return this.generateAuthResponse(user);
   }
 
-  generateToken(user) {
+  generateAuthResponse(user) {
     const token = jwt.sign(
       { 
         userId: user._id, 
@@ -95,7 +83,7 @@ class UserService {
 
     return {
       token,
-      user: {
+      userInfo: {
         id: user._id,
         username: user.username,
         nickname: user.nickname,
@@ -103,8 +91,9 @@ class UserService {
         points: user.points,
         role: user.role,
         avatar: user.avatar,
-        selectedRobot: user.selectedRobot
-      }
+        lastLoginTime: user.lastLoginTime
+      },
+      selectedRobot: user.selectedRobot || null
     };
   }
 }

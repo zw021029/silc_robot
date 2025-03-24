@@ -8,8 +8,8 @@ Page({
     countDown: 60,
     
     // 登录表单
-    username: '',
-    password: '',
+    username: 'hao',
+    password: '123456',
     
     // 注册和重置密码表单
     phone: '',
@@ -80,8 +80,8 @@ Page({
   },
 
   // 登录
-  async handleLogin() {
-    const { username, password, loading } = this.data
+  async handleLogin( username, password, phone, openid) {
+    
     if (loading) return
     
     if (!username || !password) {
