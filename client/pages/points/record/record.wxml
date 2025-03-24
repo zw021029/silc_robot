@@ -1,0 +1,106 @@
+<view class="container">
+  <view class="header">
+    <view class="title">兑换记录</view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="filter-bar">
+    <view class="filter-list">
+      <view class="filter-item {{currentStatus === 'all' ? 'active' : ''}}" 
+            data-status="all" 
+            bindtap="switchStatus">全部</view>
+      <view class="filter-item {{currentStatus === item.value ? 'active' : ''}}" 
+            wx:for="{{statusList}}" 
+            wx:key="value"
+            data-status="{{item.value}}" 
+            bindtap="switchStatus">{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="record-list">
+    <view class="record-item" wx:for="{{recordList}}" wx:key="id" bindtap="showRecordDetail" data-id="{{item.id}}">
+      <image class="goods-image" src="{{item.goodsImage}}" mode="aspectFill"></image>
+      <view class="record-info">
+        <view class="goods-name">{{item.goodsName}}</view>
+        <view class="exchange-info">
+          <text class="points">{{item.points}}积分</text>
+          <text class="time">{{item.createTime}}</text>
+        </view>
+        <view class="status-bar">
+          <text class="order-no">订单号：{{item.orderNo}}</text>
+          <text class="status {{item.status}}">{{item.statusText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 记录详情弹窗 -->
+  <view class="detail-modal" wx:if="{{showDetail}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>兑换详情</text>
+        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRecordDetail"></image>
+      </view>
+      <view class="detail-content">
+        <view class="goods-info">
+          <image class="goods-image" src="{{currentRecord.goodsImage}}" mode="aspectFill"></image>
+          <view class="info">
+            <text class="name">{{currentRecord.goodsName}}</text>
+            <text class="points">{{currentRecord.points}}积分</text>
+          </view>
+        </view>
+        <view class="order-info">
+          <view class="info-item">
+            <text class="label">订单号</text>
+            <text class="value">{{currentRecord.orderNo}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">兑换时间</text>
+            <text class="value">{{currentRecord.createTime}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">订单状态</text>
+            <text class="value status {{currentRecord.status}}">{{currentRecord.statusText}}</text>
+          </view>
+        </view>
+        <view class="delivery-info">
+          <view class="info-item">
+            <text class="label">收货人</text>
+            <text class="value">{{currentRecord.receiverName}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">联系电话</text>
+            <text class="value">{{currentRecord.receiverPhone}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">收货地址</text>
+            <text class="value">{{currentRecord.receiverAddress}}</text>
+          </view>
+        </view>
+        <view class="logistics-info" wx:if="{{currentRecord.logistics}}">
+          <view class="info-item">
+            <text class="label">物流公司</text>
+            <text class="value">{{currentRecord.logistics.company}}</text>
+          </view>
+          <view class="info-item">
+            <text class="label">物流单号</text>
+            <text class="value">{{currentRecord.logistics.trackingNo}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="action-bar" wx:if="{{currentRecord.status === 'pending'}}">
+        <button class="cancel-btn" bindtap="cancelExchange">取消兑换</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text wx:if="{{!loading}}">加载更多</text>
+    <view class="loading" wx:else>
+      <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
+      <text>加载中...</text>
+    </view>
+  </view>
+</view> 

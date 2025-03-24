@@ -1,0 +1,178 @@
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: #fff;
+  padding: 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back {
+  padding: 20rpx;
+  margin-left: -20rpx;
+}
+
+.back image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-right: 60rpx;
+}
+
+.filter-section {
+  background: #fff;
+  padding: 20rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.search-box {
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 16rpx 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  font-size: 28rpx;
+  width: 100%;
+}
+
+.filter-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.picker {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.chat-list {
+  height: calc(100vh - 240rpx);
+}
+
+.chat-item {
+  background: #fff;
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.nickname {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.chat-content {
+  margin-left: 100rpx;
+}
+
+.content-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 16rpx;
+}
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.time {
+  flex: 1;
+}
+
+.type {
+  color: #1890ff;
+}
+
+.score {
+  color: #ffa940;
+}
+
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.empty {
+  padding: 120rpx 0;
+  text-align: center;
+}
+
+.empty image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading image {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.loading text {
+  font-size: 28rpx;
+  color: #999;
+} 

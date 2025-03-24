@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="header">
+    <view class="back" bindtap="goBack">
+      <image src="/assets/images/admin/back.png" mode="aspectFit"></image>
+    </view>
+    <view class="title">对话记录</view>
+  </view>
+
+  <!-- 搜索和筛选 -->
+  <view class="filter-section">
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        type="text" 
+        placeholder="搜索用户名/对话内容" 
+        value="{{searchKey}}"
+        bindinput="handleSearch"
+      />
+    </view>
+    <view class="filter-box">
+      <picker 
+        mode="selector" 
+        range="{{robotTypes}}" 
+        range-key="name"
+        value="{{robotTypeIndex}}"
+        bindchange="handleRobotTypeChange"
+      >
+        <view class="picker">
+          <text>{{robotTypes[robotTypeIndex].name}}</text>
+          <image class="arrow" src="/assets/images/admin/arrow-down.png" mode="aspectFit"></image>
+        </view>
+      </picker>
+      <picker 
+        mode="date" 
+        start="2024-01-01" 
+        end="2024-12-31" 
+        value="{{dateFilter}}"
+        bindchange="handleDateChange"
+      >
+        <view class="picker">
+          <text>{{dateFilter || '选择日期'}}</text>
+          <image class="arrow" src="/assets/images/admin/arrow-down.png" mode="aspectFit"></image>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 对话列表 -->
+  <scroll-view 
+    class="chat-list" 
+    scroll-y="true" 
+    bindscrolltolower="loadMore"
+    enable-back-to-top="true"
+  >
+    <view class="chat-item" wx:for="{{chatList}}" wx:key="id" bindtap="showChatDetail" data-id="{{item.id}}">
+      <view class="user-info">
+        <image class="avatar" src="{{item.userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <text class="nickname">{{item.userInfo.nickname}}</text>
+      </view>
+      <view class="chat-content">
+        <view class="content-text">{{item.content}}</view>
+        <view class="chat-meta">
+          <text class="time">{{item.createTime}}</text>
+          <text class="type">{{item.robotType === 1 ? 'GPT对话' : '知识库对话'}}</text>
+          <text class="score" wx:if="{{item.score}}">评分：{{item.score}}分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{hasMore}}">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:else bindtap="loadMore">加载更多</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{chatList.length === 0 && !loading}}">
+      <image src="/assets/images/empty.png" mode="aspectFit"></image>
+      <text>暂无对话记录</text>
+    </view>
+  </scroll-view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading && chatList.length === 0}}">
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

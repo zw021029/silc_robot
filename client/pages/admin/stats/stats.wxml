@@ -1,0 +1,283 @@
+<view class="container">
+  <!-- 标签栏 -->
+  <view class="tabs">
+    <view 
+      class="tab-item {{activeTab === 'overview' ? 'active' : ''}}"
+      data-tab="overview"
+      bindtap="handleTabChange"
+    >
+      总览
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'chat' ? 'active' : ''}}"
+      data-tab="chat"
+      bindtap="handleTabChange"
+    >
+      对话
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'robot' ? 'active' : ''}}"
+      data-tab="robot"
+      bindtap="handleTabChange"
+    >
+      机器人
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'evaluation' ? 'active' : ''}}"
+      data-tab="evaluation"
+      bindtap="handleTabChange"
+    >
+      评价
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'points' ? 'active' : ''}}"
+      data-tab="points"
+      bindtap="handleTabChange"
+    >
+      积分
+    </view>
+  </view>
+
+  <!-- 时间范围选择 -->
+  <view class="filter-bar">
+    <picker 
+      mode="selector"
+      range="{{['本周', '本月', '本年', '自定义']}}"
+      value="{{dateRange === 'week' ? 0 : dateRange === 'month' ? 1 : dateRange === 'year' ? 2 : 3}}"
+      bindchange="handleRangeChange"
+    >
+      <view class="range-picker">
+        <text>{{dateRange === 'week' ? '本周' : dateRange === 'month' ? '本月' : dateRange === 'year' ? '本年' : '自定义'}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </picker>
+
+    <block wx:if="{{dateRange === 'custom'}}">
+      <picker 
+        mode="date"
+        value="{{customStart}}"
+        data-type="customStart"
+        bindchange="handleDateChange"
+      >
+        <view class="date-picker">
+          <text>{{customStart || '开始日期'}}</text>
+        </view>
+      </picker>
+      <text class="date-separator">至</text>
+      <picker 
+        mode="date"
+        value="{{customEnd}}"
+        data-type="customEnd"
+        bindchange="handleDateChange"
+      >
+        <view class="date-picker">
+          <text>{{customEnd || '结束日期'}}</text>
+        </view>
+      </picker>
+    </block>
+
+    <button 
+      class="export-btn"
+      bindtap="handleExport"
+    >
+      导出
+    </button>
+  </view>
+
+  <!-- 统计内容 -->
+  <view class="stats-content">
+    <!-- 总览 -->
+    <view class="stats-section" wx:if="{{activeTab === 'overview' && stats.overview}}">
+      <view class="stats-card">
+        <view class="card-title">用户数据</view>
+        <view class="card-grid">
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.totalUsers}}</text>
+            <text class="item-label">总用户数</text>
+          </view>
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.activeUsers}}</text>
+            <text class="item-label">活跃用户</text>
+          </view>
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.newUsers}}</text>
+            <text class="item-label">新增用户</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">对话数据</view>
+        <view class="card-grid">
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.totalChats}}</text>
+            <text class="item-label">总对话数</text>
+          </view>
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.avgChatsPerUser}}</text>
+            <text class="item-label">人均对话</text>
+          </view>
+          <view class="grid-item">
+            <text class="item-value">{{stats.overview.satisfactionRate}}%</text>
+            <text class="item-label">满意度</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 对话统计 -->
+    <view class="stats-section" wx:if="{{activeTab === 'chat' && stats.chat}}">
+      <view class="stats-card">
+        <view class="card-title">对话趋势</view>
+        <canvas 
+          canvas-id="chatTrend"
+          class="trend-chart"
+          style="height: 400rpx;"
+        />
+        <view class="chart-legend">
+          <view class="legend-item">
+            <view class="legend-color" style="background: #1296db;"></view>
+            <text>对话数量</text>
+          </view>
+          <view class="legend-item">
+            <view class="legend-color" style="background: #91d5ff;"></view>
+            <text>活跃用户</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">热门问题</view>
+        <view class="list-content">
+          <view 
+            class="list-item"
+            wx:for="{{stats.chat.hotQuestions}}"
+            wx:key="question"
+          >
+            <view class="item-rank">{{index + 1}}</view>
+            <view class="item-main">
+              <text class="item-title">{{item.question}}</text>
+              <text class="item-count">{{item.count}}次</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 机器人统计 -->
+    <view class="stats-section" wx:if="{{activeTab === 'robot' && stats.robot}}">
+      <view class="stats-card">
+        <view class="card-title">机器人使用情况</view>
+        <canvas 
+          canvas-id="robotUsage"
+          class="pie-chart"
+          style="height: 400rpx;"
+        />
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">机器人性能</view>
+        <view class="performance-list">
+          <view class="performance-item">
+            <text class="item-label">平均响应时间</text>
+            <text class="item-value">{{stats.robot.avgResponseTime}}ms</text>
+          </view>
+          <view class="performance-item">
+            <text class="item-label">准确率</text>
+            <text class="item-value">{{stats.robot.accuracy}}%</text>
+          </view>
+          <view class="performance-item">
+            <text class="item-label">知识库覆盖率</text>
+            <text class="item-value">{{stats.robot.coverage}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 评价统计 -->
+    <view class="stats-section" wx:if="{{activeTab === 'evaluation' && stats.evaluation}}">
+      <view class="stats-card">
+        <view class="card-title">评价分布</view>
+        <canvas 
+          canvas-id="evaluationDist"
+          class="bar-chart"
+          style="height: 400rpx;"
+        />
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">评价反馈</view>
+        <view class="feedback-list">
+          <view 
+            class="feedback-item"
+            wx:for="{{stats.evaluation.feedbacks}}"
+            wx:key="id"
+          >
+            <view class="feedback-header">
+              <text class="feedback-score">{{item.score === 1 ? '👍' : '👎'}}</text>
+              <text class="feedback-time">{{item.time}}</text>
+            </view>
+            <view class="feedback-content">{{item.content}}</view>
+            <view class="feedback-question">问题：{{item.question}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 积分统计 -->
+    <view class="stats-section" wx:if="{{activeTab === 'points' && stats.points}}">
+      <view class="stats-card">
+        <view class="card-title">积分趋势</view>
+        <canvas 
+          canvas-id="pointsTrend"
+          class="trend-chart"
+          style="height: 400rpx;"
+        />
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">积分排行</view>
+        <view class="rank-list">
+          <view 
+            class="rank-item"
+            wx:for="{{stats.points.topUsers}}"
+            wx:key="userId"
+          >
+            <view class="rank-index">{{index + 1}}</view>
+            <image class="rank-avatar" src="{{item.avatar}}" />
+            <view class="rank-info">
+              <text class="rank-name">{{item.nickname}}</text>
+              <text class="rank-points">{{item.points}}积分</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="stats-card">
+        <view class="card-title">积分消耗</view>
+        <view class="points-usage">
+          <canvas 
+            canvas-id="pointsUsage"
+            class="pie-chart"
+            style="height: 300rpx;"
+          />
+          <view class="usage-legend">
+            <view 
+              class="legend-item"
+              wx:for="{{stats.points.usage}}"
+              wx:key="type"
+            >
+              <view class="legend-color" style="background: {{item.color}};"></view>
+              <text>{{item.type}}</text>
+              <text class="legend-value">{{item.value}}%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view> 

@@ -1,0 +1,105 @@
+<view class="container">
+  <view class="header">
+    <view class="back" bindtap="goBack">
+      <image src="/assets/images/admin/back.png" mode="aspectFit"></image>
+    </view>
+    <view class="title">调用详情</view>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <!-- 用户信息 -->
+    <view class="user-card">
+      <view class="user-info">
+        <image class="avatar" src="{{queryDetail.userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="nickname">{{queryDetail.userInfo.nickname}}</view>
+          <view class="time">{{queryDetail.createTime}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 问答内容 -->
+    <view class="qa-card">
+      <view class="question">
+        <view class="label">问题内容</view>
+        <view class="content">{{queryDetail.query}}</view>
+      </view>
+      <view class="answer">
+        <view class="label">AI回答</view>
+        <view class="content">{{queryDetail.answer}}</view>
+      </view>
+      <view class="metrics">
+        <view class="metric-item">
+          <text class="label">相关度</text>
+          <text class="value {{queryDetail.accuracy >= 80 ? 'high' : queryDetail.accuracy >= 60 ? 'medium' : 'low'}}">
+            {{queryDetail.accuracy}}%
+          </text>
+        </view>
+        <view class="metric-item" wx:if="{{queryDetail.responseTime}}">
+          <text class="label">响应时间</text>
+          <text class="value">{{queryDetail.responseTime}}ms</text>
+        </view>
+        <view class="metric-item" wx:if="{{queryDetail.tokenCount}}">
+          <text class="label">Token数</text>
+          <text class="value">{{queryDetail.tokenCount}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 参考来源 -->
+    <view class="reference-card" wx:if="{{queryDetail.references && queryDetail.references.length > 0}}">
+      <view class="card-title">参考来源</view>
+      <view class="reference-list">
+        <view 
+          class="reference-item"
+          wx:for="{{queryDetail.references}}"
+          wx:key="index"
+        >
+          <view class="ref-content">
+            <view class="ref-text">{{item.content}}</view>
+            <view class="ref-meta">
+              <text class="source">来源：{{item.source}}</text>
+              <text class="page" wx:if="{{item.page}}">第{{item.page}}页</text>
+            </view>
+          </view>
+          <view class="ref-accuracy">
+            <text class="label">相关度</text>
+            <text class="value">{{item.similarity}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 用户反馈 -->
+    <view class="feedback-card" wx:if="{{queryDetail.feedback}}">
+      <view class="card-title">用户反馈</view>
+      <view class="feedback-content">
+        <view class="rating">
+          <text class="label">评分：</text>
+          <view class="stars">
+            <image 
+              wx:for="{{5}}" 
+              wx:key="index"
+              src="/assets/images/{{index < queryDetail.feedback.score ? 'star-filled' : 'star-empty'}}.png"
+              mode="aspectFit"
+            ></image>
+          </view>
+          <text class="score">{{queryDetail.feedback.score}}分</text>
+        </view>
+        <view class="comment" wx:if="{{queryDetail.feedback.comment}}">
+          <text class="label">评价：</text>
+          <text class="content">{{queryDetail.feedback.comment}}</text>
+        </view>
+        <view class="feedback-time">
+          <text>{{queryDetail.feedback.createTime}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

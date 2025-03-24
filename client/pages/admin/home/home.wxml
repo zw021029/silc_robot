@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="header">
+    <view class="title">管理后台</view>
+    <view class="logout-btn" bindtap="handleLogout">
+      <image src="/assets/images/admin/logout.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-list">
+    <view class="stats-item">
+      <text class="stats-value">{{stats.totalUsers}}</text>
+      <text class="stats-label">总用户数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-value">{{stats.totalChats}}</text>
+      <text class="stats-label">总对话数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-value">{{stats.todayChats}}</text>
+      <text class="stats-label">今日对话</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-value">{{stats.totalKnowledge}}</text>
+      <text class="stats-label">知识库数量</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-list">
+    <view 
+      class="menu-item"
+      wx:for="{{menuList}}"
+      wx:key="id"
+      data-url="{{item.url}}"
+      bindtap="handleMenuClick"
+    >
+      <image class="menu-icon" src="{{item.icon}}" mode="aspectFit"></image>
+      <text class="menu-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

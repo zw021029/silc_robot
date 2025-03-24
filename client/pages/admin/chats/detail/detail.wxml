@@ -1,0 +1,83 @@
+<view class="container">
+  <view class="header">
+    <view class="back" bindtap="goBack">
+      <image src="/assets/images/admin/back.png" mode="aspectFit"></image>
+    </view>
+    <view class="title">对话详情</view>
+    <view class="action" bindtap="showActionSheet">
+      <image src="/assets/images/admin/more.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <!-- 用户信息 -->
+    <view class="user-card">
+      <view class="user-info">
+        <image class="avatar" src="{{chatDetail.userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="nickname">{{chatDetail.userInfo.nickname}}</view>
+          <view class="time">{{chatDetail.createTime}}</view>
+        </view>
+      </view>
+      <view class="chat-meta">
+        <text class="type">{{chatDetail.robotType === 1 ? 'GPT对话' : '知识库对话'}}</text>
+        <text class="score" wx:if="{{chatDetail.score}}">评分：{{chatDetail.score}}分</text>
+      </view>
+    </view>
+
+    <!-- 对话内容 -->
+    <scroll-view class="chat-content" scroll-y="true" enhanced="true" show-scrollbar="false">
+      <view class="message-list">
+        <view 
+          class="message-item {{item.role === 'user' ? 'user' : 'assistant'}}"
+          wx:for="{{chatDetail.messages}}"
+          wx:key="index"
+        >
+          <view class="message-info">
+            <text class="role">{{item.role === 'user' ? '用户' : 'AI'}}</text>
+            <text class="msg-time">{{item.createTime}}</text>
+          </view>
+          <view class="message-content">
+            <text user-select="true">{{item.content}}</text>
+            <view class="reference-list" wx:if="{{item.references && item.references.length > 0}}">
+              <view class="reference-title">参考来源：</view>
+              <view 
+                class="reference-item"
+                wx:for="{{item.references}}"
+                wx:for-item="ref"
+                wx:key="index"
+              >
+                <text>{{ref.title}}</text>
+                <text class="similarity">相关度：{{ref.similarity}}%</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 用户反馈 -->
+    <view class="feedback-section" wx:if="{{chatDetail.feedback}}">
+      <view class="section-title">用户反馈</view>
+      <view class="feedback-content">
+        <view class="rating">
+          <text class="label">评分：</text>
+          <text class="value">{{chatDetail.score}}分</text>
+        </view>
+        <view class="comment" wx:if="{{chatDetail.feedback.comment}}">
+          <text class="label">评价：</text>
+          <text class="value">{{chatDetail.feedback.comment}}</text>
+        </view>
+        <view class="feedback-time">
+          <text>{{chatDetail.feedback.createTime}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

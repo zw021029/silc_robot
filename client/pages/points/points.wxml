@@ -1,0 +1,92 @@
+<view class="container">
+  <view class="header">
+    <view class="points-info">
+      <view class="total-points">
+        <text class="label">我的积分</text>
+        <text class="value">{{totalPoints}}</text>
+      </view>
+      <view class="points-detail">
+        <view class="item">
+          <text class="num">{{monthPoints}}</text>
+          <text class="text">本月获得</text>
+        </view>
+        <view class="item">
+          <text class="num">{{usedPoints}}</text>
+          <text class="text">已使用</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 积分功能区 -->
+  <view class="function-area">
+    <view class="function-grid">
+      <navigator url="/pages/points/mall/mall" class="grid-item">
+        <image src="/assets/icons/gift.png" mode="aspectFit"></image>
+        <text>积分商城</text>
+      </navigator>
+      <navigator url="/pages/points/record/record" class="grid-item">
+        <image src="/assets/icons/record.png" mode="aspectFit"></image>
+        <text>兑换记录</text>
+      </navigator>
+      <navigator url="/pages/points/rules/rules" class="grid-item">
+        <image src="/assets/icons/rule.png" mode="aspectFit"></image>
+        <text>积分规则</text>
+      </navigator>
+      <view class="grid-item" bindtap="showRankList">
+        <image src="/assets/icons/rank.png" mode="aspectFit"></image>
+        <text>积分排行</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 积分明细 -->
+  <view class="points-list">
+    <view class="list-header">
+      <text class="title">积分明细</text>
+      <view class="filter">
+        <picker mode="selector" range="{{dateRanges}}" value="{{dateRangeIndex}}" bindchange="handleDateRangeChange">
+          <text>{{dateRanges[dateRangeIndex]}}</text>
+          <image src="/assets/icons/arrow-down.png" mode="aspectFit"></image>
+        </picker>
+      </view>
+    </view>
+
+    <view class="list-content">
+      <view class="list-item" wx:for="{{pointsList}}" wx:key="id">
+        <view class="item-info">
+          <text class="type">{{item.type}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+        <text class="points {{item.points >= 0 ? 'plus' : 'minus'}}">{{item.points >= 0 ? '+' : ''}}{{item.points}}</text>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+      <text wx:if="{{!loading}}">加载更多</text>
+      <view class="loading" wx:else>
+        <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
+        <text>加载中...</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 排行榜弹窗 -->
+  <view class="rank-modal" wx:if="{{showRank}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>积分排行榜</text>
+        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRankList"></image>
+      </view>
+      <view class="rank-list">
+        <view class="rank-item" wx:for="{{rankList}}" wx:key="id">
+          <view class="rank-num {{index < 3 ? 'top' + (index + 1) : ''}}">{{index + 1}}</view>
+          <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+          <text class="nickname">{{item.nickname}}</text>
+          <text class="points">{{item.points}}分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

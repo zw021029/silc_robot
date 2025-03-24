@@ -1,0 +1,89 @@
+<view class="container">
+  <view class="header">
+    <view class="back" bindtap="goBack">
+      <image src="/assets/images/admin/back.png" mode="aspectFit"></image>
+    </view>
+    <view class="title">用户详情</view>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <!-- 基本信息 -->
+    <view class="card">
+      <view class="card-title">基本信息</view>
+      <view class="user-basic">
+        <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="nickname">{{userInfo.nickname}}</view>
+          <view class="phone">{{userInfo.phone}}</view>
+          <view class="join-time">注册时间：{{userInfo.createTime}}</view>
+        </view>
+        <view class="status-switch">
+          <switch checked="{{userInfo.status === 1}}" bindchange="handleStatusChange" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 使用统计 -->
+    <view class="card">
+      <view class="card-title">使用统计</view>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="value">{{userInfo.totalChats || 0}}</text>
+          <text class="label">总对话数</text>
+        </view>
+        <view class="stat-item">
+          <text class="value">{{userInfo.monthChats || 0}}</text>
+          <text class="label">本月对话</text>
+        </view>
+        <view class="stat-item">
+          <text class="value">{{userInfo.points || 0}}</text>
+          <text class="label">当前积分</text>
+        </view>
+        <view class="stat-item">
+          <text class="value">{{userInfo.totalPoints || 0}}</text>
+          <text class="label">累计积分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 最近对话 -->
+    <view class="card">
+      <view class="card-title">最近对话</view>
+      <view class="chat-list">
+        <view class="chat-item" wx:for="{{recentChats}}" wx:key="id">
+          <view class="chat-info">
+            <text class="chat-time">{{item.createTime}}</text>
+            <text class="chat-type">{{item.robotType === 1 ? 'GPT对话' : '知识库对话'}}</text>
+          </view>
+          <view class="chat-content">{{item.content}}</view>
+        </view>
+        <view class="empty" wx:if="{{recentChats.length === 0}}">
+          <text>暂无对话记录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 积分记录 -->
+    <view class="card">
+      <view class="card-title">积分记录</view>
+      <view class="points-list">
+        <view class="points-item" wx:for="{{pointsRecords}}" wx:key="id">
+          <view class="points-info">
+            <text class="points-desc">{{item.description}}</text>
+            <text class="points-time">{{item.createTime}}</text>
+          </view>
+          <text class="points-value {{item.type === 1 ? 'plus' : 'minus'}}">{{item.type === 1 ? '+' : '-'}}{{item.points}}</text>
+        </view>
+        <view class="empty" wx:if="{{pointsRecords.length === 0}}">
+          <text>暂无积分记录</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

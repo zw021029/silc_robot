@@ -1,0 +1,87 @@
+<view class="container">
+  <view class="tabs">
+    <view 
+      class="tab-item {{activeTab === 'users' ? 'active' : ''}}"
+      data-tab="users"
+      bindtap="handleTabChange"
+    >
+      用户管理
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'chats' ? 'active' : ''}}"
+      data-tab="chats"
+      bindtap="handleTabChange"
+    >
+      对话记录
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'knowledge' ? 'active' : ''}}"
+      data-tab="knowledge"
+      bindtap="handleTabChange"
+    >
+      知识库
+    </view>
+  </view>
+
+  <!-- 用户列表 -->
+  <view class="content" wx:if="{{activeTab === 'users'}}">
+    <view 
+      class="user-item"
+      wx:for="{{users}}"
+      wx:key="id"
+    >
+      <image class="user-avatar" src="{{item.avatar || '/assets/images/default-avatar.png'}}" />
+      <view class="user-info">
+        <text class="user-name">{{item.nickname || '用户' + item.id}}</text>
+        <text class="user-phone">{{item.phone}}</text>
+      </view>
+      <view class="user-stats">
+        <text class="stat-item">对话: {{item.chatCount}}</text>
+        <text class="stat-item">积分: {{item.points}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 对话记录 -->
+  <view class="content" wx:if="{{activeTab === 'chats'}}">
+    <view 
+      class="chat-item"
+      wx:for="{{chats}}"
+      wx:key="id"
+    >
+      <view class="chat-header">
+        <text class="chat-user">用户: {{item.userName}}</text>
+        <text class="chat-time">{{item.createTime}}</text>
+      </view>
+      <view class="chat-content">
+        <text class="chat-question">问: {{item.question}}</text>
+        <text class="chat-answer">答: {{item.answer}}</text>
+      </view>
+      <view class="chat-footer">
+        <text class="chat-robot">AI助手: {{item.robotName}}</text>
+        <text class="chat-score">评分: {{item.score !== null ? item.score : '未评分'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 知识库管理 -->
+  <view class="content knowledge" wx:if="{{activeTab === 'knowledge'}}">
+    <button class="upload-btn" bindtap="handleUpload">
+      上传PDF文件
+    </button>
+    <text class="upload-tip">支持上传PDF格式的知识库文件</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-more" wx:if="{{!hasMore && (users.length > 0 || chats.length > 0)}}">
+    <text>没有更多数据了</text>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && users.length === 0 && chats.length === 0}}">
+    <image src="/assets/images/empty.png" class="empty-icon" />
+    <text>暂无数据</text>
+  </view>
+</view> 

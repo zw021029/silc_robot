@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="header">
+    <view class="back-btn" bindtap="handleBack">
+      <image src="/assets/images/back.png" mode="aspectFit"></image>
+    </view>
+    <view class="title">对话详情</view>
+    <button 
+      class="share-btn"
+      open-type="share"
+    >
+      <image src="/assets/images/share.png" mode="aspectFit"></image>
+    </button>
+  </view>
+
+  <view class="content" wx:if="{{!loading}}">
+    <view class="info-card">
+      <view class="info-item">
+        <text class="label">对话时间：</text>
+        <text class="value">{{historyDetail.createTime}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">AI助手：</text>
+        <text class="value">{{historyDetail.robotName}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">评分：</text>
+        <view class="score">
+          <image 
+            class="score-star"
+            wx:for="{{5}}"
+            wx:key="*this"
+            src="{{index < historyDetail.score ? '/assets/images/star-active.png' : '/assets/images/star.png'}}"
+          ></image>
+        </view>
+      </view>
+    </view>
+
+    <view class="chat-list">
+      <view 
+        class="chat-item {{message.type}}"
+        wx:for="{{historyDetail.messages}}"
+        wx:key="id"
+        wx:for-item="message"
+      >
+        <image 
+          class="avatar"
+          src="{{message.type === 'user' ? '/assets/images/user-avatar.png' : historyDetail.robotAvatar}}"
+          mode="aspectFill"
+        ></image>
+        <view class="message-box">
+          <text class="nickname">{{message.type === 'user' ? '我' : historyDetail.robotName}}</text>
+          <view class="message-content">{{message.content}}</view>
+          <text class="time">{{message.createTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:else>
+    <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+    <text>加载中...</text>
+  </view>
+</view> 

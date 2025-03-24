@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="header">
+    <text class="title">选择你的AI助手</text>
+    <text class="subtitle">选择一位AI助手，开启你的智能对话之旅</text>
+  </view>
+
+  <view class="robot-list">
+    <view 
+      class="robot-card {{selectedRobot.id === robot.id ? 'selected' : ''}}" 
+      wx:for="{{robots}}" 
+      wx:key="id" 
+      wx:for-item="robot"
+      data-robot="{{robot}}"
+      bindtap="handleSelect"
+    >
+      <image class="robot-avatar" src="{{robot.avatar}}" mode="aspectFill"></image>
+      <view class="robot-info">
+        <text class="robot-name">{{robot.name}}</text>
+        <text class="robot-desc">{{robot.description}}</text>
+      </view>
+      <view class="select-icon" wx:if="{{selectedRobot.id === robot.id}}">
+        <image src="/assets/images/selected.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+
+  <button 
+    class="bind-btn" 
+    loading="{{loading}}"
+    disabled="{{!selectedRobot}}"
+    bindtap="handleBind"
+  >
+    开始对话
+  </button>
+</view> 

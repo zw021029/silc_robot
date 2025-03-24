@@ -1,0 +1,98 @@
+<view class="container">
+  <!-- 消息列表 -->
+  <scroll-view 
+    class="message-list" 
+    scroll-y 
+    scroll-top="{{scrollTop}}"
+    id="message-list"
+  >
+    <block wx:for="{{messages}}" wx:key="_id">
+      <chat-message 
+        message="{{item}}"
+        isSelf="{{item.isSelf}}"
+        bind:evaluate="handleEvaluate"
+      />
+    </block>
+    
+    <view class="loading" wx:if="{{loading}}">
+      <image src="/assets/images/loading.gif" mode="aspectFit"></image>
+      <text>正在思考中...</text>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <view class="input-box">
+      <!-- 语音按钮 -->
+      <image 
+        class="voice-btn" 
+        src="{{enableVoice ? '/assets/images/keyboard.png' : '/assets/images/voice.png'}}"
+        mode="aspectFit"
+        bindtap="toggleVoiceInput"
+      ></image>
+
+      <!-- 文字输入 -->
+      <input
+        class="input"
+        type="text"
+        value="{{inputValue}}"
+        placeholder="请输入问题"
+        bindinput="handleInput"
+        wx:if="{{!enableVoice}}"
+      />
+
+      <!-- 语音输入 -->
+      <button
+        class="voice-input"
+        hover-class="voice-input-hover"
+        bindtouchstart="startRecording"
+        bindtouchend="endRecording"
+        wx:if="{{enableVoice}}"
+      >
+        {{recording ? '松开发送' : '按住说话'}}
+      </button>
+
+      <!-- 发送按钮 -->
+      <button 
+        class="send-btn"
+        disabled="{{!inputValue && !enableVoice}}"
+        bindtap="handleSend"
+      >发送</button>
+    </view>
+  </view>
+</view>
+
+<!-- 分享菜单 -->
+<view 
+  class="share-mask {{showShareMenu ? 'show' : ''}}" 
+  bindtap="handleHideShare"
+>
+  <view 
+    class="share-menu"
+    catchtap="true"
+  >
+    <view class="share-title">分享到</view>
+    <view class="share-options">
+      <button 
+        class="share-option"
+        open-type="share"
+      >
+        <image class="option-icon" src="/assets/images/wechat.png" />
+        <text>微信好友</text>
+      </button>
+      <button 
+        class="share-option"
+        bindtap="handleShareTimeline"
+      >
+        <image class="option-icon" src="/assets/images/moments.png" />
+        <text>朋友圈</text>
+      </button>
+    </view>
+    <button 
+      class="share-cancel"
+      bindtap="handleHideShare"
+    >
+      取消
+    </button>
+  </view>
+</view> 
