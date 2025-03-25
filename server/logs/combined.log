@@ -1,14 +1,68 @@
-{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:51:50.569Z"}
-{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:51:50.585Z"}
-{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:51:52.303Z"}
-{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:51:52.325Z"}
-{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:53:50.620Z"}
-{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:53:50.636Z"}
-{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:53:56.006Z"}
-{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:53:56.029Z"}
-{"duration":"81ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:53:59","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
-{"duration":"69ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 01:55:25","url":"/register","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
-{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 01:55:27","url":"/register","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
-{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-24T17:57:04.434Z"}
-{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-24T17:57:04.451Z"}
-{"duration":"82ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 01:57:33","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:14:46.983Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:14:47.008Z"}
+{"duration":"11ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:15:12","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:15:13","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:15:16","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"76ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:20:04","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"53ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:20:23","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"65ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:28:03","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"53ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:28:18","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
+{"duration":"73ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:30:27","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"52ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:31:14","url":"/login","userAgent":"PostmanRuntime/7.43.2"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:34:48.095Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:34:48.113Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:34:52.032Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:34:52.060Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:35:09.522Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:35:09.548Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:35:12.983Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:35:13.007Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:35:20.519Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:35:20.536Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:35:29.549Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:35:29.567Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:35:30.439Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:35:30.458Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:37:53.371Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:37:53.392Z"}
+{"duration":"77ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:38:42","url":"/register","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"13ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:38:44","url":"/register","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"17ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:38:54","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"5ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:39:18","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:12.059Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:12.078Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:15.663Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:15.691Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:19.159Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:19.176Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:28.376Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:28.399Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:33.409Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:33.428Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:36.221Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:36.239Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:43.290Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:43.307Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:41:46.154Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:41:46.173Z"}
+{"duration":"17ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:41:51","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"duration":"7ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":400,"timestamp":"2025-03-25 10:43:00","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:44:04.981Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:44:05.005Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:44:06.097Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:44:06.115Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:09.971Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:09.989Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:10.583Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:10.604Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:39.235Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:39.260Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:44.412Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:44.435Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:46.293Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:46.311Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:50.960Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:50.983Z"}
+{"level":"info","message":"服务器运行在 http://localhost:3000","timestamp":"2025-03-25T02:46:51.689Z"}
+{"level":"info","message":"MongoDB 连接成功: localhost","timestamp":"2025-03-25T02:46:51.712Z"}
+{"duration":"79ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","status":200,"timestamp":"2025-03-25 10:46:56","url":"/login","userAgent":"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1 wechatdevtools/1.06.2412050 MicroMessenger/8.0.5 Language/zh_CN webview/"}

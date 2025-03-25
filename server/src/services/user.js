@@ -32,7 +32,10 @@ class UserService {
       password: hashedPassword,
       phone,
       nickname: nickname || username,
-      lastLoginTime: new Date()
+      selectedRobot: 'xiwen',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      lastLoginTime: new Date(),
     });
 
     await user.save();
@@ -45,10 +48,21 @@ class UserService {
 
     // 通过用户名密码登录
     if (username && password) {
+      // 先尝试用户名登录
       user = await User.findOne({ username }).select('+password');
-      if (!user) {
-        throw new Error('用户名不存在');
+      
+      // 如果用户名不存在，尝试用手机号登录
+      if (!user) { 
+         // TODO 验证是否为手机号格式
+        user = await User.findOne({ phone: username }).select('+password');
       }
+      
+      // 如果都找不到用户
+      if (!user) {
+        throw new Error('用户名或手机号不存在');
+      }
+
+      // 验证密码
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         throw new Error('密码错误');
@@ -56,11 +70,17 @@ class UserService {
     }
     // 通过微信code登录
     else if (code) {
-      // TODO: 实现微信登录逻辑
-      throw new Error('微信登录功能尚未实现');
+      try {
+        // TODO: 实现微信登录逻辑
+        // const wxResult = await getWxUserInfo(code);
+        // user = await User.findOne({ openid: wxResult.openid });
+        throw new Error('微信登录功能尚未实现');
+      } catch (error) {
+        throw new Error(`微信登录失败: ${error.message}`);
+      }
     } 
     else {
-      throw new Error('请提供用户名和密码'); 
+      throw new Error('请提供有效的登录信息'); 
     }
 
     // 更新最后登录时间

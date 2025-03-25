@@ -80,8 +80,8 @@ Page({
   },
 
   // 登录
-  async handleLogin( username, password, phone, openid) {
-    
+  async handleLogin() {
+    const { username, password, loading } = this.data
     if (loading) return
     
     if (!username || !password) {
@@ -100,27 +100,26 @@ Page({
         password
       })
 
-      // 保存token
+      // 保存token和用户信息
       wx.setStorageSync('token', res.data.token)
-
-      // 更新全局数据
       const app = getApp()
       app.globalData.userInfo = res.data.userInfo
       app.globalData.selectedRobot = res.data.selectedRobot
 
+      // 使用 Toast 的回调函数处理跳转
       wx.showToast({
         title: '登录成功',
-        icon: 'success'
-      })
-
-      // 延迟跳转
-      setTimeout(() => {
-        if (res.data.selectedRobot) {
-          wx.reLaunch({ url: '/pages/chat/chat' })
-        } else {
-          wx.reLaunch({ url: '/pages/index/index' })
+        icon: 'success',
+        complete: () => {
+          // Toast 显示完成后跳转
+          wx.reLaunch({
+            url: res.data.selectedRobot ? '/pages/chat/chat' : '/pages/index/index',
+            fail: (error) => {
+              console.error('页面跳转失败:', error)
+            }
+          })
         }
-      }, 1500)
+      })
 
     } catch (error) {
       wx.showToast({

@@ -1,13 +1,12 @@
 import request from '../utils/request'
 
-export const login = async (code) => {
+export const login = async ({ username, password }) => {
   try {
-    console.log('开始登录，code:', code)
-    const result = await request.post('/api/user/login', { code })
-    console.log('登录结果:', result)
+    console.log('发送登录请求，参数:', { username, password })
+    const result = await request.post('/api/user/login', { username, password })
     return result
   } catch (error) {
-    console.error('登录失败:', error)
+    console.error('登录请求失败:', error)
     throw error
   }
 }
