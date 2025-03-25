@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
   selectedRobot: {
     type: String,
     enum: ['xiwen', 'xihui'],
-    default: null
+    default: 'xiwen'
   },
   lastLoginTime: Date,
   createdAt: {

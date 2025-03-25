@@ -18,7 +18,7 @@ db.users.createIndex({ "openid": 1 }, { unique: true, sparse: true });
 // 1. 插入管理员用户
 db.users.insertOne({
   username: "admin",
-  password: "$2b$10$YourHashedPasswordHere", // 使用bcrypt生成的密码哈希
+  password: "$2b$10$24EJiM8/LxJCoOUbQ45PLuVb5DBh8Y9M.k9CnjvqV7ZIih8RAY5eK", // 使用bcrypt生成的密码哈希
   nickname: "系统管理员",
   role: "admin",
   points: 0,
@@ -30,7 +30,7 @@ db.users.insertOne({
 db.users.insertMany([
   {
     username: "test_user1",
-    password: "$2b$10$YourHashedPasswordHere",
+    password: "$2b$10$24EJiM8/LxJCoOUbQ45PLuVb5DBh8Y9M.k9CnjvqV7ZIih8RAY5eK",
     nickname: "测试用户1",
     phone: "13800138001",
     role: "user",
@@ -41,7 +41,7 @@ db.users.insertMany([
   },
   {
     username: "test_user2",
-    password: "$2b$10$YourHashedPasswordHere",
+    password: "$2b$10$24EJiM8/LxJCoOUbQ45PLuVb5DBh8Y9M.k9CnjvqV7ZIih8RAY5eK",
     nickname: "测试用户2",
     phone: "13800138002",
     role: "user",
