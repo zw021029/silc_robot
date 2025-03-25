@@ -8,7 +8,7 @@ Page({
     countDown: 60,
     
     // 登录表单
-    username: 'hao',
+    username: 'test_user1',
     password: '123456',
     
     // 注册和重置密码表单

@@ -1,4 +1,4 @@
-// const BASE_URL = 'http://silcrobot.willzuo.top'  // 或者您的域名
+// const BASE_URL = 'http://silcrobot.willzuo.top'  // 远程服务器的域名
 const BASE_URL = 'http://localhost:3000'  // 开发环境本机测试
 
 const request = (options) => {
