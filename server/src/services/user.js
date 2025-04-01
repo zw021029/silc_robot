@@ -1,7 +1,5 @@
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const config = require('../config');
+const bcrypt = require('bcryptjs');
 
 class UserService {
   async register(userData) {
@@ -39,7 +37,7 @@ class UserService {
     });
 
     await user.save();
-    return this.generateToken(user);
+    return this.generateAuthResponse(user);
   }
 
   async login({ username, password, code }) {
@@ -90,16 +88,41 @@ class UserService {
     return this.generateAuthResponse(user);
   }
 
+  async getUserRobot(userId) {
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new Error('用户不存在');
+      }
+      return user.selectedRobot;
+    } catch (error) {
+      console.error('获取用户机器人失败:', error);
+      return null;
+    }
+  }
+
+  async updateProfile(userId, updateData) {
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new Error('用户不存在');
+      }
+
+      // 更新用户信息
+      Object.assign(user, updateData, {
+        updatedAt: new Date()
+      });
+
+      await user.save();
+      return this.generateAuthResponse(user);
+    } catch (error) {
+      console.error('更新用户信息失败:', error);
+      throw error;
+    }
+  }
+
   generateAuthResponse(user) {
-    const token = jwt.sign(
-      { 
-        userId: user._id, 
-        role: user.role,
-        username: user.username
-      },
-      config.jwt.secret,
-      { expiresIn: config.jwt.expiresIn }
-    );
+    const token = user.generateToken();
 
     return {
       token,

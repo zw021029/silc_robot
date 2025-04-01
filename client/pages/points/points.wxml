@@ -33,10 +33,6 @@
         <image src="/assets/icons/rule.png" mode="aspectFit"></image>
         <text>积分规则</text>
       </navigator>
-      <view class="grid-item" bindtap="showRankList">
-        <image src="/assets/icons/rank.png" mode="aspectFit"></image>
-        <text>积分排行</text>
-      </view>
     </view>
   </view>
 
@@ -56,36 +52,25 @@
       <view class="list-item" wx:for="{{pointsList}}" wx:key="id">
         <view class="item-info">
           <text class="type">{{item.type}}</text>
+          <text class="desc">{{item.description}}</text>
           <text class="time">{{item.time}}</text>
         </view>
         <text class="points {{item.points >= 0 ? 'plus' : 'minus'}}">{{item.points >= 0 ? '+' : ''}}{{item.points}}</text>
       </view>
+      
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{pointsList.length === 0 && !loading}}">
+        <image src="/assets/icons/empty.png" mode="aspectFit"></image>
+        <text>暂无积分记录</text>
+      </view>
     </view>
 
     <!-- 加载更多 -->
-    <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <view class="load-more" wx:if="{{hasMore && pointsList.length > 0}}" bindtap="loadMore">
       <text wx:if="{{!loading}}">加载更多</text>
       <view class="loading" wx:else>
         <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
         <text>加载中...</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- 排行榜弹窗 -->
-  <view class="rank-modal" wx:if="{{showRank}}">
-    <view class="modal-content">
-      <view class="modal-header">
-        <text>积分排行榜</text>
-        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRankList"></image>
-      </view>
-      <view class="rank-list">
-        <view class="rank-item" wx:for="{{rankList}}" wx:key="id">
-          <view class="rank-num {{index < 3 ? 'top' + (index + 1) : ''}}">{{index + 1}}</view>
-          <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
-          <text class="nickname">{{item.nickname}}</text>
-          <text class="points">{{item.points}}分</text>
-        </view>
       </view>
     </view>
   </view>

@@ -1,63 +1,85 @@
-<view class="container">
-  <!-- 消息列表 -->
+<view class="chat-container">
+  <!-- 聊天记录区域 -->
   <scroll-view 
-    class="message-list" 
+    class="chat-list" 
     scroll-y 
     scroll-top="{{scrollTop}}"
-    id="message-list"
+    scroll-into-view="{{scrollToMessage}}"
+    bindscrolltoupper="onPullDownRefresh"
+    enhanced="true"
+    show-scrollbar="false"
   >
-    <block wx:for="{{messages}}" wx:key="_id">
-      <chat-message 
-        message="{{item}}"
-        isSelf="{{item.isSelf}}"
-        bind:evaluate="handleEvaluate"
-      />
-    </block>
-    
-    <view class="loading" wx:if="{{loading}}">
-      <image src="/assets/images/loading.gif" mode="aspectFit"></image>
-      <text>正在思考中...</text>
+    <view class="chat-list-content">
+      <!-- 机器人信息 -->
+      <view class="robot-info" wx:if="{{robotInfo}}">
+        <image class="robot-avatar" src="{{robotInfo.avatar || robot.avatar}}" mode="aspectFill"></image>
+        <view class="robot-name">{{robotInfo.name || robot.name}}</view>
+        <view class="robot-desc">{{robotInfo.description}}</view>
+      </view>
+
+      <!-- 消息列表 -->
+      <block wx:for="{{messages}}" wx:key="_id">
+        <!-- 用户消息 -->
+        <view class="message-item user-message" wx:if="{{item.isUser}}">
+          <!-- 用户头像放在最右侧 -->
+          <view class="avatar user-avatar" wx:if="{{userInfo.avatar}}">
+            <image src="{{userInfo.avatar}}" mode="aspectFill"></image>
+          </view>
+          <view class="avatar user-avatar text-avatar" wx:else>
+            <text>我</text>
+          </view>
+          <!-- 消息内容 -->
+          <view class="message-wrapper">
+            <view class="message-content">
+              <text>{{item.content}}</text>
+            </view>
+            <view class="message-time">{{item.createdAt}}</view>
+          </view>
+        </view>
+
+        <!-- 机器人消息 -->
+        <view class="message-item robot-message" wx:else>
+          <!-- 机器人头像 - 使用当前绑定的机器人头像 -->
+          <view class="avatar robot-avatar" wx:if="{{robot.avatar || robotInfo.avatar}}">
+            <image src="{{robot.avatar || robotInfo.avatar}}" mode="aspectFill"></image>
+          </view>
+          <view class="avatar robot-avatar text-avatar" wx:else>
+            <text>机</text>
+          </view>
+          <!-- 消息内容 -->
+          <view class="message-wrapper">
+            <view class="message-content">
+              <text>{{item.content}}</text>
+            </view>
+            <view class="message-time">{{item.createdAt}}</view>
+          </view>
+        </view>
+      </block>
+
+      <!-- 加载中 -->
+      <view class="loading" wx:if="{{loading}}">
+        <view class="loading-dots">
+          <view class="dot"></view>
+          <view class="dot"></view>
+          <view class="dot"></view>
+        </view>
+      </view>
     </view>
   </scroll-view>
 
   <!-- 输入区域 -->
   <view class="input-area">
-    <view class="input-box">
-      <!-- 语音按钮 -->
-      <image 
-        class="voice-btn" 
-        src="{{enableVoice ? '/assets/images/keyboard.png' : '/assets/images/voice.png'}}"
-        mode="aspectFit"
-        bindtap="toggleVoiceInput"
-      ></image>
-
-      <!-- 文字输入 -->
-      <input
-        class="input"
-        type="text"
-        value="{{inputValue}}"
-        placeholder="请输入问题"
-        bindinput="handleInput"
-        wx:if="{{!enableVoice}}"
-      />
-
-      <!-- 语音输入 -->
-      <button
-        class="voice-input"
-        hover-class="voice-input-hover"
-        bindtouchstart="startRecording"
-        bindtouchend="endRecording"
-        wx:if="{{enableVoice}}"
-      >
-        {{recording ? '松开发送' : '按住说话'}}
-      </button>
-
-      <!-- 发送按钮 -->
-      <button 
-        class="send-btn"
-        disabled="{{!inputValue && !enableVoice}}"
-        bindtap="handleSend"
-      >发送</button>
+    <input 
+      class="message-input" 
+      value="{{inputValue}}"
+      placeholder="输入消息..." 
+      bindinput="onInput"
+      bindconfirm="onConfirm"
+      confirm-type="send"
+      adjust-position="{{false}}"
+    />
+    <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="onSend">
+      发送
     </view>
   </view>
 </view>

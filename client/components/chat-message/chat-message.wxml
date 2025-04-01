@@ -8,7 +8,7 @@
   <view class="content">
     <view class="nickname">{{isSelf ? '我' : message.robotName}}</view>
     <view class="bubble">{{message.content}}</view>
-    <view class="time">{{message.createTime}}</view>
+    <view class="time">{{message.createdAt}}</view>
     
     <!-- 评价按钮，仅机器人消息显示 -->
     <view class="actions" wx:if="{{!isSelf && !message.evaluated}}">

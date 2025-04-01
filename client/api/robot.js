@@ -1,26 +1,34 @@
-import request from '../utils/request'
+const request = require('../utils/request')
 
 // 获取机器人列表
-export const getRobotList = () => {
-  return request.get('/api/robot/list')
+const getRobotList = () => {
+  return request.get('/robot/list')
 }
 
 // 获取机器人详情
-export const getRobotDetail = (robotId) => {
-  return request.get(`/api/robot/detail/${robotId}`)
+const getRobotDetail = (robotId) => {
+  return request.get(`/robot/${robotId}`)
 }
 
 // 绑定机器人
-export const bindRobot = (robotId) => {
-  return request.post('/api/robot/bind', { robotId })
+const bindRobot = (robotId) => {
+  return request.post(`/robot/${robotId}/bind`)
 }
 
 // 获取当前绑定的机器人
-export const getCurrentRobot = () => {
-  return request.get('/api/robot/current')
+const getCurrentRobot = () => {
+  return request.get('/robot/current')
 }
 
 // 解绑机器人
-export const unbindRobot = () => {
-  return request.post('/api/robot/unbind')
+const unbindRobot = () => {
+  return request.post('/robot/unbind')
+}
+
+module.exports = {
+  getRobotList,
+  getRobotDetail,
+  bindRobot,
+  getCurrentRobot,
+  unbindRobot
 } 

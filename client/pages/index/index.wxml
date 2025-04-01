@@ -6,16 +6,16 @@
 
   <view class="robot-list">
     <view 
-      class="robot-item {{selectedRobot && selectedRobot.id === robot.id ? 'selected' : ''}}"
+      class="robot-item {{selectedRobot && selectedRobot._id === robot._id ? 'selected' : ''}}"
       wx:for="{{robots}}"
-      wx:key="id"
+      wx:key="_id"
       wx:for-item="robot"
-      data-robot-id="{{robot.id}}"
+      data-robot-id="{{robot._id}}"
       bindtap="handleSelectRobot"
     >
-      <image class="robot-avatar" src="{{robot.avatar}}" />
+      <image class="robot-avatar" src="{{robot.avatar}}" mode="aspectFit" />
       <text class="robot-name">{{robot.name}}</text>
-      <text class="robot-desc">{{robot.desc}}</text>
+      <text class="robot-desc">{{robot.description}}</text>
     </view>
   </view>
 

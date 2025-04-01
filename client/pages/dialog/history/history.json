@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "对话历史",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {}
+}

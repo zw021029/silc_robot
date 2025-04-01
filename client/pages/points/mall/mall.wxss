@@ -1,0 +1,326 @@
+.container {
+  min-height: 100vh;
+  background: #f6f6f6;
+  padding-bottom: 30rpx;
+}
+
+/* 头部积分信息 */
+.header {
+  background: #07c160;
+  padding: 40rpx 30rpx;
+  color: #fff;
+  border-radius: 0 0 24rpx 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.balance-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+}
+
+.label {
+  font-size: 28rpx;
+  opacity: 0.9;
+  margin-bottom: 8rpx;
+}
+
+.value {
+  font-size: 56rpx;
+  font-weight: bold;
+}
+
+/* 横幅 */
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12rpx;
+  padding: 24rpx 30rpx;
+  position: relative;
+}
+
+.banner-text {
+  flex: 1;
+}
+
+.banner-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.banner-desc {
+  display: block;
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.banner-image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+/* 商品列表 */
+.items-list {
+  padding: 0 24rpx;
+  margin-top: 24rpx;
+}
+
+.item {
+  display: flex;
+  background: #fff;
+  margin-bottom: 24rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.item:active {
+  transform: scale(0.99);
+  transition: transform 0.1s;
+}
+
+.item-image {
+  width: 180rpx;
+  height: 180rpx;
+  flex-shrink: 0;
+  background: #f8f8f8;
+}
+
+.item-info {
+  flex: 1;
+  padding: 16rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-row {
+  flex: 1;
+}
+
+.name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.description {
+  font-size: 24rpx;
+  color: #666;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.points {
+  display: flex;
+  align-items: baseline;
+  margin-right: auto;
+}
+
+.points-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fa5151;
+}
+
+.points-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 4rpx;
+}
+
+.stock {
+  font-size: 22rpx;
+  color: #999;
+  margin-right: 16rpx;
+}
+
+.exchange-btn {
+  min-width: 140rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  background: #07c160;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 28rpx;
+  padding: 0 20rpx;
+}
+
+.exchange-btn.disabled {
+  background: #ccc;
+}
+
+.exchange-btn:active {
+  opacity: 0.9;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.empty-image {
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.7;
+}
+
+/* 确认弹窗 */
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 560rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+  background: #07c160;
+  color: #fff;
+}
+
+.modal-header text {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.modal-header image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.modal-body {
+  padding: 30rpx;
+}
+
+.item-preview {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.preview-image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  background: #f8f8f8;
+}
+
+.preview-info {
+  flex: 1;
+}
+
+.preview-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.preview-points {
+  font-size: 26rpx;
+  color: #fa5151;
+  display: block;
+}
+
+.confirm-tip {
+  font-size: 26rpx;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.highlight {
+  color: #fa5151;
+  font-weight: bold;
+  margin: 0 4rpx;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 20rpx 30rpx 30rpx;
+}
+
+.cancel-btn, .confirm-btn {
+  flex: 1;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 38rpx;
+  font-size: 28rpx;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.cancel-btn:active {
+  background: #eee;
+}
+
+.confirm-btn {
+  background: #07c160;
+  color: #fff;
+}
+
+.confirm-btn:active {
+  opacity: 0.9;
+} 

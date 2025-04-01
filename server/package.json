@@ -1,23 +1,34 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "description": "SILC-QA 智能问答系统后端服务",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest"
+    "import-knowledge": "node src/scripts/importKnowledge.js",
+    "test:chat": "node src/scripts/testChat.js"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
+    "csv-parse": "^5.5.3",
+    "csv-stringify": "^6.4.5",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "joi": "^17.13.3",
+    "joi": "^17.12.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.2",
+    "mongoose": "^6.12.2",
     "morgan": "^1.10.0",
-    "winston": "^3.17.0"
+    "multer": "^1.4.5-lts.1",
+    "node-cache": "^5.1.2",
+    "pdf-parse": "^1.1.1",
+    "winston": "^3.11.0",
+    "ws": "^8.18.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.3"
   }
 }

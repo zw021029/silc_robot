@@ -1,14 +1,27 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
+const config = require('../config/index');
 
-const userSchema = new mongoose.Schema({
+// 用户模型
+const userSchema = new Schema({
   username: {
     type: String,
+    required: true,
     unique: true,
-    sparse: true
+    trim: true
   },
   password: {
     type: String,
-    select: false // 默认查询不返回密码
+    required: true
+  },
+  email: {
+    type: String,
+    required: false,
+    unique: true,
+    sparse: true,
+    trim: true,
+    lowercase: true
   },
   openid: {
     type: String,
@@ -45,6 +58,36 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+}, {
+  timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+// 索引
+userSchema.index({ username: 1 });
+userSchema.index({ email: 1 });
+userSchema.index({ selectedRobot: 1 });
+
+// 更新时间中间件
+userSchema.pre('save', function(next) {
+  this.updatedAt = new Date();
+  next();
+});
+
+// 生成JWT令牌的方法
+userSchema.methods.generateToken = function() {
+  const token = jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      role: this.role,
+      nickname: this.nickname
+    },
+    config.jwt.secret,
+    { expiresIn: config.jwt.expiresIn }
+  );
+  return token;
+};
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

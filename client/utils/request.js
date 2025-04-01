@@ -1,21 +1,59 @@
 // const BASE_URL = 'http://silcrobot.willzuo.top'  // 远程服务器的域名
-const BASE_URL = 'http://localhost:3000'  // 开发环境本机测试
+const BASE_URL = 'http://localhost:3005'  // 开发环境本机测试
+
+// 自定义参数序列化函数，替代URLSearchParams
+function serializeParams(params) {
+  return Object.keys(params)
+    .filter(key => params[key] !== undefined && params[key] !== null)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    .join('&');
+}
 
 const request = (options) => {
   return new Promise((resolve, reject) => {
+    // 处理GET请求的参数
+    let url = options.url;
+    let data = options.data;
+    
+    // 对于GET请求，将参数转换为URL查询字符串
+    if (options.method === 'GET' && options.data) {
+      // 如果options.data包含params字段，取出来单独处理
+      if (options.data.params) {
+        const queryString = serializeParams(options.data.params);
+        if (url.includes('?')) {
+          url += '&' + queryString;
+        } else {
+          url += '?' + queryString;
+        }
+        // 从data中移除params，避免重复
+        data = { ...options.data };
+        delete data.params;
+      } else {
+        // 直接将data作为URL参数
+        const queryString = serializeParams(options.data);
+        if (url.includes('?')) {
+          url += '&' + queryString;
+        } else {
+          url += '?' + queryString;
+        }
+        // 清空data，因为已经放入URL中
+        data = undefined;
+      }
+    }
+    
     console.log('发起请求:', {
-      url: `${BASE_URL}${options.url}`,
+      url: `${BASE_URL}/api${url}`,
       method: options.method,
-      data: options.data
+      data: data
     })
 
     // 获取token（如果有的话）
     const token = wx.getStorageSync('token')
     
     wx.request({
-      url: `${BASE_URL}${options.url}`,
+      url: `${BASE_URL}/api${url}`,
       method: options.method || 'GET',
-      data: options.data,
+      data: data,
       header: {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : '',
@@ -37,7 +75,7 @@ const request = (options) => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
         } else {
-          const error = new Error(res.data?.message || '请求失败')
+          const error = new Error(res.data?.message || res.data?.error || '请求失败')
           error.statusCode = res.statusCode
           error.response = res.data
           reject(error)
@@ -59,11 +97,9 @@ const request = (options) => {
 }
 
 // 导出请求方法
-const http = {
+module.exports = {
   get: (url, data) => request({ url, method: 'GET', data }),
   post: (url, data) => request({ url, method: 'POST', data }),
   put: (url, data) => request({ url, method: 'PUT', data }),
   delete: (url, data) => request({ url, method: 'DELETE', data })
-}
-
-export default http 
+} 

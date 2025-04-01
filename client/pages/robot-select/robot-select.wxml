@@ -6,9 +6,9 @@
 
   <view class="robot-list">
     <view 
-      class="robot-card {{selectedRobot.id === robot.id ? 'selected' : ''}}" 
+      class="robot-card {{selectedRobot._id === robot._id ? 'selected' : ''}}" 
       wx:for="{{robots}}" 
-      wx:key="id" 
+      wx:key="_id" 
       wx:for-item="robot"
       data-robot="{{robot}}"
       bindtap="handleSelect"
@@ -18,7 +18,7 @@
         <text class="robot-name">{{robot.name}}</text>
         <text class="robot-desc">{{robot.description}}</text>
       </view>
-      <view class="select-icon" wx:if="{{selectedRobot.id === robot.id}}">
+      <view class="select-icon" wx:if="{{selectedRobot._id === robot._id}}">
         <image src="/assets/images/selected.png" mode="aspectFit"></image>
       </view>
     </view>

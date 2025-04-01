@@ -1,287 +1,287 @@
-.container {
-  height: 100vh;
+/* 新样式文件 */
+.chat-container {
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
-.message-list {
+.chat-list {
   flex: 1;
-  padding: 20rpx 0;
-}
-
-.message-item {
-  display: flex;
-  margin-bottom: 30rpx;
-}
-
-.message-item.robot {
-  flex-direction: row;
-}
-
-.message-item.user {
-  flex-direction: row-reverse;
-}
-
-.avatar {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-  margin: 0 20rpx;
-}
-
-.message-content {
-  max-width: 60%;
   padding: 20rpx;
-  border-radius: 16rpx;
-  font-size: 28rpx;
-  line-height: 1.5;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
-.robot .message-content {
-  background: #fff;
+.chat-list-content {
+  padding-bottom: 100rpx;
+}
+
+/* 机器人信息 */
+.robot-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.robot-info .robot-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  margin-bottom: 10rpx;
+  border: 2rpx solid #ffffff;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.robot-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
   color: #333;
 }
 
-.user .message-content {
-  background: #1296db;
+.robot-desc {
+  font-size: 26rpx;
+  color: #666;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 消息项 */
+.message-item {
+  display: flex;
+  margin-bottom: 30rpx;
+  position: relative;
+  max-width: 100%;
+}
+
+/* 用户消息 */
+.user-message {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/* 机器人消息 */
+.robot-message {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* 头像 */
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  margin: 0 16rpx;
+  flex-shrink: 0;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+  border: 2rpx solid #ffffff;
+  overflow: hidden;
+}
+
+.avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.text-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: bold;
   color: #fff;
 }
 
-.time {
-  display: block;
+.user-avatar.text-avatar {
+  background-color: #0080ff;
+}
+
+.robot-avatar.text-avatar {
+  background-color: #42b983;
+}
+
+/* 消息内容区域 */
+.message-wrapper {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 消息内容 */
+.message-content {
+  padding: 16rpx 24rpx;
+  border-radius: 18rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  word-break: break-all;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.user-message .message-content {
+  background-color: #0080ff;
+  color: #fff;
+  border-radius: 18rpx 4rpx 18rpx 18rpx;
+  margin-right: 12rpx;
+}
+
+.robot-message .message-content {
+  background-color: #fff;
+  color: #333;
+  border-radius: 4rpx 18rpx 18rpx 18rpx;
+  margin-left: 12rpx;
+}
+
+/* 消息时间 */
+.message-time {
   font-size: 24rpx;
   color: #999;
-  margin-top: 10rpx;
+  margin-top: 6rpx;
+  margin-bottom: 6rpx;
 }
 
-.evaluate-box {
-  text-align: center;
-  margin: 30rpx 0;
+.user-message .message-time {
+  text-align: right;
+  margin-right: 12rpx;
 }
 
-.evaluate-title {
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 20rpx;
+.robot-message .message-time {
+  text-align: left;
+  margin-left: 12rpx;
 }
 
-.evaluate-btns {
-  display: flex;
-  justify-content: center;
-  gap: 20rpx;
-}
-
-.evaluate-btn {
-  min-width: 160rpx;
-  height: 64rpx;
-  line-height: 64rpx;
-  font-size: 28rpx;
-  border-radius: 32rpx;
-}
-
-.evaluate-btn.negative {
-  background: #f5f5f5;
-  color: #666;
-}
-
+/* 加载中动画 */
 .loading {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 20rpx;
+  padding: 20rpx 0;
 }
 
-.loading image {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 10rpx;
-}
-
-.loading text {
-  font-size: 24rpx;
-  color: #999;
-}
-
-.input-area {
-  background: #fff;
-  padding: 20rpx;
-  border-top: 1rpx solid #eee;
-}
-
-.input-box {
+.loading-dots {
   display: flex;
-  align-items: center;
 }
 
-.voice-btn {
-  width: 60rpx;
-  height: 60rpx;
-  padding: 0 20rpx;
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 8rpx;
+  background-color: #ccc;
+  margin: 0 8rpx;
+  animation: dot-flashing 1s infinite alternate;
 }
 
-.input {
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 输入区域 */
+.input-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 20rpx;
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.message-input {
   flex: 1;
-  height: 80rpx;
-  background: #f5f5f5;
-  border-radius: 40rpx;
-  padding: 0 30rpx;
-  font-size: 28rpx;
-  margin: 0 20rpx;
-}
-
-.voice-input {
-  flex: 1;
-  height: 80rpx;
-  line-height: 80rpx;
-  background: #f5f5f5;
-  border-radius: 40rpx;
-  text-align: center;
-  font-size: 28rpx;
-  margin: 0 20rpx;
-}
-
-.voice-input-hover {
-  background: #e6e6e6;
+  height: 72rpx;
+  background-color: #f5f5f5;
+  border-radius: 36rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #333;
 }
 
 .send-btn {
   width: 120rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  background: #1890ff;
+  height: 72rpx;
+  border-radius: 36rpx;
+  background-color: #cccccc;
   color: #fff;
-  border-radius: 40rpx;
-  font-size: 28rpx;
-  padding: 0;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 72rpx;
+  margin-left: 20rpx;
 }
 
-.send-btn[disabled] {
-  background: #ccc;
+.send-btn.active {
+  background-color: #0080ff;
 }
 
-.message-image {
-  max-width: 100%;
-  border-radius: 8rpx;
-}
-
-.tool-bar {
-  display: flex;
-  align-items: center;
-  margin-right: 20rpx;
-}
-
-.tool-btn {
-  width: 80rpx;
-  height: 80rpx;
-  padding: 0;
-  margin: 0;
-  background: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tool-btn::after {
-  border: none;
-}
-
-.tool-icon {
-  width: 44rpx;
-  height: 44rpx;
-}
-
-.upload-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4rpx;
-  background: #1296db;
-  transition: width 0.3s;
-}
-
-.message-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10rpx;
-}
-
-.share-btn {
-  width: 48rpx;
-  height: 48rpx;
-  padding: 0;
-  margin: 0;
-  background: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.share-btn::after {
-  border: none;
-}
-
-.share-icon {
-  width: 32rpx;
-  height: 32rpx;
-  opacity: 0.6;
-}
-
+/* 分享菜单 */
 .share-mask {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 100;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s;
+  display: none;
 }
 
 .share-mask.show {
-  visibility: visible;
-  opacity: 1;
+  display: block;
 }
 
 .share-menu {
   position: absolute;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: #fff;
+  background-color: #fff;
   border-radius: 24rpx 24rpx 0 0;
-  padding: 30rpx;
-  transform: translateY(100%);
-  transition: transform 0.3s;
-}
-
-.share-mask.show .share-menu {
-  transform: translateY(0);
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .share-title {
   text-align: center;
   font-size: 32rpx;
-  color: #333;
-  margin-bottom: 30rpx;
+  font-weight: bold;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
 }
 
 .share-options {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 40rpx;
+  padding: 40rpx 20rpx;
 }
 
 .share-option {
-  background: none;
-  padding: 0;
-  margin: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  font-size: 28rpx;
+  line-height: 1.5;
 }
 
 .share-option::after {
@@ -294,17 +294,18 @@
   margin-bottom: 16rpx;
 }
 
-.share-option text {
-  font-size: 28rpx;
-  color: #333;
-}
-
 .share-cancel {
   width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  background: #f5f5f5;
-  color: #333;
+  height: 100rpx;
+  line-height: 100rpx;
   font-size: 32rpx;
-  border-radius: 44rpx;
-} 
+  color: #0080ff;
+  background-color: #f5f5f5;
+  border-radius: 0;
+  border: none;
+  margin-top: 20rpx;
+}
+
+.share-cancel::after {
+  border: none;
+}

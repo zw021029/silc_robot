@@ -1,4 +1,5 @@
-import { login, register, resetPassword, sendCode } from '../../api/user'
+const { showToast, reLaunch } = require('../../utils/util')
+const request = require('../../utils/request')
 
 Page({
   data: {
@@ -8,8 +9,8 @@ Page({
     countDown: 60,
     
     // 登录表单
-    username: 'test_user1',
-    password: '123456',
+    username: '',
+    password: '',
     
     // 注册和重置密码表单
     phone: '',
@@ -37,29 +38,20 @@ Page({
     if (counting) return
     
     if (!phone || !/^1\d{10}$/.test(phone)) {
-      wx.showToast({
-        title: '请输入正确的手机号',
-        icon: 'none'
-      })
+      showToast('请输入正确的手机号')
       return
     }
 
     try {
-      await sendCode(phone)
+      await request.post('/user/send-code', { phone })
       
       // 开始倒计时
       this.setData({ counting: true })
       this.startCountDown()
       
-      wx.showToast({
-        title: '验证码已发送',
-        icon: 'success'
-      })
+      showToast('验证码已发送', 'success')
     } catch (error) {
-      wx.showToast({
-        title: error.message || '发送失败',
-        icon: 'none'
-      })
+      showToast(error.message || '发送失败')
     }
   },
 
@@ -82,50 +74,44 @@ Page({
   // 登录
   async handleLogin() {
     const { username, password, loading } = this.data
+    
     if (loading) return
     
     if (!username || !password) {
-      wx.showToast({
-        title: '请填写完整信息',
-        icon: 'none'
-      })
+      showToast('请输入用户名和密码')
       return
     }
 
     this.setData({ loading: true })
-    
+
     try {
-      const res = await login({
+      console.log('发送登录请求，参数:', { username, password })
+      
+      const res = await request.post('/user/login', {
         username,
         password
       })
 
+      console.log('登录成功，响应数据:', res)
+
       // 保存token和用户信息
       wx.setStorageSync('token', res.data.token)
-      const app = getApp()
-      app.globalData.userInfo = res.data.userInfo
-      app.globalData.selectedRobot = res.data.selectedRobot
-
-      // 使用 Toast 的回调函数处理跳转
-      wx.showToast({
-        title: '登录成功',
-        icon: 'success',
-        complete: () => {
-          // Toast 显示完成后跳转
-          wx.reLaunch({
-            url: res.data.selectedRobot ? '/pages/chat/chat' : '/pages/index/index',
-            fail: (error) => {
-              console.error('页面跳转失败:', error)
-            }
-          })
-        }
-      })
-
+      wx.setStorageSync('userInfo', res.data.userInfo)
+      
+      // 验证token是否保存成功
+      const savedToken = wx.getStorageSync('token')
+      if (!savedToken) {
+        throw new Error('token保存失败')
+      }
+      
+      console.log('token已保存:', savedToken)
+      
+      // 跳转到机器人选择页面
+      await reLaunch('/pages/robot-select/robot-select')
+      
     } catch (error) {
-      wx.showToast({
-        title: error.message || '登录失败',
-        icon: 'none'
-      })
+      console.error('登录失败:', error)
+      showToast(error.message || '登录失败')
     } finally {
       this.setData({ loading: false })
     }
@@ -133,38 +119,29 @@ Page({
 
   // 注册
   async handleRegister() {
-    const { phone, verifyCode, password, confirmPassword, loading } = this.data
+    const { phone, verifyCode, newPassword, confirmPassword, loading } = this.data
     if (loading) return
     
-    if (!phone || !verifyCode || !password || !confirmPassword) {
-      wx.showToast({
-        title: '请填写完整信息',
-        icon: 'none'
-      })
+    if (!phone || !verifyCode || !newPassword || !confirmPassword) {
+      showToast('请填写完整信息')
       return
     }
 
-    if (password !== confirmPassword) {
-      wx.showToast({
-        title: '两次密码不一致',
-        icon: 'none'
-      })
+    if (newPassword !== confirmPassword) {
+      showToast('两次密码不一致')
       return
     }
 
     this.setData({ loading: true })
     
     try {
-      await register({
+      await request.post('/api/user/register', {
         phone,
         verifyCode,
-        password
+        password: newPassword
       })
 
-      wx.showToast({
-        title: '注册成功',
-        icon: 'success'
-      })
+      showToast('注册成功', 'success')
 
       // 延迟切换到登录页
       setTimeout(() => {
@@ -172,10 +149,7 @@ Page({
       }, 1500)
 
     } catch (error) {
-      wx.showToast({
-        title: error.message || '注册失败',
-        icon: 'none'
-      })
+      showToast(error.message || '注册失败')
     } finally {
       this.setData({ loading: false })
     }
@@ -187,34 +161,25 @@ Page({
     if (loading) return
     
     if (!phone || !verifyCode || !newPassword || !confirmPassword) {
-      wx.showToast({
-        title: '请填写完整信息',
-        icon: 'none'
-      })
+      showToast('请填写完整信息')
       return
     }
 
     if (newPassword !== confirmPassword) {
-      wx.showToast({
-        title: '两次密码不一致',
-        icon: 'none'
-      })
+      showToast('两次密码不一致')
       return
     }
 
     this.setData({ loading: true })
     
     try {
-      await resetPassword({
+      await request.post('/api/user/reset-password', {
         phone,
         verifyCode,
         newPassword
       })
 
-      wx.showToast({
-        title: '重置成功',
-        icon: 'success'
-      })
+      showToast('重置成功', 'success')
 
       // 延迟切换到登录页
       setTimeout(() => {
@@ -222,62 +187,36 @@ Page({
       }, 1500)
 
     } catch (error) {
-      wx.showToast({
-        title: error.message || '重置失败',
-        icon: 'none'
-      })
+      showToast(error.message || '重置失败')
     } finally {
       this.setData({ loading: false })
     }
   },
 
   // 微信登录
-  async handleWechatLogin(e) {
-    if (this.data.loading) return
-    
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '需要授权才能使用',
-        icon: 'none'
-      })
-      return
-    }
-
-    this.setData({ loading: true })
-    
+  async handleWxLogin() {
     try {
-      const loginRes = await wx.login()
-      const res = await login({
-        code: loginRes.code,
-        userInfo: e.detail.userInfo
-      })
-
-      wx.setStorageSync('token', res.data.token)
+      const { code } = await wx.login()
+      const res = await request.post('/api/user/wx-login', { code })
       
-      const app = getApp()
-      app.globalData.userInfo = res.data.userInfo
-      app.globalData.selectedRobot = res.data.selectedRobot
-
-      wx.showToast({
-        title: '登录成功',
-        icon: 'success'
-      })
-
-      setTimeout(() => {
-        if (res.data.selectedRobot) {
-          wx.reLaunch({ url: '/pages/chat/chat' })
-        } else {
-          wx.reLaunch({ url: '/pages/index/index' })
-        }
-      }, 1500)
-
+      // 保存token和用户信息
+      wx.setStorageSync('token', res.data.token)
+      wx.setStorageSync('userInfo', res.data.userInfo)
+      
+      // 跳转到机器人选择页面
+      await reLaunch('/pages/robot-select/robot-select')
+      
     } catch (error) {
-      wx.showToast({
-        title: error.message || '登录失败',
-        icon: 'none'
-      })
-    } finally {
-      this.setData({ loading: false })
+      console.error('微信登录失败:', error)
+      showToast(error.message || '微信登录失败')
     }
+  },
+
+  // 输入框事件
+  onInput(e) {
+    const { field } = e.currentTarget.dataset
+    this.setData({
+      [field]: e.detail.value
+    })
   }
 }) 

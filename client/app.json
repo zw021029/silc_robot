@@ -1,12 +1,26 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/login/login",
     "pages/robot-select/robot-select",
     "pages/chat/chat",
     "pages/history/history",
     "pages/points/points",
+    "pages/points/mall/mall",
+    "pages/points/record/record",
+    "pages/points/rules/rules",
     "pages/profile/profile",
-    "pages/admin/admin"
+    "pages/admin/admin",
+    "pages/dialog/history/history",
+    "pages/dialog/favorite/favorite",
+    "pages/dialog/analysis/analysis",
+    "pages/ai/memory/memory",
+    "pages/ai/personality/personality",
+    "pages/ai/appearance/appearance",
+    "pages/ai/skills/skills",
+    "pages/ai/voice/voice",
+    "pages/feedback/feedback",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

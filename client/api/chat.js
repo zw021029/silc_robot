@@ -2,47 +2,52 @@ import request from '../utils/request'
 
 // 发送消息
 export const sendMessage = (data) => {
-  return request.post('/api/chat/message', data)
+  return request.post('/chat/message', data)
 }
 
-// 获取历史消息
-export const getHistoryMessages = (params) => {
-  return request.get('/api/chat/history', { params })
+// 获取聊天历史
+export const getChatHistory = (robotId) => {
+  return request.get(`/chat/${robotId}/history`)
 }
 
-// 评价对话
+// 评价聊天
 export const evaluateChat = (data) => {
-  return request.post('/api/chat/evaluate', data)
+  return request.post('/chat/evaluate', data)
 }
 
-// 获取对话评价选项
+// 获取评价选项
 export const getEvaluationOptions = () => {
-  return request.get('/api/chat/evaluation-options')
+  return request.get('/chat/evaluation-options')
 }
 
-// 获取当前对话积分
+// 获取聊天积分
 export const getChatPoints = (chatId) => {
-  return request.get(`/api/chat/points/${chatId}`)
+  return request.get(`/chat/points/${chatId}`)
 }
 
+// 获取聊天详情
 export const getChatDetail = (id) => {
-  return request.get(`/api/chat/detail/${id}`)
+  return request.get(`/chat/detail/${id}`)
 }
 
+// 获取上下文
 export const getChatContext = (robotId) => {
-  return request.get(`/api/chat/context/${robotId}`)
+  return request.get(`/chat/context/${robotId}`)
 }
 
+// 清除上下文
 export const clearChatContext = (robotId) => {
-  return request.delete(`/api/chat/context/${robotId}`)
+  return request.delete(`/chat/context/${robotId}`)
 }
 
+// 获取机器人配置
 export const getRobotConfig = (robotId) => {
-  return request.get(`/api/chat/robot/${robotId}/config`)
+  return request.get(`/chat/robot/${robotId}/config`)
 }
 
+// 更新机器人配置
 export const updateRobotConfig = (robotId, data) => {
-  return request.put(`/api/chat/robot/${robotId}/config`, data)
+  return request.put(`/chat/robot/${robotId}/config`, data)
 }
 
 // 语音识别

@@ -1,0 +1,286 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding-bottom: 30rpx;
+}
+
+/* 头部 */
+.header {
+  background: #07c160;
+  padding: 60rpx 30rpx 70rpx;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  right: -40rpx;
+  top: -40rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  left: 40rpx;
+  bottom: -60rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+}
+
+/* 规则列表 */
+.rules-list {
+  margin: -40rpx 24rpx 30rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.rules-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease;
+}
+
+.rules-item:active {
+  transform: scale(0.98);
+}
+
+.rule-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.rule-tag {
+  background: #e8f7f0;
+  color: #07c160;
+  font-size: 24rpx;
+  font-weight: bold;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.rule-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+}
+
+.rule-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 使用须知 */
+.note-section {
+  margin: 0 24rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.note-title {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.note-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 30rpx;
+  background: #07c160;
+  border-radius: 3rpx;
+}
+
+.note-list {
+  padding: 0 10rpx;
+}
+
+.note-item {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.note-item:last-child {
+  margin-bottom: 0;
+}
+
+.dot {
+  color: #07c160;
+  font-weight: bold;
+  margin-right: 15rpx;
+}
+
+.text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 表格 */
+.table {
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin: 20rpx 0 30rpx;
+}
+
+.table-row {
+  display: flex;
+}
+
+.table-header {
+  background: rgba(110, 142, 251, 0.1);
+  font-weight: bold;
+  color: #333;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 20rpx 10rpx;
+  text-align: center;
+  font-size: 26rpx;
+  border-right: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  word-break: break-all;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-row:last-child .table-cell {
+  border-bottom: none;
+}
+
+.points-value {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* 注意事项 */
+.notice {
+  padding: 20rpx;
+  background: rgba(255, 155, 155, 0.1);
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+}
+
+.notice-title {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 10rpx;
+}
+
+.notice-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+.notice-item {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  line-height: 1.5;
+}
+
+.notice-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 底部说明 */
+.footer {
+  text-align: center;
+  padding: 40rpx 30rpx;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* 悬浮按钮 */
+.float-btn {
+  position: fixed;
+  right: 30rpx;
+  bottom: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 20rpx rgba(110, 142, 251, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28rpx;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.float-btn:active {
+  transform: scale(0.9);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+.empty-state image {
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.7;
+}
+
+.empty-state text {
+  color: #999;
+  font-size: 26rpx;
+} 

@@ -2,9 +2,9 @@
   <view class="history-list">
     <view 
       class="history-item"
-      wx:for="{{histories}}"
-      wx:key="id"
-      data-id="{{item.id}}"
+      wx:for="{{historyList}}"
+      wx:key="_id"
+      data-history="{{item}}"
       bindtap="handleViewDetail"
     >
       <view class="history-header">
@@ -13,15 +13,15 @@
           src="/assets/images/robot-{{item.robotId === 1 ? 'male' : 'female'}}.png"
         />
         <text class="robot-name">{{item.robotName}}</text>
-        <text class="history-time">{{item.createTime}}</text>
+        <text class="history-time">{{item.formattedTime}}</text>
       </view>
       <view class="history-content">
-        <text class="question">{{item.question}}</text>
-        <text class="answer">{{item.answer}}</text>
+        <text class="question">{{item.question || item.content}}</text>
+        <text class="answer">{{item.answer || item.reply}}</text>
       </view>
       <view class="history-footer">
         <text class="score">评分: {{item.score !== null ? item.score : '未评分'}}</text>
-        <text class="points">获得积分: +{{item.points}}</text>
+        <text class="points">获得积分: +{{item.points || 0}}</text>
       </view>
     </view>
   </view>
@@ -30,11 +30,11 @@
     <text>加载中...</text>
   </view>
 
-  <view class="no-more" wx:if="{{!hasMore && histories.length > 0}}">
+  <view class="no-more" wx:if="{{!hasMore && historyList.length > 0}}">
     <text>没有更多记录了</text>
   </view>
 
-  <view class="empty" wx:if="{{!loading && histories.length === 0}}">
+  <view class="empty" wx:if="{{!loading && historyList.length === 0}}">
     <image src="/assets/images/empty.png" class="empty-icon" />
     <text>暂无历史记录</text>
   </view>

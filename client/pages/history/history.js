@@ -38,26 +38,31 @@ Page({
     this.setData({ loading: true })
 
     try {
-      const params = {
+      const res = await getHistoryList({
         page: refresh ? 1 : page,
         pageSize,
         keyword
-      }
-
-      const res = await getHistoryList(params)
+      })
       
-      const formattedList = res.data.list.map(item => ({
+      if (!res.success || !res.data) {
+        throw new Error(res.error || '加载失败');
+      }
+      
+      const responseList = res.data.list || [];
+      
+      const formattedList = responseList.map(item => ({
         ...item,
-        formattedTime: formatTime(new Date(item.createTime))
+        formattedTime: item.formattedTime || new Date(item.createdAt).toLocaleString()
       }))
 
       this.setData({
         historyList: refresh ? formattedList : [...historyList, ...formattedList],
         hasMore: formattedList.length === pageSize,
         page: refresh ? 2 : page + 1,
-        stats: res.data.stats
+        stats: res.data.stats || { total: 0, today: 0 }
       })
     } catch (error) {
+      console.error('加载历史记录失败:', error);
       wx.showToast({
         title: error.message || '加载失败',
         icon: 'none'

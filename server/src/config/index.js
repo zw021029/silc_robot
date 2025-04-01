@@ -3,18 +3,21 @@ require('dotenv').config();
 module.exports = {
   // 服务器配置
   server: {
-    port: process.env.PORT || 3000,
+    port: 3005,
     env: process.env.NODE_ENV || 'development',
-    debug: process.env.DEBUG || true
+    debug: process.env.DEBUG || true,
+    baseUrl: process.env.API_BASE_URL || 'http://localhost:3000'
   },
 
   // 数据库配置
   database: {
-    url: process.env.MONGODB_URI || 'mongodb://localhost:27017/silc_qa',
+    url: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/silc_robot',
     options: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      debug: process.env.DEBUG || false,  // 启用 mongoose debug 模式
+      debug: process.env.DEBUG || false
     }
   },
 
@@ -29,8 +32,9 @@ module.exports = {
 
   // 跨域配置
   cors: {
-    origin: process.env.CORS_ORIGIN || '*',
-    credentials: true
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   },
 
   // 文件上传配置
@@ -43,5 +47,13 @@ module.exports = {
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
     port: process.env.REDIS_PORT || 6379
+  },
+
+  // OpenAI API 配置
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY || 'your-api-key-here',
+    model: 'gpt-3.5-turbo',
+    maxTokens: 1000,
+    temperature: 0.7
   }
 };
