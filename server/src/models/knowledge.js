@@ -11,9 +11,9 @@ const knowledgeArticleSchema = new Schema({
     type: String,
     required: true
   },
-  robotId: {
+  robotName: {
     type: String,
-    enum: ['xiwen', 'xihui', 'all'],
+    enum: ['悉文', '悉荟', 'all'],
     required: true
   },
   category: {
@@ -57,7 +57,8 @@ const knowledgeArticleSchema = new Schema({
     default: Date.now
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'knowledgearticles'
 });
 
 // 知识库分类模型
@@ -88,7 +89,7 @@ const knowledgeCategorySchema = new Schema({
 
 // 索引以提高查询速度
 knowledgeArticleSchema.index({ title: 'text', content: 'text' });
-knowledgeArticleSchema.index({ robotId: 1 });
+knowledgeArticleSchema.index({ robotName: 1 });
 knowledgeArticleSchema.index({ category: 1 });
 knowledgeArticleSchema.index({ tags: 1 });
 knowledgeArticleSchema.index({ status: 1 });
@@ -111,57 +112,8 @@ knowledgeCategorySchema.pre('save', function(next) {
 const KnowledgeArticle = mongoose.model('KnowledgeArticle', knowledgeArticleSchema);
 const KnowledgeCategory = mongoose.model('KnowledgeCategory', knowledgeCategorySchema);
 
-// 问答对模型 - 不再使用此模型
-const knowledgeSchema = new Schema({
-  question: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  answer: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  robotId: {
-    type: String,
-    required: true,
-    enum: ['xiwen', 'xihui']
-  },
-  category: {
-    type: String,
-    required: true
-  },
-  keywords: [{
-    type: String,
-    trim: true
-  }],
-  vector: {
-    type: Schema.Types.Mixed,
-    default: () => new Map()
-  },
-  createTime: {
-    type: Date,
-    default: Date.now
-  },
-  updateTime: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-// 索引
-knowledgeSchema.index({ robotId: 1 });
-knowledgeSchema.index({ category: 1 });
-knowledgeSchema.index({ keywords: 1 });
-
-// 更新时间中间件
-knowledgeSchema.pre('save', function(next) {
-  this.updateTime = new Date();
-  next();
-});
-
-const Knowledge = mongoose.model('Knowledge', knowledgeArticleSchema);
+// 为了向后兼容，Knowledge模型也指向相同的集合
+const Knowledge = mongoose.model('Knowledge', knowledgeArticleSchema, 'knowledgearticles');
 
 module.exports = {
   KnowledgeArticle,

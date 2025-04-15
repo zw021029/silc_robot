@@ -10,7 +10,7 @@ const messageSchema = new Schema({
   },
   robotId: {
     type: String,
-    enum: ['xiwen', 'xihui'],
+    enum: ['悉文', '悉荟', 'xiwen', 'xihui'],
     required: true
   },
   chatId: {

@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// 机器人模型
 const robotSchema = new Schema({
-  id: {
+  name: {
     type: String,
     required: true,
-    unique: true,
-    enum: ['xiwen', 'xihui']
+    unique: true
   },
-  name: {
+  displayName: {
     type: String,
     required: true
   },
@@ -18,6 +18,29 @@ const robotSchema = new Schema({
   },
   avatar: {
     type: String,
+    default: '/assets/images/default-avatar.png'
+  },
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active'
+  },
+  features: [String],
+  personality: {
+    type: String,
+    default: '友好'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  },
+  type: {
+    type: String,
+    enum: ['male', 'female'],
     required: true
   },
   model: {
@@ -95,24 +118,13 @@ const robotSchema = new Schema({
     default: 1,
     min: 0
   },
-  status: {
-    type: String,
-    enum: ['active', 'inactive', 'maintenance'],
-    default: 'active'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
+  isActive: {
+    type: Boolean,
+    default: true
   }
+}, {
+  timestamps: true
 });
-
-// 索引以提高查询速度
-robotSchema.index({ id: 1 });
-robotSchema.index({ status: 1 });
 
 // 更新时间的中间件
 robotSchema.pre('save', function(next) {
@@ -120,4 +132,45 @@ robotSchema.pre('save', function(next) {
   next();
 });
 
-module.exports = mongoose.model('Robot', robotSchema);
+// 创建索引
+robotSchema.index({ name: 1 });
+robotSchema.index({ status: 1 });
+
+// 添加默认机器人数据的方法
+robotSchema.statics.createDefaultRobots = async function() {
+  const count = await this.countDocuments();
+  if (count === 0) {
+    try {
+      await this.create([
+        {
+          name: '悉文',
+          displayName: '悉文',
+          description: '悉文是一位友好、热情、有责任心的虚拟助手，擅长学业辅导和日常交流。',
+          avatar: '/assets/images/xiwen.png',
+          status: 'active',
+          features: ['学业辅导', '日常交流', '校园指南'],
+          personality: '友好、热情、有责任心'
+        },
+        {
+          name: '悉荟',
+          displayName: '悉荟',
+          description: '悉荟是一位温柔、细心、有耐心的虚拟助手，擅长情感交流和生活指导。',
+          avatar: '/assets/images/xihui.png',
+          status: 'active',
+          features: ['情感交流', '生活指导', '心理辅导'],
+          personality: '温柔、细心、有耐心'
+        }
+      ]);
+      console.log('成功创建默认机器人数据');
+    } catch (error) {
+      console.error('创建默认机器人数据失败:', error);
+    }
+  }
+};
+
+const Robot = mongoose.model('Robot', robotSchema);
+
+// 导出时执行创建默认机器人的方法
+Robot.createDefaultRobots().catch(err => console.error('初始化机器人数据时出错:', err));
+
+module.exports = Robot;

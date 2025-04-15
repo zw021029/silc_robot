@@ -692,4 +692,15 @@ module.exports = AlertService
 - [ ] 性能监控
 - [ ] 错误告警
 - [ ] 日志收集
-- [ ] 备份策略 
+- [ ] 备份策略
+
+## 测试账号
+
+为了方便测试和开发，项目提供了多种测试账号生成脚本，可以创建不同场景下的用户账号：
+
+1. 标准测试用户 (`node scripts/create-test-users.js`)
+2. 特定场景测试用户 (`node scripts/create-specific-users.js`)
+3. 批量创建随机测试用户 (`node scripts/batch-create-users.js [数量]`)
+4. 删除所有测试用户 (`node scripts/delete-test-users.js`)
+
+详细说明请参考 [测试账号生成与管理指南](docs/test-users.md) 

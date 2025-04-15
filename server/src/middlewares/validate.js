@@ -79,38 +79,38 @@ const validate = {
     next();
   },
 
-  // 知识库问答对验证
+  // 知识库数据验证
   validateKnowledge: (req, res, next) => {
     const schema = Joi.object({
-      question: Joi.string().required().messages({
-        'any.required': '问题是必填项',
-        'string.empty': '问题不能为空'
-      }),
-      answer: Joi.string().required().messages({
-        'any.required': '答案是必填项',
-        'string.empty': '答案不能为空'
-      }),
-      tags: Joi.array().items(Joi.string()).default([]),
-      category: Joi.string().allow(''),
-      userId: Joi.string().allow(''),
-      items: Joi.array().items(Joi.object({
-        question: Joi.string().required(),
-        answer: Joi.string().required(),
-        tags: Joi.array().items(Joi.string()).default([]),
-        category: Joi.string().allow('')
-      }))
+      question: Joi.string()
+        .required()
+        .messages({
+          'any.required': '问题是必填项'
+        }),
+      answer: Joi.string()
+        .required()
+        .messages({
+          'any.required': '答案是必填项'
+        }),
+      category: Joi.string()
+        .required()
+        .messages({
+          'any.required': '分类是必填项'
+        }),
+      tags: Joi.string()
+        .allow('')
+        .messages({
+          'string.base': '标签必须是字符串'
+        })
     });
 
-    const { error, value } = schema.validate(req.body, { allowUnknown: true });
-    
+    const { error, value } = schema.validate(req.body);
     if (error) {
       return res.status(400).json({
         success: false,
         message: error.details[0].message
       });
     }
-    
-    req.body = value;
     next();
   },
   
@@ -187,6 +187,25 @@ const validate = {
     
     // 合并验证后的值到请求查询参数中
     Object.assign(req.query, value);
+    next();
+  },
+
+  // 手机号验证规则
+  validatePhone: (req, res, next) => {
+    const schema = Joi.object({
+      phone: Joi.string().pattern(/^1[3-9]\d{9}$/).required().messages({
+        'string.pattern.base': '请输入正确的手机号码',
+        'any.required': '手机号码不能为空'
+      })
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+      return res.status(400).json({
+        code: 400,
+        message: error.details[0].message
+      });
+    }
     next();
   }
 };

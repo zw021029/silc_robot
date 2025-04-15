@@ -11,8 +11,8 @@ images/
 ├── wechat.png        # 微信图标
 ├── moments.png       # 朋友圈图标
 └── robots/           # 机器人头像
-    ├── xiwen.png     # 悉问机器人头像
-    └── xihui.png     # 悉慧机器人头像
+    ├── xiwen.png     # 悉文机器人头像
+    └── xihui.png     # 悉荟机器人头像
 ```
 
 ## 图片要求

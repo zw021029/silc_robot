@@ -1,0 +1,134 @@
+<view class="container">
+  <!-- 顶部标签栏 -->
+  <view class="tabs">
+    <view 
+      class="tab-item {{activeTab === 'chatHistory' ? 'active' : ''}}" 
+      bindtap="handleTabChange" 
+      data-tab="chatHistory"
+    >对话历史</view>
+    <view 
+      class="tab-item {{activeTab === 'knowledge' ? 'active' : ''}}" 
+      bindtap="handleTabChange" 
+      data-tab="knowledge"
+    >知识库管理</view>
+  </view>
+
+  <!-- 对话历史 -->
+  <view class="content" wx:if="{{activeTab === 'chatHistory'}}">
+    <!-- 筛选条件 -->
+    <view class="filter-section">
+      <view class="date-range">
+        <picker 
+          mode="date" 
+          value="{{dateRange.start}}" 
+          bindchange="onDateChange" 
+          data-type="start"
+        >
+          <view class="picker">
+            {{dateRange.start || '开始日期'}}
+          </view>
+        </picker>
+        <text>至</text>
+        <picker 
+          mode="date" 
+          value="{{dateRange.end}}" 
+          bindchange="onDateChange" 
+          data-type="end"
+        >
+          <view class="picker">
+            {{dateRange.end || '结束日期'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 对话列表 -->
+    <view class="chat-list">
+      <view class="chat-item" wx:for="{{chatHistory}}" wx:key="id">
+        <view class="chat-header">
+          <text class="username">{{item.userId.username || '用户'}}</text>
+          <text class="time">{{item.createdAt}}</text>
+        </view>
+        <view class="chat-content">
+          <!-- 用户问题 -->
+          <view class="question" wx:if="{{item.userMessage}}">
+            <text class="label">问：</text>
+            <text>{{item.userMessage.content}}</text>
+          </view>
+          <!-- 机器人回答 -->
+          <view class="answer" wx:if="{{item.robotMessage}}">
+            <text class="label">答：</text>
+            <text>{{item.robotMessage.content}}</text>
+          </view>
+          <!-- 仅有机器人消息 -->
+          <view class="answer" wx:if="{{!item.isPair && item.robotMessage}}">
+            <text class="label">答：</text>
+            <text>{{item.robotMessage.content}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 无数据提示 -->
+      <view class="empty-tip" wx:if="{{chatHistory.length === 0 && !loading}}">
+        暂无对话记录
+      </view>
+    </view>
+  </view>
+
+  <!-- 知识库管理 -->
+  <view class="content" wx:if="{{activeTab === 'knowledge'}}">
+    <!-- 操作栏 -->
+    <view class="action-bar">
+      <button class="btn" bindtap="addKnowledge">添加知识</button>
+      <button class="btn" bindtap="uploadFile">上传文件</button>
+    </view>
+
+    <!-- 筛选条件 -->
+    <view class="filter-section">
+      <view class="search-box">
+        <input 
+          type="text" 
+          placeholder="搜索关键词" 
+          value="{{searchKeyword}}"
+          bindinput="onSearch"
+        />
+      </view>
+      <picker 
+        mode="selector" 
+        range="{{categories}}" 
+        value="{{selectedCategory}}"
+        bindchange="onCategoryChange"
+      >
+        <view class="picker">
+          {{categories[selectedCategory] || '选择分类'}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 知识库列表 -->
+    <view class="knowledge-list">
+      <view class="knowledge-item" wx:for="{{knowledgeList}}" wx:key="_id">
+        <view class="knowledge-header">
+          <text class="category">{{item.category}}</text>
+          <view class="actions">
+            <text class="edit" bindtap="editKnowledge" data-id="{{item._id}}">编辑</text>
+            <text class="delete" bindtap="deleteKnowledge" data-id="{{item._id}}">删除</text>
+          </view>
+        </view>
+        <view class="knowledge-content">
+          <view class="question">
+            <text class="label">问：</text>
+            <text>{{item.question}}</text>
+          </view>
+          <view class="answer">
+            <text class="label">答：</text>
+            <text>{{item.answer}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="no-more" wx:if="{{!loading && chatHistory.length >= total}}">没有更多了</view>
+</view> 

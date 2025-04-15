@@ -58,70 +58,148 @@ Page({
   },
 
   async onLoad(options) {
+    console.log('chat页面加载，options:', options);
+    
     // 检查登录状态
-    const token = wx.getStorageSync('token')
+    const token = wx.getStorageSync('token');
     if (!token) {
-      wx.redirectTo({
+      console.log('未检测到token，跳转到登录页');
+      wx.reLaunch({
         url: '/pages/login/login'
-      })
-      return
+      });
+      return;
     }
 
     // 获取用户信息
-    this.loadUserInfo()
+    await this.loadUserInfo();
+    
+    // 获取全局数据
+    const app = getApp();
+    console.log('全局数据:', app.globalData);
+    
+    // 获取本地存储的机器人信息
+    const storedRobot = wx.getStorageSync('selectedRobot');
+    console.log('本地存储的机器人:', storedRobot);
 
-    // 检查是否选择了机器人
-    const app = getApp()
-    if (!app.globalData.selectedRobot) {
+    // 检查用户是否选择了机器人
+    let selectedRobot = app.globalData.selectedRobot || storedRobot;
+    
+    if (!selectedRobot) {
+      console.log('未选择机器人，尝试从用户信息中获取');
+      // 尝试从用户信息中获取已选择的机器人
+      const userInfo = wx.getStorageSync('userInfo');
+      console.log('本地存储的用户信息:', userInfo);
+      
+      if (userInfo && userInfo.selectedRobot) {
+        console.log('用户已绑定机器人:', userInfo.selectedRobot);
+        // 处理可能的命名不一致问题
+        let robotId = userInfo.selectedRobot;
+        if (robotId === '悉文') robotId = 'xiwen';
+        if (robotId === '悉荟') robotId = 'xihui';
+        
+        // 使用app.js中的方法获取机器人信息
+        selectedRobot = app.findRobotInfo(robotId);
+        
+        if (selectedRobot) {
+          console.log('成功获取机器人信息');
+          app.globalData.selectedRobot = selectedRobot;
+          wx.setStorageSync('selectedRobot', selectedRobot);
+        }
+      }
+    }
+    
+    if (!selectedRobot) {
+      console.log('无法获取机器人信息，提示用户并跳转');
       wx.showModal({
         title: '提示',
         content: '请先选择AI助手',
         showCancel: false,
         success: () => {
-          wx.switchTab({
-            url: '/pages/index/index'
-          })
+          wx.reLaunch({
+            url: '/pages/robot-select/robot-select'
+          });
         }
-      })
-      return
+      });
+      return;
     }
-
-    if (options.robotId) {
-      this.setData({ robotId: options.robotId })
-      this.loadRobotInfo()
-      this.loadChatHistory()
-    } else {
-      this.setData({
-        robot: app.globalData.selectedRobot
-      }, () => {
-        this.initSocket()
-        this.loadHistory()
-      })
-    }
+    
+    console.log('使用机器人:', selectedRobot);
+    this.setData({ robot: selectedRobot }, () => {
+      this.initSocket();
+      this.loadHistory();
+    });
   },
 
   onShow() {
-    // 检查登录状态和机器人选择状态
-    const token = wx.getStorageSync('token')
+    console.log('chat页面显示');
+    
+    // 检查登录状态
+    const token = wx.getStorageSync('token');
     if (!token) {
-      wx.redirectTo({
+      console.log('未检测到token，跳转到登录页');
+      wx.reLaunch({
         url: '/pages/login/login'
-      })
-      return
+      });
+      return;
     }
 
-    const app = getApp()
-    if (!app.globalData.selectedRobot) {
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+    // 检查机器人选择状态
+    const app = getApp();
+    let selectedRobot = app.globalData.selectedRobot || wx.getStorageSync('selectedRobot');
+    
+    if (!selectedRobot) {
+      // 尝试从用户信息中获取已选择的机器人
+      const userInfo = wx.getStorageSync('userInfo');
+      if (userInfo && userInfo.selectedRobot) {
+        // 处理可能的命名不一致问题
+        let robotId = userInfo.selectedRobot;
+        if (robotId === '悉文') robotId = 'xiwen';
+        if (robotId === '悉荟') robotId = 'xihui';
+        
+        // 使用app.js中的方法获取机器人信息
+        selectedRobot = app.findRobotInfo(robotId);
+        
+        if (selectedRobot) {
+          app.globalData.selectedRobot = selectedRobot;
+          wx.setStorageSync('selectedRobot', selectedRobot);
+        }
+      }
+    }
+    
+    if (!selectedRobot) {
+      console.log('未选择机器人，跳转到选择页面');
+      wx.showModal({
+        title: '提示',
+        content: '请先选择AI助手',
+        showCancel: false,
+        success: () => {
+          wx.reLaunch({
+            url: '/pages/robot-select/robot-select'
+          });
+        }
+      });
+      return;
+    }
+    
+    // 如果当前没有机器人数据，但全局有，则更新
+    if (!this.data.robot && selectedRobot) {
+      console.log('更新页面机器人数据');
+      this.setData({ robot: selectedRobot }, () => {
+        // 如果还没有初始化socket，则初始化
+        if (!this.socketInitialized) {
+          this.initSocket();
+          this.loadHistory();
+        }
+      });
     }
   },
 
   initSocket() {
+    console.log('初始化WebSocket');
     // 初始化WebSocket连接
-    chatSocket.connect()
-    chatSocket.onMessage(this.handleReceiveMessage.bind(this))
+    chatSocket.connect();
+    chatSocket.onMessage(this.handleReceiveMessage.bind(this));
+    this.socketInitialized = true;
   },
 
   async loadHistory() {
@@ -130,25 +208,52 @@ Page({
     this.setData({ loading: true })
 
     try {
+      // 获取机器人ID，从多个可能的来源获取
       const app = getApp()
-      const robotId = app.globalData.selectedRobot?._id
+      let robotId = null
+      
+      // 尝试从页面数据获取
+      if (this.data.robot && this.data.robot._id) {
+        robotId = this.data.robot._id
+      } 
+      // 尝试从全局数据获取
+      else if (app.globalData.selectedRobot && app.globalData.selectedRobot._id) {
+        robotId = app.globalData.selectedRobot._id
+      }
+      // 尝试从本地存储获取
+      else {
+        const storedRobot = wx.getStorageSync('selectedRobot')
+        if (storedRobot && storedRobot._id) {
+          robotId = storedRobot._id
+        }
+      }
+      
+      console.log('加载历史消息, 机器人ID:', robotId)
       
       if (!robotId) {
         throw new Error('未选择机器人')
       }
 
+      // 使用API获取聊天历史
       const res = await getChatHistory(robotId)
+      console.log('获取聊天历史响应:', res)
       
-      // 处理历史消息，确保每条消息都有isUser标志
-      let messages = [];
-      if (Array.isArray(res.data)) {
-        messages = res.data.map(msg => {
-          return {
-            ...msg,
-            isUser: msg.type === 'user'  // 根据消息类型设置isUser标志
-          };
-        });
+      // 处理不同的响应格式
+      let messages = []
+      
+      if (res && res.success && res.data) {
+        // 处理messages字段
+        if (res.data.messages && Array.isArray(res.data.messages)) {
+          messages = res.data.messages.map(msg => {
+            return {
+              ...msg,
+              isUser: msg.type === 'user'  // 根据消息类型设置isUser标志
+            }
+          })
+        }
       }
+      
+      console.log(`加载了 ${messages.length} 条历史消息`)
       
       this.setData({ 
         messages: messages,
@@ -164,7 +269,10 @@ Page({
         title: error.message || '加载历史消息失败',
         icon: 'none'
       })
-      this.setData({ loading: false })
+      this.setData({ 
+        loading: false,
+        messages: [] // 确保messages是一个空数组
+      })
     }
   },
 
@@ -191,7 +299,7 @@ Page({
   async handleSend() {
     if (this.data.sending) return
     
-    const { inputValue, loading, robot } = this.data
+    const { inputValue, robot } = this.data
     if (!inputValue.trim()) return
     
     if (!robot) {
@@ -205,17 +313,28 @@ Page({
     this.setData({ sending: true })
     
     try {
+      // 获取用户ID
+      const app = getApp();
+      const userId = app.globalData.userId || wx.getStorageSync('userId');
+      
+      console.log('开始发送消息:', { 
+        content: inputValue,
+        robotId: robot._id,
+        userId: userId
+      });
+      
       // 发送消息到服务器
       const res = await sendMessage({
         robotId: robot._id,
-        content: inputValue
+        content: inputValue,
+        userId: userId  // 显式传递用户ID
       })
       
-      console.log('发送消息响应', res);
+      console.log('发送消息响应:', res);
       
       // 检查响应格式是否正确
-      if (!res.success || !res.data) {
-        throw new Error(res.error || '发送失败');
+      if (!res || !res.success || !res.data) {
+        throw new Error(res.message || res.error || '发送失败');
       }
       
       // 确保messages是数组
@@ -225,8 +344,10 @@ Page({
       if (res.data.userMessage) {
         const userMessage = {
           _id: res.data.userMessage._id || res.data.userMessage.id,
+          id: res.data.userMessage._id || res.data.userMessage.id,
           content: res.data.userMessage.content,
-          createdAt: res.data.userMessage.createdAt || new Date().toLocaleTimeString(),
+          createdAt: res.data.userMessage.createdAt || new Date().toISOString(),
+          time: res.data.userMessage.time || new Date().toISOString(),
           type: 'user',
           isUser: true
         }
@@ -244,8 +365,10 @@ Page({
         
         const robotMessage = {
           _id: res.data.robotReply._id || res.data.robotReply.id,
+          id: res.data.robotReply._id || res.data.robotReply.id,
           content: res.data.robotReply.content,
-          createdAt: res.data.robotReply.createdAt || new Date().toLocaleTimeString(),
+          createdAt: res.data.robotReply.createdAt || new Date().toISOString(),
+          time: res.data.robotReply.time || new Date().toISOString(),
           robotName: robot.name || robotInfo.name || '智能助手',
           robotAvatar: robot.avatar || robotInfo.avatar,
           type: 'robot',
@@ -267,12 +390,20 @@ Page({
         // 获取本次对话积分
         if (res.data.userMessage && res.data.userMessage._id) {
           try {
-            const pointsRes = await getChatPoints(res.data.userMessage._id)
-            if (pointsRes.data > 0) {
-              wx.showToast({
-                title: `获得${pointsRes.data}积分`,
-                icon: 'none'
-              })
+            const messageId = res.data.userMessage._id;
+            console.log('获取聊天积分，消息ID:', messageId);
+            
+            // 验证消息ID格式
+            if (messageId && /^[0-9a-fA-F]{24}$/.test(messageId)) {
+              const pointsRes = await getChatPoints(messageId);
+              if (pointsRes && pointsRes.data && pointsRes.data.points > 0) {
+                wx.showToast({
+                  title: `获得${pointsRes.data.points}积分`,
+                  icon: 'none'
+                });
+              }
+            } else {
+              console.warn('消息ID格式无效，跳过积分获取', { messageId });
             }
           } catch (pointsError) {
             console.error('获取积分失败', pointsError);
@@ -396,7 +527,7 @@ Page({
 
       // 上传录音文件
       const uploadRes = await wx.uploadFile({
-        url: 'http://localhost:3003/api/chat/voice/upload',
+        url: 'http://127.0.0.1:3005/api/chat/voice/upload',
         filePath: tempFilePath,
         name: 'file',
         header: {
@@ -457,7 +588,7 @@ Page({
       const robotId = app.globalData.selectedRobot?._id
 
       const uploadRes = await wx.uploadFile({
-        url: 'http://localhost:3003/api/chat/image/upload',
+        url: 'http://127.0.0.1:3005/api/chat/image/upload',
         filePath: tempFilePath,
         name: 'file',
         header: {
@@ -536,7 +667,7 @@ Page({
 
       // 生成分享图片
       const res = await wx.downloadFile({
-        url: 'http://localhost:3003/api/chat/share/image',
+        url: 'http://127.0.0.1:3005/api/chat/share/image',
         data: {
           messageId: currentShareMessage.id
         },
@@ -693,7 +824,24 @@ Page({
   // 加载聊天历史
   async loadChatHistory() {
     try {
-      const res = await request.get('/api/chat/history')
+      const app = getApp();
+      let robotId = this.data.robotId;
+      
+      // 如果页面中没有设置robotId，则尝试使用应用全局的机器人ID
+      if (!robotId && app.globalData && app.globalData.selectedRobot) {
+        robotId = app.globalData.selectedRobot._id;
+      }
+      
+      if (!robotId) {
+        console.warn('未找到机器人ID，无法加载聊天历史');
+        throw new Error('请先选择AI助手');
+      }
+      
+      console.log('加载聊天历史，robotId:', robotId);
+      
+      // 使用正确的API路径和参数 - 修复API调用
+      const res = await getChatHistory(robotId);
+      
       if (res.success) {
         const messagesData = res.data && res.data.messages ? res.data.messages : [];
         
@@ -707,12 +855,17 @@ Page({
         this.setData({ 
           messages: formattedMessages,
           scrollTop: 99999 // 滚动到底部
-        })
+        });
       }
     } catch (error) {
-      console.error('加载聊天历史失败:', error)
+      console.error('加载聊天历史失败:', error);
       // 确保messages是一个空数组，而不是undefined或null
-      this.setData({ messages: [] })
+      this.setData({ messages: [] });
+      // 显示错误提示
+      wx.showToast({
+        title: error.message || '加载聊天历史失败',
+        icon: 'none'
+      });
     }
   },
 
@@ -739,19 +892,71 @@ Page({
       const res = await getUserInfo()
       console.log('用户信息API返回:', res)
       
-      // 检查不同格式的成功响应 (success 或 code === 0)
-      if ((res.success || res.code === 0) && res.data) {
-        console.log('获取到用户信息:', res.data)
-        this.setData({ userInfo: res.data })
-      } else {
-        console.error('获取用户信息失败:', res)
+      // 检查用户信息响应格式并处理
+      if (res.success === false || res.code === 401) {
+        console.warn('获取用户信息API返回错误:', res)
         // 设置默认用户信息
         this.setData({ userInfo: { nickname: '我' } })
+        return
       }
+      
+      // 处理不同的响应格式
+      let userData = res
+      if (res.data) {
+        userData = res.data
+      } else if (typeof res === 'object' && res._id) {
+        userData = res
+      }
+      
+      console.log('设置用户信息:', userData)
+      
+      // 更新全局数据
+      const app = getApp();
+      if (app && app.globalData) {
+        app.globalData.userInfo = userData;
+        
+        // 确保在全局保存用户ID
+        if (userData && userData._id) {
+          app.globalData.userId = userData._id;
+          wx.setStorageSync('userId', userData._id);
+          console.log('用户ID已设置到全局:', userData._id);
+        }
+      }
+      
+      // 更新本地存储
+      wx.setStorageSync('userInfo', userData);
+      
+      this.setData({ userInfo: userData })
     } catch (error) {
       console.error('加载用户信息失败:', error)
       // 设置默认用户信息
       this.setData({ userInfo: { nickname: '我' } })
     }
+  },
+
+  // 发送语音消息
+  sendVoice(tempFilePath) {
+    const self = this;
+    const token = wx.getStorageSync('token');
+    
+    wx.uploadFile({
+      url: 'http://127.0.0.1:3005/api/chat/voice/upload',
+      filePath: tempFilePath,
+      name: 'file',
+      header: {
+        'Authorization': `Bearer ${token}`
+      },
+      success: function(res) {
+        console.log('上传语音成功', res);
+        self.handleVoiceRecognition(tempFilePath);
+      },
+      fail: function(error) {
+        console.error('上传语音失败', error);
+        wx.showToast({
+          title: '上传语音失败',
+          icon: 'none'
+        });
+      }
+    });
   }
 }) 

@@ -1,5 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const { generateToken } = require('../utils/jwt');
+const logger = require('../utils/logger');
+const redis = require('../utils/redis');
 
 class UserService {
   async register(userData) {
@@ -41,51 +44,55 @@ class UserService {
   }
 
   async login({ username, password, code }) {
-    console.log('service收到的登录参数:', { username, password, code });
-    let user;
-
-    // 通过用户名密码登录
-    if (username && password) {
-      // 先尝试用户名登录
-      user = await User.findOne({ username }).select('+password');
-      
-      // 如果用户名不存在，尝试用手机号登录
-      if (!user) { 
-         // TODO 验证是否为手机号格式
-        user = await User.findOne({ phone: username }).select('+password');
-      }
-      
-      // 如果都找不到用户
+    try {
+      // 查找用户
+      const user = await User.findOne({ username });
       if (!user) {
-        throw new Error('用户名或手机号不存在');
+        throw new Error('用户不存在');
       }
 
       // 验证密码
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await user.comparePassword(password);
       if (!isMatch) {
         throw new Error('密码错误');
       }
-    }
-    // 通过微信code登录
-    else if (code) {
-      try {
-        // TODO: 实现微信登录逻辑
-        // const wxResult = await getWxUserInfo(code);
-        // user = await User.findOne({ openid: wxResult.openid });
-        throw new Error('微信登录功能尚未实现');
-      } catch (error) {
-        throw new Error(`微信登录失败: ${error.message}`);
+
+      // 如果提供了验证码，验证验证码
+      if (code) {
+        const savedCode = await redis.get(`verification_code:${user.phone}`);
+        if (!savedCode || savedCode !== code) {
+          throw new Error('验证码错误或已过期');
+        }
+        // 验证成功后删除验证码
+        await redis.del(`verification_code:${user.phone}`);
       }
-    } 
-    else {
-      throw new Error('请提供有效的登录信息'); 
+
+      // 生成token
+      const token = generateToken(user._id);
+
+      // 获取用户信息（不包含密码）
+      const userInfo = await User.findById(user._id).select('-password');
+
+      // 检查用户是否已绑定机器人
+      let selectedRobot = null;
+      if (userInfo.boundRobots && userInfo.boundRobots.length > 0) {
+        // 如果已绑定机器人，使用第一个绑定的机器人
+        selectedRobot = userInfo.boundRobots[0];
+      }
+
+      // 更新最后登录时间
+      user.lastLoginTime = new Date();
+      await user.save();
+
+      return {
+        token,
+        userInfo,
+        selectedRobot
+      };
+    } catch (error) {
+      logger.error('登录失败:', error);
+      throw error;
     }
-
-    // 更新最后登录时间
-    user.lastLoginTime = new Date();
-    await user.save();
-
-    return this.generateAuthResponse(user);
   }
 
   async getUserRobot(userId) {
@@ -138,6 +145,39 @@ class UserService {
       },
       selectedRobot: user.selectedRobot || null
     };
+  }
+
+  async getUserList() {
+    try {
+      const users = await User.find().select('-password');
+      return users;
+    } catch (error) {
+      logger.error('获取用户列表失败:', error);
+      throw error;
+    }
+  }
+
+  async getUserInfo(userId) {
+    try {
+      const user = await User.findById(userId).select('-password');
+      if (!user) {
+        throw new Error('用户不存在');
+      }
+
+      // 获取用户绑定的机器人
+      let selectedRobot = null;
+      if (user.boundRobots && user.boundRobots.length > 0) {
+        selectedRobot = user.boundRobots[0];
+      }
+
+      return {
+        ...user.toObject(),
+        selectedRobot
+      };
+    } catch (error) {
+      logger.error('获取用户信息失败:', error);
+      throw error;
+    }
   }
 }
 

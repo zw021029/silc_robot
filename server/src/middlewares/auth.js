@@ -34,9 +34,11 @@ const auth = async (req, res, next) => {
     // 将用户信息附加到请求对象
     req.user = {
       _id: user._id,
+      id: user._id,
       username: user.username,
       role: user.role,
-      nickname: user.nickname
+      nickname: user.nickname,
+      isAdmin: user.isAdmin
     };
 
     logger.info('用户认证成功:', { userId: user._id, username: user.username });

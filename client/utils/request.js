@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://silcrobot.willzuo.top'  // 远程服务器的域名
-const BASE_URL = 'http://localhost:3005'  // 开发环境本机测试
+const BASE_URL = 'http://127.0.0.1:3005';  // 本地开发环境
 
 // 自定义参数序列化函数，替代URLSearchParams
 function serializeParams(params) {
@@ -9,97 +9,142 @@ function serializeParams(params) {
     .join('&');
 }
 
-const request = (options) => {
-  return new Promise((resolve, reject) => {
-    // 处理GET请求的参数
-    let url = options.url;
-    let data = options.data;
-    
-    // 对于GET请求，将参数转换为URL查询字符串
-    if (options.method === 'GET' && options.data) {
-      // 如果options.data包含params字段，取出来单独处理
-      if (options.data.params) {
-        const queryString = serializeParams(options.data.params);
-        if (url.includes('?')) {
-          url += '&' + queryString;
-        } else {
-          url += '?' + queryString;
+const request = {
+  get: (url, data) => {
+    return new Promise((resolve, reject) => {
+      console.log(`发起GET请求: ${BASE_URL}${url}`, data || '无参数');
+      wx.request({
+        url: `${BASE_URL}${url}`,
+        method: 'GET',
+        data,
+        header: {
+          'Authorization': `Bearer ${wx.getStorageSync('token')}`
+        },
+        success: (res) => {
+          console.log(`GET请求成功: ${url}`, res);
+          if (res.statusCode === 200) {
+            resolve(res.data);
+          } else {
+            console.error(`GET请求失败: ${url}`, res.statusCode, res.data);
+            
+            // 更友好地处理错误
+            let errorMessage = '请求失败';
+            
+            // 尝试从响应中提取错误信息
+            if (res.data) {
+              if (typeof res.data === 'string') {
+                errorMessage = res.data;
+              } else if (res.data.error) {
+                errorMessage = res.data.error;
+              } else if (res.data.message) {
+                errorMessage = res.data.message;
+              } else if (res.data.status && res.data.status.message) {
+                errorMessage = res.data.status.message;
+              }
+            }
+            
+            // 创建带有statusCode、url和message的错误对象
+            const error = new Error(errorMessage);
+            error.statusCode = res.statusCode;
+            error.url = url;
+            error.response = res.data;
+            
+            reject(error);
+          }
+        },
+        fail: (err) => {
+          console.error(`GET请求错误: ${url}`, err);
+          
+          // 创建网络错误
+          const error = new Error(err.errMsg || '网络请求失败');
+          error.original = err;
+          error.url = url;
+          
+          reject(error);
         }
-        // 从data中移除params，避免重复
-        data = { ...options.data };
-        delete data.params;
-      } else {
-        // 直接将data作为URL参数
-        const queryString = serializeParams(options.data);
-        if (url.includes('?')) {
-          url += '&' + queryString;
-        } else {
-          url += '?' + queryString;
-        }
-        // 清空data，因为已经放入URL中
-        data = undefined;
-      }
-    }
-    
-    console.log('发起请求:', {
-      url: `${BASE_URL}/api${url}`,
-      method: options.method,
-      data: data
-    })
+      });
+    });
+  },
 
-    // 获取token（如果有的话）
-    const token = wx.getStorageSync('token')
-    
-    wx.request({
-      url: `${BASE_URL}/api${url}`,
-      method: options.method || 'GET',
-      data: data,
-      header: {
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : '',
-        ...options.header
-      },
-      success: (res) => {
-        console.log('请求成功，响应数据:', res)
-        
-        if (res.statusCode === 401) {
-          // token失效，清除token并跳转到登录页
-          wx.removeStorageSync('token')
-          wx.reLaunch({
-            url: '/pages/login/login'
-          })
-          reject(new Error('未登录或登录已过期'))
-          return
+  post: (url, data) => {
+    return new Promise((resolve, reject) => {
+      console.log(`发起POST请求: ${BASE_URL}${url}`, data);
+      
+      wx.request({
+        url: `${BASE_URL}${url}`,
+        method: 'POST',
+        data,
+        header: {
+          'Authorization': `Bearer ${wx.getStorageSync('token')}`,
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          console.log(`POST请求响应: ${url}`, res.statusCode, res.data);
+          
+          if (res.statusCode === 200) {
+            resolve(res.data);
+          } else {
+            console.error(`POST请求失败: ${url}`, res.statusCode, res.data);
+            const errorMsg = res.data && (res.data.message || res.data.error) ? 
+              (res.data.message || res.data.error) : 
+              `请求失败 (${res.statusCode})`;
+            
+            reject(new Error(errorMsg));
+          }
+        },
+        fail: (err) => {
+          console.error(`POST请求错误: ${url}`, err);
+          reject(err);
         }
-        
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve(res.data)
-        } else {
-          const error = new Error(res.data?.message || res.data?.error || '请求失败')
-          error.statusCode = res.statusCode
-          error.response = res.data
-          reject(error)
-        }
-      },
-      fail: (err) => {
-        console.error('请求失败:', err)
-        // 添加更详细的错误信息
-        const errorMsg = err.errMsg || '网络请求失败'
-        wx.showToast({
-          title: errorMsg,
-          icon: 'none',
-          duration: 2000
-        })
-        reject(new Error(errorMsg))
-      }
-    })
-  })
-}
+      });
+    });
+  },
 
-// 导出请求方法
-module.exports = {
-  get: (url, data) => request({ url, method: 'GET', data }),
-  post: (url, data) => request({ url, method: 'POST', data }),
-  put: (url, data) => request({ url, method: 'PUT', data }),
-  delete: (url, data) => request({ url, method: 'DELETE', data })
-} 
+  put: (url, data) => {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${BASE_URL}${url}`,
+        method: 'PUT',
+        data,
+        header: {
+          'Authorization': `Bearer ${wx.getStorageSync('token')}`
+        },
+        success: (res) => {
+          if (res.statusCode === 200) {
+            resolve(res.data);
+          } else {
+            reject(new Error(res.data.error || '请求失败'));
+          }
+        },
+        fail: (err) => {
+          reject(err);
+        }
+      });
+    });
+  },
+
+  delete: (url, data) => {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${BASE_URL}${url}`,
+        method: 'DELETE',
+        data,
+        header: {
+          'Authorization': `Bearer ${wx.getStorageSync('token')}`
+        },
+        success: (res) => {
+          if (res.statusCode === 200) {
+            resolve(res.data);
+          } else {
+            reject(new Error(res.data.error || '请求失败'));
+          }
+        },
+        fail: (err) => {
+          reject(err);
+        }
+      });
+    });
+  }
+};
+
+module.exports = request; 

@@ -1,18 +1,18 @@
-<view class="container">
-  <view class="login-box">
+<view class="container" style="width: 747rpx; display: flex; box-sizing: border-box; left: 25rpx; top: 0rpx; height: 1021rpx; position: relative">
+  <view class="login-box" style="height: 1030rpx; display: block; box-sizing: border-box; width: 653rpx; left: 0rpx; top: -34rpx">
     <image class="logo" src="/assets/images/logo.png" mode="aspectFit"></image>
-    <view class="title">SILC-AI成长伴侣</view>
-    <view class="subtitle">让AI助你成长</view>
+    <view class="title">SILC-AI成长伙伴</view>
+    <view class="subtitle">悉问·悉知·悉守，我们一起成长</view>
     
     <!-- 登录表单 -->
-    <view class="form-box" wx:if="{{currentView === 'login'}}">
-      <input 
+    <view class="form-box" wx:if="{{currentView === 'login'}}" style="height: 475rpx; display: block; box-sizing: border-box">
+      <input style="width: 545rpx; display: block; box-sizing: border-box; height: 89rpx; left: 0rpx; top: 0rpx" 
         class="input" 
         type="text" 
         placeholder="请输入用户名/手机号" 
         model:value="{{username}}"
       />
-      <input 
+      <input style="width: 541rpx; display: block; box-sizing: border-box; height: 89rpx" 
         class="input" 
         type="password" 
         placeholder="请输入密码" 
@@ -22,10 +22,10 @@
         class="submit-btn" 
         loading="{{loading}}"
         bindtap="handleLogin"
-      >
+        style="position: relative; left: 0rpx; top: 77rpx">
         登录
       </button>
-      <view class="action-links">
+      <view class="action-links" style="position: relative; left: 0rpx; top: -121rpx">
         <text bindtap="switchToRegister">注册账号</text>
         <text bindtap="switchToReset">忘记密码</text>
       </view>
@@ -130,7 +130,7 @@
       class="wechat-btn" 
       open-type="getUserInfo" 
       bindgetuserinfo="handleWechatLogin"
-    >
+     style="position: relative; left: 0rpx; top: -88rpx">
       微信一键登录
     </button>
   </view>

@@ -5,6 +5,8 @@ const { getEmbedding, calculateSimilarity } = require('../utils/embedding');
 const aiService = require('./ai');
 const User = require('../models/user');
 const Chat = require('../models/chat');
+const Robot = require('../models/robot');
+const robotService = require('./robot');
 
 // 获取聊天历史
 exports.getChatHistory = async (userId) => {
@@ -204,7 +206,7 @@ exports.getRobotReply = async (userId, message) => {
       throw new Error('用户未选择机器人');
     }
 
-    logger.info('开始生成机器人回复', { userId, message, robotId: user.selectedRobot });
+    logger.info('开始生成机器人回复', { userId, message, robotName: user.selectedRobot });
 
     // 获取用户消息的向量表示
     const userVector = await getEmbedding(message);
@@ -214,15 +216,22 @@ exports.getRobotReply = async (userId, message) => {
     }
 
     // 从知识库中查找最相关的答案
-    const knowledgeList = await Knowledge.find({ robotId: user.selectedRobot });
+    const { KnowledgeArticle } = require('../models/knowledge');
+    // 查询通用知识库(robotName='all')，而不是针对特定机器人
+    const knowledgeList = await KnowledgeArticle.find({ 
+      $or: [
+        { robotName: 'all' }, 
+        { robotName: user.selectedRobot }
+      ] 
+    });
     if (!knowledgeList || knowledgeList.length === 0) {
-      logger.warn('知识库为空，使用默认回复', { robotId: user.selectedRobot });
+      logger.warn('知识库为空，使用默认回复', { robotName: user.selectedRobot });
       return {
         _id: null,
         id: null,
-        content: `抱歉，${user.selectedRobot === 'xiwen' ? '俺' : '人家'}暂时不知道该怎么回答这个问题。`,
+        content: `抱歉，${user.selectedRobot === '悉文' ? '俺' : '人家'}暂时不知道该怎么回答这个问题。`,
         type: 'robot',
-        robotId: user.selectedRobot
+        robotName: user.selectedRobot
       };
     }
 
@@ -259,20 +268,24 @@ exports.getRobotReply = async (userId, message) => {
       }
     }
 
-    // 如果找到相似度大于阈值的答案，使用该答案
-    if (bestMatch && maxSimilarity > 0.5) {
+    // 如果找到相似度大于阈值的答案，使用该答案并根据机器人调整回复风格
+    if (bestMatch && maxSimilarity > 0.2) {
       logger.info('找到匹配的答案', { 
         similarity: maxSimilarity,
         question: bestMatch.title,
         answer: bestMatch.content,
         knowledgeId: bestMatch._id
       });
+      
+      // 根据当前选择的机器人调整回复风格
+      const content = exports.adjustReplyStyle(bestMatch.content, user.selectedRobot === '悉文' ? 'xiwen' : 'xihui');
+      
       return {
         _id: bestMatch._id,
         id: bestMatch._id,
-        content: bestMatch.content,
+        content: content,
         type: 'robot',
-        robotId: user.selectedRobot
+        robotName: user.selectedRobot
       };
     }
 
@@ -281,9 +294,9 @@ exports.getRobotReply = async (userId, message) => {
     return {
       _id: null,
       id: null,
-      content: `抱歉，${user.selectedRobot === 'xiwen' ? '俺' : '人家'}暂时不知道该怎么回答这个问题。`,
+      content: `抱歉，${user.selectedRobot === '悉文' ? '俺' : '人家'}暂时不知道该怎么回答这个问题。`,
       type: 'robot',
-      robotId: user.selectedRobot
+      robotName: user.selectedRobot
     };
   } catch (error) {
     logger.error('获取机器人回复失败:', error);
@@ -292,7 +305,7 @@ exports.getRobotReply = async (userId, message) => {
 };
 
 // 调整回复风格
-function adjustReplyStyle(content, robotId) {
+exports.adjustReplyStyle = function(content, robotId) {
   if (robotId === 'xiwen') {
     // 悉文：更加男性化的回答方式
     return content
@@ -335,6 +348,85 @@ exports.calculateChatPoints = async (messageId) => {
     return Math.round(basePoints + lengthPoints + complexityPoints);
   } catch (error) {
     logger.error('计算聊天积分失败:', error);
+    throw error;
+  }
+};
+
+// 获取聊天积分
+exports.getChatPoints = async (userId, messageId) => {
+  try {
+    // 查找消息
+    const message = await Message.findOne({
+      _id: messageId,
+      userId
+    });
+
+    if (!message) {
+      throw new Error('消息不存在');
+    }
+
+    // 使用robotService获取机器人信息，避免ObjectId转换问题
+    const robotId = message.robotId ? message.robotId.toString() : null;
+    if (!robotId) {
+      throw new Error('机器人ID不存在');
+    }
+    
+    // 直接使用robotService获取机器人信息，它已经考虑了字符串ID的情况
+    let robotInfo = null;
+    try {
+      robotInfo = await robotService.getRobotDetail(robotId);
+    } catch (robotError) {
+      logger.warn('获取机器人信息失败，使用默认配置', { robotId, error: robotError.message });
+      // 尝试查找默认机器人
+      const robots = await robotService.getRobotList();
+      robotInfo = robots.find(r => r.name === robotId || r._id === robotId);
+      
+      if (!robotInfo) {
+        throw new Error('机器人不存在');
+      }
+    }
+
+    // 获取用户信息
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('用户不存在');
+    }
+
+    // 计算积分 - 固定为1点，简化处理
+    const points = 1;
+
+    // 更新用户积分
+    user.points += points;
+    await user.save();
+
+    return {
+      points,
+      totalPoints: user.points
+    };
+  } catch (error) {
+    logger.error('获取聊天积分失败:', error);
+    throw error;
+  }
+};
+
+
+// 获取机器人详情
+exports.getRobotDetails = async (robotId) => {
+  try {
+    // 先按ID查询
+    if (mongoose.Types.ObjectId.isValid(robotId)) {
+      const robot = await Robot.findById(robotId);
+      if (robot) return robot;
+    }
+    
+    // 如果ID查询失败，按名称查询
+    const robot = await Robot.findOne({ name: robotId });
+    if (robot) return robot;
+    
+    logger.warn('获取机器人详情失败: 机器人不存在', { robotId });
+    throw new Error('机器人不存在');
+  } catch (error) {
+    logger.error('获取机器人详情失败:', error);
     throw error;
   }
 };

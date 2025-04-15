@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   padding: 40rpx;
-  background-color: #f5f5f5;
+  background-color: #e6f2ff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +21,9 @@
   height: 200rpx;
   margin: 0 auto 40rpx;
   display: block;
+  text-align: center;
+  margin-bottom: 40rpx;
+  margin-top: 40rpx;
 }
 
 .title {
@@ -39,6 +42,7 @@
 
 .form-box {
   margin-bottom: 40rpx;
+  margin-top: 40rpx;
 }
 
 .input {
@@ -80,7 +84,7 @@
   color: #fff;
   border-radius: 45rpx;
   font-size: 32rpx;
-  margin-top: 40rpx;
+  margin-top: 0rpx;
 }
 
 .action-links {
@@ -89,6 +93,7 @@
   margin-top: 30rpx;
   font-size: 26rpx;
   color: #007AFF;
+  text-align: center;
 }
 
 .wechat-btn {
@@ -100,4 +105,6 @@
   border-radius: 45rpx;
   font-size: 32rpx;
   margin-top: 40rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
 } 

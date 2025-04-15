@@ -52,6 +52,12 @@ function calculateSimilarity(vector1, vector2) {
     // 获取所有唯一的词
     const allWords = new Set([...Array.from(v1.keys()), ...Array.from(v2.keys())]);
     
+    // 如果向量中没有任何词，返回0
+    if (allWords.size === 0) {
+      logger.warn('向量中没有任何词，返回相似度为0');
+      return 0;
+    }
+
     let dotProduct = 0;
     let norm1 = 0;
     let norm2 = 0;
@@ -72,9 +78,28 @@ function calculateSimilarity(vector1, vector2) {
     }
 
     const similarity = dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
+    
+    logger.debug('计算相似度详情', {
+      dotProduct,
+      norm1,
+      norm2,
+      similarity,
+      v1Size: v1.size,
+      v2Size: v2.size,
+      v1Type: typeof v1,
+      v2Type: typeof v2,
+      v1Keys: Array.from(v1.keys()).slice(0, 5),
+      v2Keys: Array.from(v2.keys()).slice(0, 5)
+    });
+    
     return similarity;
   } catch (error) {
-    logger.error('计算向量相似度失败:', error);
+    logger.error('计算向量相似度失败:', error, {
+      vector1Type: typeof vector1,
+      vector2Type: typeof vector2,
+      vector1IsMap: vector1 instanceof Map,
+      vector2IsMap: vector2 instanceof Map
+    });
     return 0;
   }
 }
@@ -90,19 +115,48 @@ function convertToMap(obj) {
     
     // 检查是否是普通对象
     if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
-      Object.entries(obj).forEach(([key, value]) => {
-        if (!isNaN(value)) { // 确保值是数字
-          map.set(key, Number(value));
-        }
-      });
-      return map;
+      // 尝试不同的格式
+      // 格式1: 标准对象 {key: value}
+      if (Object.keys(obj).length > 0) {
+        Object.entries(obj).forEach(([key, value]) => {
+          if (!isNaN(value)) { // 确保值是数字
+            map.set(key, Number(value));
+          }
+        });
+      }
+      // 格式2: MongoDB存储的格式可能是 {_doc: {map: {entries: [[key, value]]}}}
+      else if (obj._doc && obj._doc.map && Array.isArray(obj._doc.map.entries)) {
+        obj._doc.map.entries.forEach(([key, value]) => {
+          if (!isNaN(value)) {
+            map.set(key, Number(value));
+          }
+        });
+      }
+      // 尝试其他可能的格式
+      else if (obj.map && typeof obj.map === 'object') {
+        Object.entries(obj.map).forEach(([key, value]) => {
+          if (!isNaN(value)) {
+            map.set(key, Number(value));
+          }
+        });
+      }
     }
     
-    logger.warn('无法转换为向量格式:', obj);
-    return null;
+    if (map.size === 0) {
+      logger.warn('无法转换为向量格式，结果为空Map:', {
+        objType: typeof obj,
+        objKeys: obj ? Object.keys(obj) : [],
+        objIsArray: Array.isArray(obj)
+      });
+    }
+    
+    return map;
   } catch (error) {
-    logger.error('转换向量格式失败:', error);
-    return null;
+    logger.error('转换向量格式失败:', error, {
+      objType: typeof obj,
+      obj: JSON.stringify(obj).substring(0, 100) + '...'
+    });
+    return new Map(); // 返回空Map而不是null，避免后续处理出错
   }
 }
 

@@ -3,10 +3,10 @@ require('dotenv').config();
 module.exports = {
   // 服务器配置
   server: {
-    port: 3005,
+    port: process.env.PORT || 3005,
     env: process.env.NODE_ENV || 'development',
     debug: process.env.DEBUG || true,
-    baseUrl: process.env.API_BASE_URL || 'http://localhost:3000'
+    baseUrl: process.env.API_BASE_URL || 'http://localhost:3005'
   },
 
   // 数据库配置
@@ -17,7 +17,7 @@ module.exports = {
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      debug: process.env.DEBUG || false
+      dbName: 'silc_robot'
     }
   },
 
@@ -46,7 +46,8 @@ module.exports = {
   // 缓存配置
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
-    port: process.env.REDIS_PORT || 6379
+    port: process.env.REDIS_PORT || 6379,
+    password: process.env.REDIS_PASSWORD
   },
 
   // OpenAI API 配置

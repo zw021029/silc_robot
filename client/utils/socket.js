@@ -18,11 +18,14 @@ class ChatSocket {
 
     const token = wx.getStorageSync('token');
     if (!token) {
-      console.error('未登录，无法连接WebSocket');
+      wx.showToast({
+        title: '未登录，请先登录',
+        icon: 'none'
+      });
       return;
     }
 
-    const wsUrl = `ws://localhost:3005/ws/chat?token=${token}`;
+    const wsUrl = `ws://127.0.0.1:3005/api/ws/chat?token=${token}`;
     
     try {
       this.socket = wx.connectSocket({

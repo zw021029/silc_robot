@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="form">
+    <view class="form-item">
+      <text class="label">问题</text>
+      <textarea 
+        class="input" 
+        value="{{question}}"
+        placeholder="请输入问题"
+        data-field="question"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">答案</text>
+      <textarea 
+        class="input" 
+        value="{{answer}}"
+        placeholder="请输入答案"
+        data-field="answer"
+        bindinput="onInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">分类</text>
+      <picker 
+        mode="selector" 
+        range="{{categories}}" 
+        value="{{categories.indexOf(category)}}"
+        bindchange="onCategoryChange"
+      >
+        <view class="picker">
+          {{category || '请选择分类'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">标签</text>
+      <input 
+        class="input" 
+        value="{{tags}}"
+        placeholder="请输入标签，用逗号分隔"
+        data-field="tags"
+        bindinput="onInput"
+      />
+    </view>
+  </view>
+
+  <view class="footer">
+    <button class="btn" bindtap="save">保存</button>
+  </view>
+</view> 

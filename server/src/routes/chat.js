@@ -16,7 +16,7 @@ router.post('/reply', auth.verifyToken, chatController.getRobotReply);
 router.post('/:messageId/evaluate', auth.verifyToken, chatController.evaluateChat);
 
 // 获取聊天积分
-router.get('/points/:chatId', auth.verifyToken, chatController.getChatPoints);
+router.get('/points/:messageId', auth.verifyToken, chatController.getChatPoints);
 
 // 获取聊天详情
 router.get('/detail/:id', auth.verifyToken, chatController.getChatDetail);

@@ -1,16 +1,19 @@
 const mongoose = require('mongoose');
 const logger = require('./logger');
+const config = require('../config');
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  dbName: 'silc_robot'
-};
+// 设置 mongoose 选项
+mongoose.set('strictQuery', false);
+mongoose.set('debug', config.server.debug);
 
 async function connectDB() {
   try {
-    const conn = await mongoose.connect('mongodb://localhost:27017', options);
-    logger.info('MongoDB 连接成功:', conn.connection.host);
+    const conn = await mongoose.connect(config.database.url, config.database.options);
+    logger.info('MongoDB 连接成功:', {
+      host: conn.connection.host,
+      port: conn.connection.port,
+      database: conn.connection.name
+    });
   } catch (error) {
     logger.error('MongoDB 连接失败:', error);
     process.exit(1);

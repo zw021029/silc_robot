@@ -20,7 +20,10 @@
     "pages/ai/skills/skills",
     "pages/ai/voice/voice",
     "pages/feedback/feedback",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/admin/index",
+    "pages/admin/knowledge/edit",
+    "pages/user/info/info"
   ],
   "window": {
     "backgroundTextStyle": "light",
