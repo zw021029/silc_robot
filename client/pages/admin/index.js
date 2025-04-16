@@ -1,5 +1,7 @@
+import config from '../../config.js'
+
 const app = getApp();
-const BASE_URL = 'http://127.0.0.1:3005'; // 定义BASE_URL
+const BASE_URL = config.BASE_URL
 
 Page({
   data: {

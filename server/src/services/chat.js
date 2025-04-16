@@ -224,6 +224,8 @@ exports.getRobotReply = async (userId, message) => {
         { robotName: user.selectedRobot }
       ] 
     });
+    console.log(`找到 ${knowledgeList.length} 条知识库记录`);
+    logger.info(`找到 ${knowledgeList.length} 条知识库记录`, { robotName: user.selectedRobot });
     if (!knowledgeList || knowledgeList.length === 0) {
       logger.warn('知识库为空，使用默认回复', { robotName: user.selectedRobot });
       return {

@@ -1,10 +1,10 @@
 require('dotenv').config({ path: '../../.env' });
 const mongoose = require('mongoose');
-const { KnowledgeArticle } = require('../models/knowledge');
+const { KnowledgeArticle } = require('../src/models/knowledge');
 const studentQA = require('./studentQA');
 
 // 连接数据库
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/silc0325', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/silc_robot', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

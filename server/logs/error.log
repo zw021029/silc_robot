@@ -1033,3 +1033,102 @@
 {"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T10:42:55.556Z"}
 {"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T10:42:55.556Z"}
 {"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T10:45:02.050Z"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis连接错误:","port":6379,"syscall":"connect","timestamp":"2025-04-15T14:00:37.848Z"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis连接错误:","port":6379,"syscall":"connect","timestamp":"2025-04-15T14:00:37.912Z"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis连接错误:","port":6379,"syscall":"connect","timestamp":"2025-04-15T14:00:38.015Z"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-111,"level":"error","message":"Redis连接错误:","port":6379,"syscall":"connect","timestamp":"2025-04-15T14:00:38.166Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T14:11:00.356Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T14:11:08.152Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T14:11:08.153Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:00.107Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:00.108Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:04.659Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:04.659Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:06.224Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:12:06.225Z"}
+{"_message":"Robot validation failed","errors":{"displayName":{"kind":"required","message":"Path `displayName` is required.","name":"ValidatorError","path":"displayName","properties":{"message":"Path `displayName` is required.","path":"displayName","type":"required"}}},"level":"error","message":"初始化数据失败:","timestamp":"2025-04-15T14:38:37.968Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T14:51:53.476Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T14:51:53.477Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:52:20.025Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:52:20.026Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:58:12.082Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T14:58:12.082Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:04:45.540Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:04:45.540Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:13.175Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:13.175Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:17.900Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:17.900Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:29.809Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:20:29.809Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:22:01.219Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:22:01.219Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T15:32:01.854Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T15:32:01.855Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T15:32:13.018Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T15:32:13.018Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:32:24.528Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:32:24.528Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:32:32.893Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:32:32.893Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T15:34:32.580Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T15:34:35.872Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T15:37:36.791Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T15:40:54.202Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T15:47:07.482Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T15:52:30.178Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T15:52:30.180Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:52:45.052Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:52:45.052Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:52:59.151Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:52:59.151Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:54:24.579Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:54:24.580Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T15:57:19.604Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T15:57:19.605Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:57:34.665Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:57:34.665Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:58:28.469Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:58:28.469Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:59:41.208Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T15:59:41.208Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:00:28.630Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:00:28.631Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:00:45.871Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:00:45.871Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:01:56.413Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:01:56.413Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:02:10.712Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:02:10.712Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T16:03:24.961Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:03:46.262Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:03:46.263Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:03:59.246Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:03:59.247Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:05:19.283Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:05:19.283Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:05:25.868Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:05:25.868Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:10:34.465Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:10:34.466Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:10:45.340Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:10:45.340Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:13:29.252Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:13:29.253Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:15:11.036Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:15:11.037Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:18:58.984Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:18:58.984Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:19:25.664Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:19:25.664Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:34:52.077Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:34:52.078Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:35:00.865Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:35:00.866Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:35:07.206Z"}
+{"level":"error","message":"获取机器人详情失败:","timestamp":"2025-04-15T16:35:07.206Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T16:35:44.029Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T16:35:44.030Z"}
+{"level":"error","message":"获取知识库列表失败:","timestamp":"2025-04-15T16:36:33.773Z"}
+{"level":"error","message":"身份验证失败:","timestamp":"2025-04-15T17:20:42.432Z"}
+{"level":"error","message":"未处理的 Promise 拒绝:","promise":{},"reason":{},"timestamp":"2025-04-15T17:20:42.433Z"}

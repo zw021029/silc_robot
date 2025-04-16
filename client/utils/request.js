@@ -1,5 +1,5 @@
-// const BASE_URL = 'http://silcrobot.willzuo.top'  // 远程服务器的域名
-const BASE_URL = 'http://127.0.0.1:3005';  // 本地开发环境
+import config from '../config.js'
+const BASE_URL = config.BASE_URL
 
 // 自定义参数序列化函数，替代URLSearchParams
 function serializeParams(params) {

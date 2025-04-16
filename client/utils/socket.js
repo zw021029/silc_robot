@@ -1,6 +1,8 @@
 /**
  * WebSocket工具类
  */
+import config from '../config.js'
+const WS_URL = config.WS_URL
 class ChatSocket {
   constructor() {
     this.socket = null;
@@ -25,7 +27,7 @@ class ChatSocket {
       return;
     }
 
-    const wsUrl = `ws://127.0.0.1:3005/api/ws/chat?token=${token}`;
+    const wsUrl = `${WS_URL}/api/ws/chat?token=${token}`;
     
     try {
       this.socket = wx.connectSocket({

@@ -1,3 +1,5 @@
+import config from './config.js'
+
 App({
   globalData: {
     userInfo: null,
@@ -9,6 +11,7 @@ App({
 
   onLaunch() {
     console.log('App onLaunch')
+    console.log('BASE_URL:', config.BASE_URL)
     // 检查登录状态
     this.checkLoginStatus()
   },
@@ -29,7 +32,7 @@ App({
 
     // 验证token有效性
     console.log('Sending verify request...')
-    const BASE_URL = 'http://127.0.0.1:3005';
+    const BASE_URL = process.env.BASE_URL
     wx.request({
       url: `${BASE_URL}/api/user/verify`,
       method: 'GET',

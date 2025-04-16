@@ -38,3 +38,6 @@ yarn-error.log*
 
 # logs
 logs
+
+mongo-data/
+redis-data/
