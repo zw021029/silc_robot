@@ -1,6 +1,6 @@
 const config = {
-    BASE_URL: 'http://175.24.18.171:3005',
-    WS_URL: 'ws://175.24.18.171:3005',
+    BASE_URL: 'https://sirius1y.top',
+    WS_URL: 'wss://sirius1y.top',
 };
 
 export default config;
