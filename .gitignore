@@ -37,7 +37,7 @@ yarn-error.log*
 .temp/
 
 # logs
-logs
+logs/
 
 mongo-data/
 redis-data/

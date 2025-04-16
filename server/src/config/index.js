@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config('../../.env');
 
 module.exports = {
   // 服务器配置
