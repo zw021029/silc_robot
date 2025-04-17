@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/login/login",
+    "pages/register/register",
+    "pages/index/index",
     "pages/robot-select/robot-select",
     "pages/chat/chat",
     "pages/history/history",
@@ -21,6 +22,7 @@
     "pages/ai/voice/voice",
     "pages/feedback/feedback",
     "pages/about/about",
+    "pages/notifications/notifications",
     "pages/admin/index",
     "pages/admin/knowledge/edit",
     "pages/user/info/info"
@@ -33,7 +35,7 @@
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#1890ff",
+    "selectedColor": "#000000",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [

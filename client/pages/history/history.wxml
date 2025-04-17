@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" enablePullDownRefresh="true">
   <view class="history-list">
     <view 
       class="history-item"
@@ -10,7 +10,7 @@
       <view class="history-header">
         <image 
           class="robot-avatar" 
-          src="/assets/images/robot-{{item.robotId === 1 ? 'male' : 'female'}}.png"
+          src="/assets/images/{{item.robotId}}.png"
         />
         <text class="robot-name">{{item.robotName}}</text>
         <text class="history-time">{{item.formattedTime}}</text>

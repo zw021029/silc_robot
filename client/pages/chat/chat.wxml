@@ -5,7 +5,10 @@
     scroll-y 
     scroll-top="{{scrollTop}}"
     scroll-into-view="{{scrollToMessage}}"
-    bindscrolltoupper="onPullDownRefresh"
+    bindscroll="onScroll"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
     enhanced="true"
     show-scrollbar="false"
   >
@@ -21,19 +24,19 @@
       <block wx:for="{{messages}}" wx:key="_id">
         <!-- 用户消息 -->
         <view class="message-item user-message" wx:if="{{item.isUser}}">
+          <!-- 消息内容 -->
+          <view class="message-wrapper">
+            <view class="message-content">
+              <text>{{item.content}}</text>
+            </view>
+            <view class="message-time">{{item.formattedTime}}</view>
+          </view>
           <!-- 用户头像放在最右侧 -->
           <view class="avatar user-avatar" wx:if="{{userInfo.avatar}}">
             <image src="{{userInfo.avatar}}" mode="aspectFill"></image>
           </view>
           <view class="avatar user-avatar text-avatar" wx:else>
             <text>我</text>
-          </view>
-          <!-- 消息内容 -->
-          <view class="message-wrapper">
-            <view class="message-content">
-              <text>{{item.content}}</text>
-            </view>
-            <view class="message-time">{{item.createdAt}}</view>
           </view>
         </view>
 
@@ -51,7 +54,7 @@
             <view class="message-content">
               <text>{{item.content}}</text>
             </view>
-            <view class="message-time">{{item.createdAt}}</view>
+            <view class="message-time">{{item.formattedTime}}</view>
           </view>
         </view>
       </block>

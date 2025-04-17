@@ -55,7 +55,7 @@
 /* 消息项 */
 .message-item {
   display: flex;
-  margin-bottom: 30rpx;
+  margin-bottom: 15rpx;
   position: relative;
   max-width: 100%;
 }
@@ -121,6 +121,7 @@
   line-height: 1.5;
   word-break: break-all;
   box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+  margin-top: 12rpx;
 }
 
 .user-message .message-content {

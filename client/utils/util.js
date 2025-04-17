@@ -4,14 +4,21 @@
 
 // 格式化时间
 const formatTime = date => {
+  // 确保传入的是有效的 Date 对象
+  if (!(date instanceof Date) || isNaN(date)) {
+    console.error('Invalid date:', date);
+    return '无效时间';
+  }
+  
+  // 获取本地时间
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
   const hour = date.getHours();
   const minute = date.getMinutes();
-  const second = date.getSeconds();
 
-  return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`;
+  // 使用中文格式
+  return `${year}年${formatNumber(month)}月${formatNumber(day)}日 ${formatNumber(hour)}:${formatNumber(minute)}`;
 };
 
 // 格式化数字

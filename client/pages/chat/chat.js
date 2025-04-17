@@ -4,6 +4,7 @@ const { getChatHistory } = require('../../api/chat')
 const { getUserInfo } = require('../../api/user')
 const chatSocket = require('../../utils/socket')
 const request = require('../../utils/request')
+const { formatTime } = require('../../utils/util')
 
 // 创建事件中心（如果不存在）
 if (!wx.eventCenter) {
@@ -54,12 +55,17 @@ Page({
     recording: false,
     robotId: '',
     robotInfo: null,
-    userInfo: null
+    userInfo: null,
+    isPulling: false,  // 是否正在下拉
+    pullDistance: 0,   // 下拉距离
+    lastScrollTop: 0   // 上次滚动位置
   },
 
   async onLoad(options) {
     console.log('chat页面加载，options:', options);
-    
+    console.log('当前页面robotId:', this.data.robotId);
+    console.log('本地存储selectedRobot:', wx.getStorageSync('selectedRobot'));
+
     // 检查登录状态
     const token = wx.getStorageSync('token');
     if (!token) {
@@ -130,9 +136,7 @@ Page({
     });
   },
 
-  onShow() {
-    console.log('chat页面显示');
-    
+  onShow() {    
     // 检查登录状态
     const token = wx.getStorageSync('token');
     if (!token) {
@@ -247,7 +251,8 @@ Page({
           messages = res.data.messages.map(msg => {
             return {
               ...msg,
-              isUser: msg.type === 'user'  // 根据消息类型设置isUser标志
+              isUser: msg.type === 'user',  // 根据消息类型设置isUser标志
+              formattedTime: formatTime(new Date(msg.createdAt || new Date()))
             }
           })
         }
@@ -281,6 +286,12 @@ Page({
     
     // 确保messages是数组
     const currentMessages = Array.isArray(this.data.messages) ? this.data.messages : [];
+    
+    // 格式化消息时间
+    if (message.createdAt) {
+      message.formattedTime = formatTime(new Date(message.createdAt));
+    }
+    
     const updatedMessages = [...currentMessages, message];
     
     this.setData({ messages: updatedMessages }, () => {
@@ -327,17 +338,15 @@ Page({
       const res = await sendMessage({
         robotId: robot._id,
         content: inputValue,
-        userId: userId  // 显式传递用户ID
+        userId: userId
       })
       
       console.log('发送消息响应:', res);
       
-      // 检查响应格式是否正确
       if (!res || !res.success || !res.data) {
         throw new Error(res.message || res.error || '发送失败');
       }
       
-      // 确保messages是数组
       const currentMessages = Array.isArray(this.data.messages) ? this.data.messages : [];
       
       // 添加用户消息
@@ -349,10 +358,10 @@ Page({
           createdAt: res.data.userMessage.createdAt || new Date().toISOString(),
           time: res.data.userMessage.time || new Date().toISOString(),
           type: 'user',
-          isUser: true
+          isUser: true,
+          formattedTime: formatTime(new Date(res.data.userMessage.createdAt || new Date()))
         }
         
-        // 将用户消息添加到消息列表
         this.setData({
           messages: [...currentMessages, userMessage]
         })
@@ -360,7 +369,6 @@ Page({
 
       // 添加机器人回复
       if (res.data.robotReply) {
-        // 获取正确的机器人信息
         const robotInfo = this.data.robotInfo || {};
         
         const robotMessage = {
@@ -372,13 +380,12 @@ Page({
           robotName: robot.name || robotInfo.name || '智能助手',
           robotAvatar: robot.avatar || robotInfo.avatar,
           type: 'robot',
-          isUser: false
+          isUser: false,
+          formattedTime: formatTime(new Date(res.data.robotReply.createdAt || new Date()))
         }
         
-        // 重新获取最新的messages数组
         const updatedMessages = Array.isArray(this.data.messages) ? this.data.messages : [];
         
-        // 将机器人回复添加到消息列表
         this.setData({
           messages: [...updatedMessages, robotMessage],
           inputValue: '',
@@ -821,6 +828,11 @@ Page({
     }
   },
 
+  // 上拉加载更多
+  onReachBottom() {
+    this.loadChatHistory();
+  },
+
   // 加载聊天历史
   async loadChatHistory() {
     try {
@@ -830,38 +842,43 @@ Page({
       // 如果页面中没有设置robotId，则尝试使用应用全局的机器人ID
       if (!robotId && app.globalData && app.globalData.selectedRobot) {
         robotId = app.globalData.selectedRobot._id;
+        // 更新页面数据中的robotId
+        this.setData({ robotId });
       }
       
       if (!robotId) {
         console.warn('未找到机器人ID，无法加载聊天历史');
-        throw new Error('请先选择AI助手');
+        // 不再抛出错误，而是保持现有消息
+        wx.showToast({
+          title: '请先选择AI助手',
+          icon: 'none'
+        });
+        return;
       }
       
       console.log('加载聊天历史，robotId:', robotId);
       
-      // 使用正确的API路径和参数 - 修复API调用
       const res = await getChatHistory(robotId);
       
       if (res.success) {
         const messagesData = res.data && res.data.messages ? res.data.messages : [];
         
-        // 处理历史消息，确保每条消息都有isUser标志
         const formattedMessages = Array.isArray(messagesData) ? 
           messagesData.map(msg => ({
             ...msg,
-            isUser: msg.type === 'user'  // 根据消息类型设置isUser标志
+            isUser: msg.type === 'user'
           })) : [];
           
+        // 将新消息追加到现有消息列表的末尾
+        const currentMessages = this.data.messages || [];
         this.setData({ 
-          messages: formattedMessages,
-          scrollTop: 99999 // 滚动到底部
+          messages: [...currentMessages, ...formattedMessages],
+          scrollTop: 99999
         });
       }
     } catch (error) {
       console.error('加载聊天历史失败:', error);
-      // 确保messages是一个空数组，而不是undefined或null
-      this.setData({ messages: [] });
-      // 显示错误提示
+      // 不再清空消息，而是显示错误提示
       wx.showToast({
         title: error.message || '加载聊天历史失败',
         icon: 'none'
@@ -877,13 +894,6 @@ Page({
   // 回车发送
   onConfirm() {
     this.handleSend()
-  },
-
-  // 下拉刷新
-  onPullDownRefresh() {
-    this.loadChatHistory().then(() => {
-      wx.stopPullDownRefresh()
-    })
   },
 
   // 加载用户信息
@@ -958,5 +968,53 @@ Page({
         });
       }
     });
-  }
+  },
+
+  // 滚动事件处理
+  onScroll(e) {
+    const scrollTop = e.detail.scrollTop;
+    const scrollHeight = e.detail.scrollHeight;
+    const clientHeight = e.detail.clientHeight;
+    
+    // 记录滚动位置
+    this.setData({ lastScrollTop: scrollTop });
+    
+    // 如果已经滚动到底部，且正在下拉
+    if (scrollTop + clientHeight >= scrollHeight && this.data.isPulling) {
+      this.loadChatHistory();
+      this.setData({ isPulling: false, pullDistance: 0 });
+    }
+  },
+
+  // 触摸开始事件
+  onTouchStart(e) {
+    const scrollTop = this.data.lastScrollTop;
+    const scrollHeight = e.detail.scrollHeight;
+    const clientHeight = e.detail.clientHeight;
+    
+    // 如果已经滚动到底部，开始记录下拉
+    if (scrollTop + clientHeight >= scrollHeight) {
+      this.setData({ isPulling: true });
+    }
+  },
+
+  // 触摸移动事件
+  onTouchMove(e) {
+    if (this.data.isPulling) {
+      const touch = e.touches[0];
+      const startY = this.data.startY;
+      const currentY = touch.clientY;
+      const pullDistance = startY - currentY;
+      
+      // 更新下拉距离
+      this.setData({ pullDistance });
+    }
+  },
+
+  // 触摸结束事件
+  onTouchEnd() {
+    if (this.data.isPulling) {
+      this.setData({ isPulling: false, pullDistance: 0 });
+    }
+  },
 }) 
