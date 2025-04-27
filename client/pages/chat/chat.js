@@ -263,10 +263,9 @@ Page({
       this.setData({ 
         messages: messages,
         loading: false
+      }, () => {
+        this.scrollToBottom();
       })
-      
-      // 滚动到最新消息
-      this.scrollToBottom()
       
     } catch (error) {
       console.error('加载历史消息失败:', error)
@@ -295,7 +294,7 @@ Page({
     const updatedMessages = [...currentMessages, message];
     
     this.setData({ messages: updatedMessages }, () => {
-      this.scrollToBottom()
+      this.scrollToBottom();
     })
   },
 
@@ -364,6 +363,8 @@ Page({
         
         this.setData({
           messages: [...currentMessages, userMessage]
+        }, () => {
+          this.scrollToBottom();
         })
       }
 
@@ -391,7 +392,7 @@ Page({
           inputValue: '',
           sending: false
         }, () => {
-          this.scrollToBottom()
+          this.scrollToBottom();
         })
         
         // 获取本次对话积分
@@ -621,6 +622,8 @@ Page({
       this.setData({
         messages: [...this.data.messages, imageMessage],
         inputValue: question || ''
+      }, () => {
+        this.scrollToBottom();
       })
 
       // 如果有识别出的问题，自动发送
@@ -732,17 +735,12 @@ Page({
   },
 
   scrollToBottom() {
-    wx.createSelectorQuery()
-      .select('#message-list')
-      .boundingClientRect((rect) => {
-        if (rect) {
-          wx.pageScrollTo({
-            scrollTop: rect.height,
-            duration: 300
-          })
-        }
-      })
-      .exec()
+    if (this.data.messages && this.data.messages.length > 0) {
+      const lastMessage = this.data.messages[this.data.messages.length - 1];
+      this.setData({
+        scrollToMessage: `msg-${lastMessage._id}`
+      });
+    }
   },
 
   onUnload() {

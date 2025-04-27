@@ -12,17 +12,19 @@
           class="robot-avatar" 
           src="/assets/images/{{item.robotId}}.png"
         />
-        <text class="robot-name">{{item.robotName}}</text>
+        <text class="robot-name" wx:if="{{item.robotName === 'xiwen'}}">悉文</text>
+        <text class="robot-name" wx:elif="{{item.robotName === 'xihui'}}">悉荟</text>
+        <text class="robot-name" wx:else>悉文</text>
         <text class="history-time">{{item.formattedTime}}</text>
       </view>
       <view class="history-content">
         <text class="question">{{item.question || item.content}}</text>
         <text class="answer">{{item.answer || item.reply}}</text>
       </view>
-      <view class="history-footer">
+      <!-- <view class="history-footer">
         <text class="score">评分: {{item.score !== null ? item.score : '未评分'}}</text>
         <text class="points">获得积分: +{{item.points || 0}}</text>
-      </view>
+      </view> -->
     </view>
   </view>
 
