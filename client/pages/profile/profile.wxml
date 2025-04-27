@@ -1,90 +1,51 @@
 <!--pages/profile/profile.wxml-->
 <view class="container">
-  <!-- 头部区域：用户信息 -->
-  <view class="header">
-    <view class="user-card">
-      <view class="user-info">
-        <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
-        <view class="user-detail">
-          <text class="nickname">{{userInfo.nickName || userInfo.username || '未登录'}}</text>
-          <view class="user-id">
-            <text>ID: {{userInfo._id || 'N/A'}}</text>
-          </view>
-        </view>
-        <view class="points-info">
-          <text class="points-value">{{points || 0}}</text>
-          <text class="points-label">积分</text>
-        </view>
+  <!-- 用户信息卡片 -->
+  <view class="user-card" bindtap="goToUserInfo">
+    <view class="user-card-bg"></view>
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-detail">
+        <text class="nickname">{{userInfo.nickName || userInfo.username || '未登录'}}</text>
+        <text class="user-id">ID: {{userInfo._id || 'N/A'}}</text>
+      </view>
+      <view class="points-info">
+        <text class="points-value">{{points || 0}}</text>
+        <text class="points-label">积分</text>
       </view>
     </view>
   </view>
-  
-  <!-- 功能区域 -->
-  <view class="function-area">
-    <!-- 个人信息设置 -->
-    <view class="section">
-      <view class="section-title">
-        <text class="title-text">个人设置</text>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="readAllNotifications">
+      <view class="item-left">
+        <image class="item-icon" src="/assets/icons/notification.png" mode="aspectFit"></image>
+        <text class="item-name">消息通知</text>
       </view>
-      
-      <view class="function-list">
-        <view class="list-item" bindtap="goToUserInfo">
-          <view class="item-left">
-            <view class="item-icon">
-              <image src="/assets/icons/user.png" mode="aspectFit"></image>
-            </view>
-            <text class="item-name">个人信息设置</text>
-          </view>
-          <view class="item-right">
-            <text class="arrow">></text>
-          </view>
-        </view>
-        
-        <view class="list-item" bindtap="readAllNotifications">
-          <view class="item-left">
-            <view class="item-icon">
-              <image src="/assets/icons/notification.png" mode="aspectFit"></image>
-            </view>
-            <text class="item-name">消息通知</text>
-          </view>
-          <view class="item-right">
-            <view class="notification-badge" wx:if="{{showNotificationBadge}}"></view>
-            <text class="arrow">></text>
-          </view>
-        </view>
+      <view class="item-right">
+        <view class="notification-badge" wx:if="{{showNotificationBadge}}"></view>
+        <text class="arrow">></text>
       </view>
     </view>
 
-    <!-- 其他功能 -->
-    <view class="section">
-      <view class="section-title">
-        <text class="title-text">其他功能</text>
+    <view class="function-item" bindtap="goToFeedback">
+      <view class="item-left">
+        <image class="item-icon" src="/assets/icons/feedback.png" mode="aspectFit"></image>
+        <text class="item-name">意见反馈</text>
       </view>
-      
-      <view class="function-list">
-        <view class="list-item" bindtap="goToFeedback">
-          <view class="item-left">
-            <view class="item-icon">
-              <image src="/assets/icons/feedback.png" mode="aspectFit"></image>
-            </view>
-            <text class="item-name">意见反馈</text>
-          </view>
-          <view class="item-right">
-            <text class="arrow">></text>
-          </view>
-        </view>
-        
-        <view class="list-item" bindtap="goToAbout">
-          <view class="item-left">
-            <view class="item-icon">
-              <image src="/assets/icons/about.png" mode="aspectFit"></image>
-            </view>
-            <text class="item-name">关于我们</text>
-          </view>
-          <view class="item-right">
-            <text class="arrow">></text>
-          </view>
-        </view>
+      <view class="item-right">
+        <text class="arrow">></text>
+      </view>
+    </view>
+
+    <view class="function-item" bindtap="goToAbout">
+      <view class="item-left">
+        <image class="item-icon" src="/assets/icons/about.png" mode="aspectFit"></image>
+        <text class="item-name">关于我们</text>
+      </view>
+      <view class="item-right">
+        <text class="arrow">></text>
       </view>
     </view>
   </view>

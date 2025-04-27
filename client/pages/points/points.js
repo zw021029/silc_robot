@@ -19,9 +19,9 @@ Page({
     pageSize: 10,
     hasMore: true,
     showRules: false,
-    totalPoints: 0,
-    monthPoints: 0,
-    usedPoints: 0,
+    totalPoints: 0, // 总积分
+    monthPoints: 0, // 本月积分
+    usedPoints: 0, // 已使用积分
     dateRanges: ['全部', '本周', '本月', '今年'],
     dateRangeIndex: 0
   },

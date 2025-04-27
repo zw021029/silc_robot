@@ -1,61 +1,43 @@
 /* pages/profile/profile.wxss */
 .container {
   min-height: 100vh;
-  background-color: #f8f9fa;
-  padding-bottom: 40rpx;
+  background-color: #f5f7fa;
+  padding: 30rpx;
 }
 
-/* 头部区域 */
-.header {
-  padding: 40rpx 30rpx 50rpx;
-  position: relative;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  overflow: hidden;
-}
-
-.header::before {
-  content: '';
-  position: absolute;
-  right: -80rpx;
-  top: -80rpx;
-  width: 300rpx;
-  height: 300rpx;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.header::after {
-  content: '';
-  position: absolute;
-  left: 40rpx;
-  bottom: -100rpx;
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-}
-
+/* 用户信息卡片 */
 .user-card {
-  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  background: #fff;
   border-radius: 24rpx;
   overflow: hidden;
   box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 5;
-  backdrop-filter: blur(10px);
+  margin-bottom: 30rpx;
 }
 
-/* 用户信息 */
+.user-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200rpx;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  z-index: 1;
+}
+
 .user-info {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   padding: 40rpx 30rpx;
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .avatar {
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 70rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
   margin-right: 30rpx;
   border: 4rpx solid #fff;
   box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.1);
@@ -70,6 +52,7 @@
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 12rpx;
+  display: block;
 }
 
 .user-id {
@@ -88,7 +71,7 @@
 .points-value {
   font-size: 40rpx;
   font-weight: bold;
-  color: #e74c3c;
+  color: #4a90e2;
 }
 
 .points-label {
@@ -96,50 +79,23 @@
   color: #7f8c8d;
 }
 
-/* 功能区域 */
-.function-area {
-  padding: 0 30rpx;
-  margin-top: -20rpx;
-}
-
-.section {
-  margin-top: 30rpx;
+/* 功能列表 */
+.function-list {
   background: #fff;
   border-radius: 24rpx;
   overflow: hidden;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 
-.section-title {
-  padding: 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.title-text {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-/* 功能列表 */
-.function-list {
-  padding: 0 20rpx;
-}
-
-.list-item {
+.function-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 35rpx 20rpx;
-  border-bottom: 1rpx solid #f5f5f5;
-  transition: background-color 0.3s;
+  padding: 35rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
 }
 
-.list-item:active {
-  background-color: #f8f9fa;
-}
-
-.list-item:last-child {
+.function-item:last-child {
   border-bottom: none;
 }
 
@@ -152,11 +108,6 @@
   width: 44rpx;
   height: 44rpx;
   margin-right: 24rpx;
-}
-
-.item-icon image {
-  width: 100%;
-  height: 100%;
 }
 
 .item-name {
@@ -172,7 +123,6 @@
 .arrow {
   font-size: 26rpx;
   color: #bdc3c7;
-  margin-left: 10rpx;
 }
 
 .notification-badge {

@@ -6,7 +6,7 @@
 
 /* 积分卡片 */
 .header {
-  background: #07c160;  /* 微信绿色 */
+  background: #1989fa;  /* 改为蓝色 */
   padding: 40rpx 30rpx 80rpx;
   position: relative;
   overflow: hidden;
@@ -193,7 +193,7 @@
   transform: translateY(-50%);
   width: 6rpx;
   height: 26rpx;
-  background: #07c160;
+  background: #1989fa;  /* 改为蓝色 */
   border-radius: 3rpx;
 }
 
