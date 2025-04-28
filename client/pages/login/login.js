@@ -150,13 +150,13 @@ Page({
       })
       
       // 保存登录凭证和用户信息
-      wx.setStorageSync('token', res.token)
-      wx.setStorageSync('userInfo', res.user)
+      wx.setStorageSync('token', res.data.token)
+      wx.setStorageSync('userInfo', res.data.user)
       
       // 保存全局数据
       const app = getApp()
       if (app && app.globalData) {
-        app.globalData.userInfo = res.user
+        app.globalData.userInfo = res.data.user
       }
       
       // 用户是管理员
@@ -167,11 +167,26 @@ Page({
         return
       }
       
-      // 普通用户处理逻辑
-      if (res.user && res.user.selectedRobot) {
-        reLaunch('/pages/chat/chat')
+      // 获取页面栈
+      const pages = getCurrentPages()
+      const prevPage = pages[pages.length - 2]
+      
+      // 如果是从机器人选择页面跳转过来的
+      if (prevPage && prevPage.route === 'pages/robot-select/robot-select') {
+        // 触发登录成功事件
+        const eventChannel = this.getOpenerEventChannel()
+        if (eventChannel) {
+          eventChannel.emit('loginSuccess')
+        }
+        // 返回上一页
+        wx.navigateBack()
       } else {
-        reLaunch('/pages/robot-select/robot-select')
+        // 普通用户处理逻辑
+        if (res.user && res.user.selectedRobot) {
+          reLaunch('/pages/chat/chat')
+        } else {
+          reLaunch('/pages/robot-select/robot-select')
+        }
       }
       
     } catch (error) {

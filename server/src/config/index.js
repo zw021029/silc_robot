@@ -57,5 +57,11 @@ module.exports = {
     model: 'gpt-3.5-turbo',
     maxTokens: 1000,
     temperature: 0.7
+  },
+
+  // 微信配置
+  wechat: {
+    appid: process.env.WECHAT_APPID || 'your-appid-here',
+    secret: process.env.WECHAT_SECRET || 'your-secret-here'
   }
 };

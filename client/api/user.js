@@ -70,6 +70,18 @@ const selectRobot = (selectedRobot) => {
   return request.post('/api/user/select-robot', { selectedRobot })
 }
 
+// 微信登录
+const wechatLogin = async ({ code, userInfo }) => {
+  try {
+    console.log('发送微信登录请求，参数:', { code, userInfo })
+    const result = await request.post('/api/user/wechat-login', { code, userInfo })
+    return result
+  } catch (error) {
+    console.error('微信登录请求失败:', error)
+    throw error
+  }
+}
+
 module.exports = {
   login,
   register,
@@ -81,5 +93,6 @@ module.exports = {
   updateUserSettings,
   getUserProfile,
   getUserPoints,
-  selectRobot
+  selectRobot,
+  wechatLogin
 } 

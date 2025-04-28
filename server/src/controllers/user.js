@@ -6,22 +6,23 @@ const redis = require('../utils/redis');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const fetch = require('node-fetch');
 
 // 发送验证码
 exports.sendVerificationCode = async (req, res) => {
   try {
     const { phone } = req.body;
-    
+
     // 生成6位随机验证码
     const code = Math.random().toString().slice(-6);
-    
+
     // TODO: 调用短信服务发送验证码
     // 这里需要集成实际的短信服务，比如阿里云短信、腾讯云短信等
-    
+
     // 将验证码保存到数据库或缓存中
     // 设置5分钟过期
     await redis.set(`verification_code:${phone}`, code, 'EX', 300);
-    
+
     // 开发环境下直接返回验证码
     if (process.env.NODE_ENV === 'development') {
       return res.json({
@@ -30,7 +31,7 @@ exports.sendVerificationCode = async (req, res) => {
         data: { code }
       });
     }
-    
+
     res.json({
       code: 200,
       message: '验证码发送成功'
@@ -48,7 +49,7 @@ exports.sendVerificationCode = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    
+
     console.log(`尝试登录: 用户名=${username}, 密码=${password}`);
 
     // 查找用户
@@ -57,13 +58,13 @@ exports.login = async (req, res) => {
       console.log(`用户不存在: ${username}`);
       return res.status(404).json({ message: '用户不存在' });
     }
-    
+
     console.log(`找到用户: id=${user._id}, 用户名=${user.username}, 密码哈希=${user.password}`);
 
     // 临时解决方案：硬编码管理员密码验证
     // 注意：这是临时措施，仅用于解决当前问题，应尽快移除此代码
     let isMatch = false;
-    
+
     // 管理员账户特殊处理
     if (user.role === 'admin' && (username === 'admin' || username === 'superadmin')) {
       // 特定管理员账户的固定密码
@@ -85,7 +86,7 @@ exports.login = async (req, res) => {
         console.log(`标准密码验证结果: ${isMatch ? '通过' : '失败'}`);
       }
     }
-    
+
     if (!isMatch) {
       return res.status(401).json({ message: '密码错误' });
     }
@@ -119,7 +120,7 @@ exports.login = async (req, res) => {
       }
     };
     console.log(`登录成功, 返回数据:`, responseData);
-    
+
     res.json(responseData);
   } catch (error) {
     logger.error('登录失败:', error);
@@ -187,7 +188,7 @@ exports.verifyUserToken = async (req, res) => {
 
     const decoded = verifyToken(token);
     const user = await User.findById(decoded._id).select('-password');
-    
+
     if (!user) {
       return res.status(401).json({
         code: 401,
@@ -213,9 +214,9 @@ exports.getUserInfo = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     if (!user) {
-      return res.status(404).json({ 
-        success: false, 
-        message: '用户不存在' 
+      return res.status(404).json({
+        success: false,
+        message: '用户不存在'
       });
     }
     res.json({
@@ -224,9 +225,9 @@ exports.getUserInfo = async (req, res) => {
     });
   } catch (error) {
     logger.error('获取用户信息失败:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: '服务器错误' 
+      message: '服务器错误'
     });
   }
 };
@@ -261,10 +262,10 @@ exports.updateUserInfo = async (req, res) => {
     }
 
     await user.save();
-    
+
     // 返回更新后的用户信息
     const updatedUser = await User.findById(req.user.id).select('-password');
-    
+
     res.json({
       message: '用户信息更新成功',
       user: updatedUser
@@ -296,7 +297,7 @@ exports.getUserList = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const { nickname, phone, avatar } = req.body;
-    
+
     const user = await User.findById(req.user._id);
     if (!user) {
       return res.status(404).json({
@@ -404,3 +405,82 @@ exports.selectRobot = async (req, res) => {
     res.status(500).json({ message: '服务器错误' });
   }
 };
+
+// 微信登录
+exports.wechatLogin = async (req, res) => {
+  try {
+    const { code, userInfo } = req.body;
+    
+    // 调用微信接口获取openid和session_key
+    const appid = config.wechat.appid;
+    const secret = config.wechat.secret;
+    const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if (data.errcode) {
+      return res.status(400).json({
+        code: 400,
+        message: '微信登录失败',
+        error: data
+      });
+    }
+
+    const { openid, session_key } = data;
+
+    // 查找用户
+    let user = await User.findOne({ openid });
+    
+    if (!user) {
+      // 创建新用户
+      user = new User({
+        openid,
+        loginType: 'wechat',
+        username: `wx_${openid.slice(0, 8)}`,
+        nickname: userInfo.nickName,
+        avatar: userInfo.avatarUrl,
+        gender: userInfo.gender,
+        country: userInfo.country,
+        province: userInfo.province,
+        city: userInfo.city,
+        language: userInfo.language
+      });
+      
+      await user.save();
+    }
+
+    // 更新最后登录时间
+    user.lastLogin = new Date();
+    await user.save();
+
+    // 生成token
+    const token = generateToken(user);
+
+    // 返回用户信息和token
+    res.json({
+      code: 200,
+      data: {
+        token,
+        user: {
+          id: user._id,
+          username: user.username,
+          nickname: user.nickname,
+          avatar: user.avatar,
+          role: user.role,
+          isAdmin: user.isAdmin || user.role === 'admin',
+          selectedRobot: user.selectedRobot,
+          lastLogin: user.lastLogin
+        }
+      }
+    });
+  } catch (error) {
+    logger.error('微信登录失败:', error);
+    res.status(500).json({
+      code: 500,
+      message: '服务器错误'
+    });
+  }
+};
+
+

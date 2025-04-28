@@ -31,4 +31,7 @@ router.get('/list', authenticateToken, userController.getUserList);
 // 更新用户信息
 router.put('/profile', authenticateToken, userController.updateProfile);
 
+// 微信登录
+router.post('/wx-login', userController.wechatLogin);
+
 module.exports = router; 

@@ -201,7 +201,17 @@ Page({
     // 未登录，需要先登录
     if (!this.data.isHasLogin) {
       wx.navigateTo({
-        url: '/pages/login/login'
+        url: '/pages/login/login',
+        events: {
+          loginSuccess: () => {
+            // 登录成功后更新状态
+            this.setData({
+              isHasLogin: true
+            });
+            // 继续执行绑定流程
+            this.handleBind();
+          }
+        }
       });
       return;
     }

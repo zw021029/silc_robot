@@ -6,6 +6,8 @@ const config = require('../config/index');
 
 // 用户模型
 const userSchema = new Schema({
+  openid: { type: String, unique: true, sparse: true }, // 微信用户唯一标识
+  loginType: { type: String, enum: ['wechat', 'password'], required: true }, // 区分登录方式
   username: {
     type: String,
     required: true,
@@ -14,7 +16,9 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: function() {
+      return this.loginType === 'password';
+    }
   },
   email: {
     type: String,
