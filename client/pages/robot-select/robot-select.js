@@ -44,6 +44,11 @@ Page({
       
       // 获取机器人列表
       await this.getRobots();
+      
+      // 页面加载完成后播放第一个机器人的音频
+      if (this.data.robots.length > 0) {
+        this.playRobotAudio(this.data.robots[0]);
+      }
     } catch (error) {
       console.error('初始化页面失败:', error);
       Toast.fail('页面加载失败，请重试');
@@ -141,7 +146,7 @@ Page({
         selectedRobot: robot
       });
       
-      // 播放对应的音频
+      // 滑动时播放对应的音频
       this.playRobotAudio(robot);
     }
   },

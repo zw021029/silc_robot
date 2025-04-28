@@ -1,6 +1,597 @@
 {
-  "pointstransactions": [],
-  "knowledgecategories": [],
+  "robots": [
+    {
+      "_id": {
+        "$oid": "67ff2cc301f5d027d02606d7"
+      },
+      "name": "悉文",
+      "displayName": "悉文",
+      "description": "直男风格，适合简单直接的问答",
+      "avatar": "/assets/images/xiwen_avatar.png",
+      "status": "active",
+      "features": [],
+      "personality": "友好",
+      "type": "male",
+      "model": "gpt-3.5-turbo",
+      "systemPrompt": "你是悉商商学院的智能助手悉文，性格直率，回答简洁明了。",
+      "temperature": 0.7,
+      "maxTokens": 2000,
+      "topP": 0.9,
+      "frequencyPenalty": 0,
+      "presencePenalty": 0.6,
+      "voiceSettings": {
+        "enabled": false,
+        "voiceId": "cmn-CN-YunxiNeural",
+        "speed": 1
+      },
+      "imageSettings": {
+        "enabled": false,
+        "maxSize": 5242880,
+        "allowedTypes": [
+          "image/jpeg",
+          "image/png"
+        ]
+      },
+      "pointsPerInteraction": 1,
+      "isActive": true,
+      "createdAt": "2025-04-16T04:06:27.205Z",
+      "updatedAt": "2025-04-16T04:06:27.211Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cc301f5d027d02606db"
+      },
+      "name": "悉荟",
+      "displayName": "悉荟",
+      "description": "温柔可爱，适合情感交流",
+      "avatar": "/assets/images/xihui_avatar.png",
+      "status": "active",
+      "features": [],
+      "personality": "友好",
+      "type": "female",
+      "model": "gpt-3.5-turbo",
+      "systemPrompt": "你是悉商商学院的智能助手悉荟，性格温柔体贴，回答亲切细致。",
+      "temperature": 0.7,
+      "maxTokens": 2000,
+      "topP": 0.9,
+      "frequencyPenalty": 0,
+      "presencePenalty": 0.6,
+      "voiceSettings": {
+        "enabled": false,
+        "voiceId": "cmn-CN-YunxiNeural",
+        "speed": 1
+      },
+      "imageSettings": {
+        "enabled": false,
+        "maxSize": 5242880,
+        "allowedTypes": [
+          "image/jpeg",
+          "image/png"
+        ]
+      },
+      "pointsPerInteraction": 1,
+      "isActive": true,
+      "createdAt": "2025-04-16T04:06:27.231Z",
+      "updatedAt": "2025-04-16T04:06:27.232Z",
+      "__v": 0
+    }
+  ],
+  "users": [
+    {
+      "_id": {
+        "$oid": "67ff2d866fb224e24ddf4dcf"
+      },
+      "username": "xiwen_user",
+      "password": "$2a$10$YCiqC3o7wgdhH9Q1qUmEZeotZXolDI1X12.XyY0x4j58ac0IsC33G",
+      "email": "xiwen@example.com",
+      "nickname": "悉文用户",
+      "points": 20,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:42.633Z",
+      "updatedAt": "2025-04-16T04:09:42.773Z",
+      "__v": 0,
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d866fb224e24ddf4dd4"
+      },
+      "username": "xihui_user",
+      "password": "$2a$10$a/Vr.A7K5Ou7miCm103.UO3atBifypJd8XDqim42Pf9.Clc5wGikO",
+      "email": "xihui@example.com",
+      "phone": "13900000002",
+      "nickname": "悉荟用户",
+      "points": 30,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉荟",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:42.887Z",
+      "updatedAt": "2025-04-16T04:09:42.981Z",
+      "__v": 0,
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4dd7"
+      },
+      "username": "new_user",
+      "password": "$2a$10$G06onlyobFJJ5pqZySL4Ku/yulrvveSVXBFRaZmRNTC0E5BZW8kia",
+      "email": "new@example.com",
+      "nickname": "新用户",
+      "points": 0,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:43.076Z",
+      "updatedAt": "2025-04-28T11:12:26.819Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T11:12:26.818Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4dda"
+      },
+      "username": "rich_user",
+      "password": "$2a$10$KwGY.OzAPglbqCpSZsxKEeZg0i/dlWLt2B0JiThAHLEP31m7imd0O",
+      "email": "rich@example.com",
+      "nickname": "土豪用户",
+      "points": 1500,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:43.267Z",
+      "updatedAt": "2025-04-28T04:07:42.385Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T04:07:42.383Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4ddd"
+      },
+      "username": "superadmin",
+      "password": "$2a$10$1OaLxb/Cj8njqxCKjub3buCoNHheJbGzSwydJeHQdGcTufFhvLmmW",
+      "email": "super@example.com",
+      "nickname": "超级管理员",
+      "points": 1000,
+      "role": "admin",
+      "isAdmin": true,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:43.456Z",
+      "updatedAt": "2025-04-26T08:25:14.741Z",
+      "__v": 0,
+      "lastLogin": "2025-04-26T08:25:14.740Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f798"
+      },
+      "username": "testuser1",
+      "password": "$2a$10$ZsnZkVoTuMI/nqC5IuGOi.WjTBY3tzZucgq3t5A.P1VU6nsgT6s1a",
+      "email": "test1@example.com",
+      "nickname": "我不是测试用户",
+      "points": 3020,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:59.259Z",
+      "updatedAt": "2025-04-28T12:35:13.882Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T12:35:13.881Z",
+      "avatar": "",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a0"
+      },
+      "username": "testuser2",
+      "password": "$2a$10$ocgsxiDNxxAhEtltxSRMC./qp9zjkTvRVORBEmOTWJLh2VlVEW7wy",
+      "email": "testuser2@example.com",
+      "phone": "13800000002",
+      "nickname": "测试用户2",
+      "points": 6,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉荟",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:59.471Z",
+      "updatedAt": "2025-04-28T12:24:57.850Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T12:24:57.848Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a3"
+      },
+      "username": "testuser3",
+      "password": "$2a$10$J6DvuLdTalkXkfy70LG18uwHdeRQzfiOsDCvdA8EPCv1LJRvk2CWu",
+      "email": "test3@example.com",
+      "nickname": "测试用户3",
+      "points": 21,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:59.668Z",
+      "updatedAt": "2025-04-28T12:25:21.760Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T12:25:21.759Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a6"
+      },
+      "username": "testuser4",
+      "password": "$2a$10$EcG.oCx.aNr27KvbEcfV6eOsEiQlUdSwN8iVxdVsQdba1LkPuh4Gu",
+      "email": "test4@example.com",
+      "nickname": "测试用户4",
+      "points": 103,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:59.865Z",
+      "updatedAt": "2025-04-16T07:35:50.846Z",
+      "__v": 0,
+      "lastLogin": "2025-04-16T07:23:28.736Z",
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d98e7f230f99573f7a9"
+      },
+      "username": "testuser5",
+      "password": "$2a$10$UHGpQWdL41WKKOSeMP94PeO13gU0L6.Rx0nCktZlL6ccC/tfuPmLq",
+      "email": "testuser5@example.com",
+      "phone": "13800000005",
+      "nickname": "测试用户5",
+      "points": 50,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉荟",
+      "status": "active",
+      "createdAt": "2025-04-16T04:10:00.051Z",
+      "updatedAt": "2025-04-16T04:10:00.144Z",
+      "__v": 0,
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d98e7f230f99573f7ac"
+      },
+      "username": "admin",
+      "password": "$2a$10$JGpL9LQIaqneBsVZzmmQWe4xOx2/qp1De78kkLaRbAQwyY7YlR4YO",
+      "email": "admin@example.com",
+      "nickname": "管理员",
+      "points": 0,
+      "role": "admin",
+      "isAdmin": true,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:10:00.237Z",
+      "updatedAt": "2025-04-16T04:10:00.326Z",
+      "__v": 0,
+      "loginType": "password"
+    },
+    {
+      "_id": {
+        "$oid": "680f7314de0fd2b08ad635fc"
+      },
+      "openid": "oMGQZ647CjQi1_BROfqqc4bcBc-E",
+      "loginType": "wechat",
+      "username": "wx_oMGQZ647",
+      "nickname": "微信用户",
+      "avatar": "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132",
+      "points": 5,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉荟",
+      "status": "active",
+      "createdAt": "2025-04-28T12:22:44.755Z",
+      "updatedAt": "2025-04-28T12:42:17.388Z",
+      "__v": 0,
+      "lastLogin": "2025-04-28T12:42:08.815Z"
+    }
+  ],
+  "tasks": [],
+  "knowledgearticles": [
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d733"
+      },
+      "title": "如何查询课程表",
+      "content": "你可以通过以下方式查询课程表：\n1. 登录教务系统\n2. 点击\"课程表查询\"选项\n3. 选择相应的学期\n4. 系统会显示你的完整课程表",
+      "robotName": "all",
+      "category": "课程相关",
+      "tags": [
+        "课程表",
+        "查询",
+        "上课时间"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "查": 1,
+        "询": 1,
+        "课": 1,
+        "程": 1,
+        "表": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.106Z",
+      "updatedAt": "2025-04-16T04:06:58.405Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d734"
+      },
+      "title": "如何申请缓考",
+      "content": "申请缓考的步骤如下：\n1. 在考试前至少3天提交缓考申请\n2. 准备相关证明材料（如医院证明等）\n3. 填写缓考申请表\n4. 提交给所在学院教务办公室\n5. 等待审核结果",
+      "robotName": "all",
+      "category": "考试相关",
+      "tags": [
+        "缓考",
+        "考试",
+        "申请"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "申": 1,
+        "请": 1,
+        "缓": 1,
+        "考": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.419Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d735"
+      },
+      "title": "如何办理学生证补办",
+      "content": "学生证补办流程：\n1. 准备一寸照片\n2. 填写补办申请表\n3. 到学生事务中心办理\n4. 缴纳补办费用\n5. 等待3-5个工作日领取新证",
+      "robotName": "all",
+      "category": "证件相关",
+      "tags": [
+        "学生证",
+        "补办",
+        "证件"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "办": 2,
+        "理": 1,
+        "学": 1,
+        "生": 1,
+        "证": 1,
+        "补": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.442Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d736"
+      },
+      "title": "如何申请奖学金",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "robotName": "all",
+      "category": "奖学金",
+      "tags": [
+        "奖学金",
+        "申请",
+        "资助"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "申": 1,
+        "请": 1,
+        "奖": 1,
+        "学": 1,
+        "金": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.449Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d737"
+      },
+      "title": "如何办理休学手续",
+      "content": "休学办理流程：\n1. 提交休学申请\n2. 准备相关证明材料\n3. 填写休学申请表\n4. 经辅导员、学院领导审批\n5. 到教务处办理手续",
+      "robotName": "all",
+      "category": "学籍管理",
+      "tags": [
+        "休学",
+        "学籍",
+        "手续"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "办": 1,
+        "理": 1,
+        "休": 1,
+        "学": 1,
+        "手": 1,
+        "续": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.454Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d738"
+      },
+      "title": "如何查询成绩",
+      "content": "成绩查询方式：\n1. 登录教务系统\n2. 点击\"成绩查询\"选项\n3. 选择相应学期\n4. 查看各科成绩\n5. 可打印成绩单",
+      "robotName": "all",
+      "category": "成绩相关",
+      "tags": [
+        "成绩",
+        "查询",
+        "分数"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "查": 1,
+        "询": 1,
+        "成": 1,
+        "绩": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.458Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d739"
+      },
+      "title": "如何申请转专业",
+      "content": "转专业申请流程：\n1. 关注学校转专业通知\n2. 准备申请材料（成绩单、转专业申请表等）\n3. 提交给所在学院\n4. 参加转专业考试\n5. 等待审核结果",
+      "robotName": "all",
+      "category": "学籍管理",
+      "tags": [
+        "转专业",
+        "专业",
+        "申请"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "申": 1,
+        "请": 1,
+        "转": 1,
+        "专": 1,
+        "业": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.461Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73a"
+      },
+      "title": "如何办理校园卡",
+      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
+      "robotName": "all",
+      "category": "校园卡",
+      "tags": [
+        "校园卡",
+        "办理",
+        "一卡通"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "办": 1,
+        "理": 1,
+        "校": 1,
+        "园": 1,
+        "卡": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.110Z",
+      "updatedAt": "2025-04-16T04:06:58.465Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73b"
+      },
+      "title": "如何申请勤工助学",
+      "content": "勤工助学申请流程：\n1. 关注学校勤工助学岗位信息\n2. 准备个人简历\n3. 填写申请表\n4. 参加面试\n5. 签订工作协议",
+      "robotName": "all",
+      "category": "勤工助学",
+      "tags": [
+        "勤工助学",
+        "兼职",
+        "工作"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "申": 1,
+        "请": 1,
+        "勤": 1,
+        "工": 1,
+        "助": 1,
+        "学": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.111Z",
+      "updatedAt": "2025-04-16T04:06:58.470Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73c"
+      },
+      "title": "如何办理毕业手续",
+      "content": "毕业手续办理流程：\n1. 完成所有课程和学分\n2. 提交毕业论文\n3. 参加毕业答辩\n4. 办理离校手续\n5. 领取毕业证书和学位证书",
+      "robotName": "all",
+      "category": "毕业相关",
+      "tags": [
+        "毕业",
+        "手续",
+        "离校"
+      ],
+      "status": "active",
+      "embeddings": true,
+      "vector": {
+        "如": 1,
+        "何": 1,
+        "办": 1,
+        "理": 1,
+        "毕": 1,
+        "业": 1,
+        "手": 1,
+        "续": 1
+      },
+      "createdAt": "2025-04-16T04:06:50.111Z",
+      "updatedAt": "2025-04-16T04:06:58.473Z",
+      "__v": 0
+    }
+  ],
   "messages": [
     {
       "_id": {
@@ -751,87 +1342,939 @@
       "createdAt": "2025-04-27T22:26:26.619Z",
       "updatedAt": "2025-04-27T22:26:26.619Z",
       "__v": 0
-    }
-  ],
-  "robots": [
+    },
     {
       "_id": {
-        "$oid": "67ff2cc301f5d027d02606d7"
+        "$oid": "680ec1cfa6d5b65424084ebf"
       },
-      "name": "悉文",
-      "displayName": "悉文",
-      "description": "直男风格，适合简单直接的问答",
-      "avatar": "/assets/images/xiwen_avatar.png",
-      "status": "active",
-      "features": [],
-      "personality": "友好",
-      "type": "male",
-      "model": "gpt-3.5-turbo",
-      "systemPrompt": "你是悉商商学院的智能助手悉文，性格直率，回答简洁明了。",
-      "temperature": 0.7,
-      "maxTokens": 2000,
-      "topP": 0.9,
-      "frequencyPenalty": 0,
-      "presencePenalty": 0.6,
-      "voiceSettings": {
-        "enabled": false,
-        "voiceId": "cmn-CN-YunxiNeural",
-        "speed": 1
-      },
-      "imageSettings": {
-        "enabled": false,
-        "maxSize": 5242880,
-        "allowedTypes": [
-          "image/jpeg",
-          "image/png"
-        ]
-      },
-      "pointsPerInteraction": 1,
-      "isActive": true,
-      "createdAt": "2025-04-16T04:06:27.205Z",
-      "updatedAt": "2025-04-16T04:06:27.211Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:46:23.231Z",
+      "updatedAt": "2025-04-27T23:46:23.232Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cc301f5d027d02606db"
+        "$oid": "680ec1cfa6d5b65424084ec4"
       },
-      "name": "悉荟",
-      "displayName": "悉荟",
-      "description": "温柔可爱，适合情感交流",
-      "avatar": "/assets/images/xihui_avatar.png",
-      "status": "active",
-      "features": [],
-      "personality": "友好",
-      "type": "female",
-      "model": "gpt-3.5-turbo",
-      "systemPrompt": "你是悉商商学院的智能助手悉荟，性格温柔体贴，回答亲切细致。",
-      "temperature": 0.7,
-      "maxTokens": 2000,
-      "topP": 0.9,
-      "frequencyPenalty": 0,
-      "presencePenalty": 0.6,
-      "voiceSettings": {
-        "enabled": false,
-        "voiceId": "cmn-CN-YunxiNeural",
-        "speed": 1
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:46:23.256Z",
+      "updatedAt": "2025-04-27T23:46:23.257Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec1d6a6d5b65424084ed1"
       },
-      "imageSettings": {
-        "enabled": false,
-        "maxSize": 5242880,
-        "allowedTypes": [
-          "image/jpeg",
-          "image/png"
-        ]
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "校规",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:46:30.125Z",
+      "updatedAt": "2025-04-27T23:46:30.126Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec1d6a6d5b65424084ed6"
       },
-      "pointsPerInteraction": 1,
-      "isActive": true,
-      "createdAt": "2025-04-16T04:06:27.231Z",
-      "updatedAt": "2025-04-16T04:06:27.232Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:46:30.148Z",
+      "updatedAt": "2025-04-27T23:46:30.149Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec228a6d5b65424084f21"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "1",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:52.114Z",
+      "updatedAt": "2025-04-27T23:47:52.115Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec228a6d5b65424084f26"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:52.137Z",
+      "updatedAt": "2025-04-27T23:47:52.138Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec22ba6d5b65424084f33"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "2",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:55.264Z",
+      "updatedAt": "2025-04-27T23:47:55.265Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec22ba6d5b65424084f38"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:55.284Z",
+      "updatedAt": "2025-04-27T23:47:55.285Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec22ca6d5b65424084f45"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "3",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:56.694Z",
+      "updatedAt": "2025-04-27T23:47:56.695Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec22ca6d5b65424084f4a"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:47:56.712Z",
+      "updatedAt": "2025-04-27T23:47:56.712Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec431a6d5b6542408502f"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:56:33.635Z",
+      "updatedAt": "2025-04-27T23:56:33.636Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec431a6d5b65424085034"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:56:33.651Z",
+      "updatedAt": "2025-04-27T23:56:33.651Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec448a6d5b65424085069"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:56:56.909Z",
+      "updatedAt": "2025-04-27T23:56:56.910Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ec448a6d5b6542408506e"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T23:56:56.927Z",
+      "updatedAt": "2025-04-27T23:56:56.927Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ed3e4f7184c6aab8ee302"
+      },
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "robotId": "xiwen",
+      "chatId": "680ed3e4f7184c6aab8ee300",
+      "content": "积分",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T01:03:32.887Z",
+      "updatedAt": "2025-04-28T01:03:32.889Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680ed3e4f7184c6aab8ee307"
+      },
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "robotId": "xiwen",
+      "chatId": "680ed3e4f7184c6aab8ee300",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T01:03:32.906Z",
+      "updatedAt": "2025-04-28T01:03:32.906Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f43363eff76fa4b59de"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T06:25:07.747Z",
+      "updatedAt": "2025-04-28T06:25:07.747Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f43363eff76fa4b59e3"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T06:25:07.764Z",
+      "updatedAt": "2025-04-28T06:25:07.764Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f4c363eff76fa4b59f0"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "怎么发财",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T06:25:16.412Z",
+      "updatedAt": "2025-04-28T06:25:16.412Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f4c363eff76fa4b59f5"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T06:25:16.427Z",
+      "updatedAt": "2025-04-28T06:25:16.428Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f485a49112d9cdaab8bb8"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "a",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:20:26.259Z",
+      "updatedAt": "2025-04-28T09:20:26.262Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f48bc0bc6f5c32f868b29"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "a",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:22:04.351Z",
+      "updatedAt": "2025-04-28T09:22:04.356Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f48bd0bc6f5c32f868b30"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "a",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:22:05.547Z",
+      "updatedAt": "2025-04-28T09:22:05.549Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f48c40bc6f5c32f868b37"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "阿斯顿",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:22:12.828Z",
+      "updatedAt": "2025-04-28T09:22:12.829Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f48d10bc6f5c32f868b3e"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:22:25.444Z",
+      "updatedAt": "2025-04-28T09:22:25.444Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f48d40bc6f5c32f868b45"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:22:28.726Z",
+      "updatedAt": "2025-04-28T09:22:28.728Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b2d5f87c02e22ccf3bb"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:29.682Z",
+      "updatedAt": "2025-04-28T09:32:29.687Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b2d5f87c02e22ccf3c0"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:29.727Z",
+      "updatedAt": "2025-04-28T09:32:29.728Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b3b5f87c02e22ccf3eb"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "Q",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:43.669Z",
+      "updatedAt": "2025-04-28T09:32:43.671Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b3b5f87c02e22ccf3f0"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:43.690Z",
+      "updatedAt": "2025-04-28T09:32:43.690Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b465f87c02e22ccf3f7"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "奖金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:54.006Z",
+      "updatedAt": "2025-04-28T09:32:54.007Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b465f87c02e22ccf3fc"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "680ec1cfa6d5b65424084ebd",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:32:54.025Z",
+      "updatedAt": "2025-04-28T09:32:54.026Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8c5f87c02e22ccf458"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "1",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:04.451Z",
+      "updatedAt": "2025-04-28T09:34:04.451Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8c5f87c02e22ccf45d"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:04.466Z",
+      "updatedAt": "2025-04-28T09:34:04.466Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8e5f87c02e22ccf467"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "2",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:06.015Z",
+      "updatedAt": "2025-04-28T09:34:06.015Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8e5f87c02e22ccf46c"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:06.031Z",
+      "updatedAt": "2025-04-28T09:34:06.031Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b975f87c02e22ccf497"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "3",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:15.900Z",
+      "updatedAt": "2025-04-28T09:34:15.901Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b975f87c02e22ccf49c"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:15.915Z",
+      "updatedAt": "2025-04-28T09:34:15.915Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b995f87c02e22ccf4a6"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "4",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:17.211Z",
+      "updatedAt": "2025-04-28T09:34:17.211Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b995f87c02e22ccf4ab"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:17.225Z",
+      "updatedAt": "2025-04-28T09:34:17.226Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9a5f87c02e22ccf4b5"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "5",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:18.699Z",
+      "updatedAt": "2025-04-28T09:34:18.700Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9a5f87c02e22ccf4ba"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:18.714Z",
+      "updatedAt": "2025-04-28T09:34:18.715Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9c5f87c02e22ccf4c4"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "6",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:20.373Z",
+      "updatedAt": "2025-04-28T09:34:20.373Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9c5f87c02e22ccf4c9"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:20.384Z",
+      "updatedAt": "2025-04-28T09:34:20.385Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9e5f87c02e22ccf4d3"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "7",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:22.961Z",
+      "updatedAt": "2025-04-28T09:34:22.961Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9e5f87c02e22ccf4d8"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:22.975Z",
+      "updatedAt": "2025-04-28T09:34:22.976Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba05f87c02e22ccf4e2"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "8",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:24.869Z",
+      "updatedAt": "2025-04-28T09:34:24.870Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba05f87c02e22ccf4e7"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:24.882Z",
+      "updatedAt": "2025-04-28T09:34:24.882Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba25f87c02e22ccf4f1"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "9",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:26.252Z",
+      "updatedAt": "2025-04-28T09:34:26.253Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba25f87c02e22ccf4f6"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:26.266Z",
+      "updatedAt": "2025-04-28T09:34:26.267Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba65f87c02e22ccf500"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "10",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:30.203Z",
+      "updatedAt": "2025-04-28T09:34:30.203Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba65f87c02e22ccf505"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:30.216Z",
+      "updatedAt": "2025-04-28T09:34:30.216Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba85f87c02e22ccf50f"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "11",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:32.426Z",
+      "updatedAt": "2025-04-28T09:34:32.427Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba85f87c02e22ccf514"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T09:34:32.439Z",
+      "updatedAt": "2025-04-28T09:34:32.440Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f6155280dd07a7f236821"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "奖学金如何获取？",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T11:07:01.659Z",
+      "updatedAt": "2025-04-28T11:07:01.667Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f6155280dd07a7f236826"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "680f4b8c5f87c02e22ccf456",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T11:07:01.696Z",
+      "updatedAt": "2025-04-28T11:07:01.698Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7740de0fd2b08ad636b9"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xiwen",
+      "chatId": "680f7740de0fd2b08ad636b7",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:40:32.256Z",
+      "updatedAt": "2025-04-28T12:40:32.256Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7740de0fd2b08ad636be"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xiwen",
+      "chatId": "680f7740de0fd2b08ad636b7",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:40:32.274Z",
+      "updatedAt": "2025-04-28T12:40:32.275Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7744de0fd2b08ad636c8"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xiwen",
+      "chatId": "680f7740de0fd2b08ad636b7",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:40:36.373Z",
+      "updatedAt": "2025-04-28T12:40:36.373Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7744de0fd2b08ad636cd"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xiwen",
+      "chatId": "680f7740de0fd2b08ad636b7",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:40:36.389Z",
+      "updatedAt": "2025-04-28T12:40:36.389Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f77a9de0fd2b08ad6372d"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xihui",
+      "chatId": "680f77a9de0fd2b08ad6372b",
+      "content": "nihao",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:42:17.361Z",
+      "updatedAt": "2025-04-28T12:42:17.362Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f77a9de0fd2b08ad63732"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xihui",
+      "chatId": "680f77a9de0fd2b08ad6372b",
+      "content": "抱歉，人家暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-28T12:42:17.379Z",
+      "updatedAt": "2025-04-28T12:42:17.380Z",
       "__v": 0
     }
   ],
-  "tasks": [],
+  "knowledgecategories": [],
   "chats": [
     {
       "_id": {
@@ -880,487 +2323,726 @@
       "__v": 0,
       "userMessage": "680dfdd1005492f3832b5db0",
       "robotReply": "680dfdd1005492f3832b5db5"
+    },
+    {
+      "_id": {
+        "$oid": "680ec1cfa6d5b65424084ebd"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-27T23:46:23.223Z",
+      "updatedAt": "2025-04-28T09:32:54.029Z",
+      "__v": 0,
+      "userMessage": "680f4b465f87c02e22ccf3f7",
+      "robotReply": "680f4b465f87c02e22ccf3fc"
+    },
+    {
+      "_id": {
+        "$oid": "680ed3e4f7184c6aab8ee300"
+      },
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-28T01:03:32.881Z",
+      "updatedAt": "2025-04-28T01:03:32.909Z",
+      "__v": 0,
+      "userMessage": "680ed3e4f7184c6aab8ee302",
+      "robotReply": "680ed3e4f7184c6aab8ee307"
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8c5f87c02e22ccf456"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-28T09:34:04.449Z",
+      "updatedAt": "2025-04-28T11:07:01.706Z",
+      "__v": 0,
+      "userMessage": "680f6155280dd07a7f236821",
+      "robotReply": "680f6155280dd07a7f236826"
+    },
+    {
+      "_id": {
+        "$oid": "680f7740de0fd2b08ad636b7"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-28T12:40:32.252Z",
+      "updatedAt": "2025-04-28T12:40:36.392Z",
+      "__v": 0,
+      "userMessage": "680f7744de0fd2b08ad636c8",
+      "robotReply": "680f7744de0fd2b08ad636cd"
+    },
+    {
+      "_id": {
+        "$oid": "680f77a9de0fd2b08ad6372b"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "robotId": "xihui",
+      "createdAt": "2025-04-28T12:42:17.357Z",
+      "updatedAt": "2025-04-28T12:42:17.382Z",
+      "__v": 0,
+      "userMessage": "680f77a9de0fd2b08ad6372d",
+      "robotReply": "680f77a9de0fd2b08ad63732"
     }
   ],
-  "users": [
+  "pointstransactions": [
     {
       "_id": {
-        "$oid": "67ff2d866fb224e24ddf4dcf"
+        "$oid": "680ec1cfa6d5b65424084ecb"
       },
-      "username": "xiwen_user",
-      "password": "$2a$10$YCiqC3o7wgdhH9Q1qUmEZeotZXolDI1X12.XyY0x4j58ac0IsC33G",
-      "email": "xiwen@example.com",
-      "nickname": "悉文用户",
-      "points": 20,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:42.633Z",
-      "updatedAt": "2025-04-16T04:09:42.773Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 15,
+      "sourceType": "chat",
+      "sourceId": "680ec1cfa6d5b65424084ebf",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:46:23.293Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2d866fb224e24ddf4dd4"
+        "$oid": "680ec1d6a6d5b65424084edd"
       },
-      "username": "xihui_user",
-      "password": "$2a$10$a/Vr.A7K5Ou7miCm103.UO3atBifypJd8XDqim42Pf9.Clc5wGikO",
-      "email": "xihui@example.com",
-      "phone": "13900000002",
-      "nickname": "悉荟用户",
-      "points": 30,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:42.887Z",
-      "updatedAt": "2025-04-16T04:09:42.981Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 16,
+      "sourceType": "chat",
+      "sourceId": "680ec1d6a6d5b65424084ed1",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:46:30.184Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2d876fb224e24ddf4dd7"
+        "$oid": "680ec228a6d5b65424084f2d"
       },
-      "username": "new_user",
-      "password": "$2a$10$G06onlyobFJJ5pqZySL4Ku/yulrvveSVXBFRaZmRNTC0E5BZW8kia",
-      "email": "new@example.com",
-      "nickname": "新用户",
-      "points": 0,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:43.076Z",
-      "updatedAt": "2025-04-26T08:21:34.711Z",
-      "__v": 0,
-      "lastLogin": "2025-04-26T08:21:34.711Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d876fb224e24ddf4dda"
-      },
-      "username": "rich_user",
-      "password": "$2a$10$KwGY.OzAPglbqCpSZsxKEeZg0i/dlWLt2B0JiThAHLEP31m7imd0O",
-      "email": "rich@example.com",
-      "nickname": "土豪用户",
-      "points": 9999,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:43.267Z",
-      "updatedAt": "2025-04-16T04:09:43.364Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 17,
+      "sourceType": "chat",
+      "sourceId": "680ec228a6d5b65424084f21",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:47:52.171Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2d876fb224e24ddf4ddd"
+        "$oid": "680ec22ba6d5b65424084f3f"
       },
-      "username": "superadmin",
-      "password": "$2a$10$1OaLxb/Cj8njqxCKjub3buCoNHheJbGzSwydJeHQdGcTufFhvLmmW",
-      "email": "super@example.com",
-      "nickname": "超级管理员",
-      "points": 1000,
-      "role": "admin",
-      "isAdmin": true,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:43.456Z",
-      "updatedAt": "2025-04-26T08:25:14.741Z",
-      "__v": 0,
-      "lastLogin": "2025-04-26T08:25:14.740Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d97e7f230f99573f798"
-      },
-      "username": "testuser1",
-      "password": "$2a$10$ZsnZkVoTuMI/nqC5IuGOi.WjTBY3tzZucgq3t5A.P1VU6nsgT6s1a",
-      "email": "test1@example.com",
-      "nickname": "测试用户1",
-      "points": 14,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:59.259Z",
-      "updatedAt": "2025-04-27T22:26:26.697Z",
-      "__v": 0,
-      "lastLogin": "2025-04-27T21:31:39.411Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d97e7f230f99573f7a0"
-      },
-      "username": "testuser2",
-      "password": "$2a$10$ocgsxiDNxxAhEtltxSRMC./qp9zjkTvRVORBEmOTWJLh2VlVEW7wy",
-      "email": "testuser2@example.com",
-      "phone": "13800000002",
-      "nickname": "测试用户2",
-      "points": 6,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:59.471Z",
-      "updatedAt": "2025-04-27T14:00:57.167Z",
-      "__v": 0,
-      "lastLogin": "2025-04-27T14:00:57.166Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d97e7f230f99573f7a3"
-      },
-      "username": "testuser3",
-      "password": "$2a$10$J6DvuLdTalkXkfy70LG18uwHdeRQzfiOsDCvdA8EPCv1LJRvk2CWu",
-      "email": "test3@example.com",
-      "nickname": "测试用户3",
-      "points": 3,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:59.668Z",
-      "updatedAt": "2025-04-17T18:21:41.517Z",
-      "__v": 0,
-      "lastLogin": "2025-04-17T18:21:41.516Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d97e7f230f99573f7a6"
-      },
-      "username": "testuser4",
-      "password": "$2a$10$EcG.oCx.aNr27KvbEcfV6eOsEiQlUdSwN8iVxdVsQdba1LkPuh4Gu",
-      "email": "test4@example.com",
-      "nickname": "测试用户4",
-      "points": 103,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:09:59.865Z",
-      "updatedAt": "2025-04-16T07:35:50.846Z",
-      "__v": 0,
-      "lastLogin": "2025-04-16T07:23:28.736Z"
-    },
-    {
-      "_id": {
-        "$oid": "67ff2d98e7f230f99573f7a9"
-      },
-      "username": "testuser5",
-      "password": "$2a$10$UHGpQWdL41WKKOSeMP94PeO13gU0L6.Rx0nCktZlL6ccC/tfuPmLq",
-      "email": "testuser5@example.com",
-      "phone": "13800000005",
-      "nickname": "测试用户5",
-      "points": 50,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-16T04:10:00.051Z",
-      "updatedAt": "2025-04-16T04:10:00.144Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 18,
+      "sourceType": "chat",
+      "sourceId": "680ec22ba6d5b65424084f33",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:47:55.314Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2d98e7f230f99573f7ac"
+        "$oid": "680ec22ca6d5b65424084f51"
       },
-      "username": "admin",
-      "password": "$2a$10$JGpL9LQIaqneBsVZzmmQWe4xOx2/qp1De78kkLaRbAQwyY7YlR4YO",
-      "email": "admin@example.com",
-      "nickname": "管理员",
-      "points": 0,
-      "role": "admin",
-      "isAdmin": true,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-16T04:10:00.237Z",
-      "updatedAt": "2025-04-16T04:10:00.326Z",
-      "__v": 0
-    }
-  ],
-  "knowledgearticles": [
-    {
-      "_id": {
-        "$oid": "67ff2cdab67bf8d37366d733"
-      },
-      "title": "如何查询课程表",
-      "content": "你可以通过以下方式查询课程表：\n1. 登录教务系统\n2. 点击\"课程表查询\"选项\n3. 选择相应的学期\n4. 系统会显示你的完整课程表",
-      "robotName": "all",
-      "category": "课程相关",
-      "tags": [
-        "课程表",
-        "查询",
-        "上课时间"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "查": 1,
-        "询": 1,
-        "课": 1,
-        "程": 1,
-        "表": 1
-      },
-      "createdAt": "2025-04-16T04:06:50.106Z",
-      "updatedAt": "2025-04-16T04:06:58.405Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 19,
+      "sourceType": "chat",
+      "sourceId": "680ec22ca6d5b65424084f45",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:47:56.745Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d734"
+        "$oid": "680ec431a6d5b6542408503b"
       },
-      "title": "如何申请缓考",
-      "content": "申请缓考的步骤如下：\n1. 在考试前至少3天提交缓考申请\n2. 准备相关证明材料（如医院证明等）\n3. 填写缓考申请表\n4. 提交给所在学院教务办公室\n5. 等待审核结果",
-      "robotName": "all",
-      "category": "考试相关",
-      "tags": [
-        "缓考",
-        "考试",
-        "申请"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "申": 1,
-        "请": 1,
-        "缓": 1,
-        "考": 1
-      },
-      "createdAt": "2025-04-16T04:06:50.108Z",
-      "updatedAt": "2025-04-16T04:06:58.419Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 20,
+      "sourceType": "chat",
+      "sourceId": "680ec431a6d5b6542408502f",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:56:33.684Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d735"
+        "$oid": "680ec448a6d5b65424085075"
       },
-      "title": "如何办理学生证补办",
-      "content": "学生证补办流程：\n1. 准备一寸照片\n2. 填写补办申请表\n3. 到学生事务中心办理\n4. 缴纳补办费用\n5. 等待3-5个工作日领取新证",
-      "robotName": "all",
-      "category": "证件相关",
-      "tags": [
-        "学生证",
-        "补办",
-        "证件"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "办": 2,
-        "理": 1,
-        "学": 1,
-        "生": 1,
-        "证": 1,
-        "补": 1
-      },
-      "createdAt": "2025-04-16T04:06:50.108Z",
-      "updatedAt": "2025-04-16T04:06:58.442Z",
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 21,
+      "sourceType": "chat",
+      "sourceId": "680ec448a6d5b65424085069",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-27T23:56:56.955Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d736"
+        "$oid": "680ed3e4f7184c6aab8ee30e"
       },
-      "title": "如何申请奖学金",
-      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
-      "robotName": "all",
-      "category": "奖学金",
-      "tags": [
-        "奖学金",
-        "申请",
-        "资助"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "申": 1,
-        "请": 1,
-        "奖": 1,
-        "学": 1,
-        "金": 1
-      },
-      "createdAt": "2025-04-16T04:06:50.108Z",
-      "updatedAt": "2025-04-16T04:06:58.449Z",
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "type": "earn",
+      "amount": 1,
+      "balance": 10000,
+      "sourceType": "chat",
+      "sourceId": "680ed3e4f7184c6aab8ee302",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-28T01:03:32.941Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d737"
+        "$oid": "680eedb91ebe3a73af525203"
       },
-      "title": "如何办理休学手续",
-      "content": "休学办理流程：\n1. 提交休学申请\n2. 准备相关证明材料\n3. 填写休学申请表\n4. 经辅导员、学院领导审批\n5. 到教务处办理手续",
-      "robotName": "all",
-      "category": "学籍管理",
-      "tags": [
-        "休学",
-        "学籍",
-        "手续"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "办": 1,
-        "理": 1,
-        "休": 1,
-        "学": 1,
-        "手": 1,
-        "续": 1
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "type": "spend",
+      "amount": -500,
+      "balance": 9500,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI月卡",
+      "metadata": {
+        "itemId": 1
       },
-      "createdAt": "2025-04-16T04:06:50.109Z",
-      "updatedAt": "2025-04-16T04:06:58.454Z",
+      "createdAt": "2025-04-28T02:53:45.379Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d738"
+        "$oid": "680eedee1ebe3a73af525225"
       },
-      "title": "如何查询成绩",
-      "content": "成绩查询方式：\n1. 登录教务系统\n2. 点击\"成绩查询\"选项\n3. 选择相应学期\n4. 查看各科成绩\n5. 可打印成绩单",
-      "robotName": "all",
-      "category": "成绩相关",
-      "tags": [
-        "成绩",
-        "查询",
-        "分数"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "查": 1,
-        "询": 1,
-        "成": 1,
-        "绩": 1
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "type": "spend",
+      "amount": -1000,
+      "balance": 8500,
+      "sourceType": "other",
+      "description": "兑换商品: AI个性化形象定制",
+      "metadata": {
+        "itemId": 2
       },
-      "createdAt": "2025-04-16T04:06:50.109Z",
-      "updatedAt": "2025-04-16T04:06:58.458Z",
+      "createdAt": "2025-04-28T02:54:38.752Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d739"
+        "$oid": "680eedf01ebe3a73af52522d"
       },
-      "title": "如何申请转专业",
-      "content": "转专业申请流程：\n1. 关注学校转专业通知\n2. 准备申请材料（成绩单、转专业申请表等）\n3. 提交给所在学院\n4. 参加转专业考试\n5. 等待审核结果",
-      "robotName": "all",
-      "category": "学籍管理",
-      "tags": [
-        "转专业",
-        "专业",
-        "申请"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "申": 1,
-        "请": 1,
-        "转": 1,
-        "专": 1,
-        "业": 1
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "type": "spend",
+      "amount": -2000,
+      "balance": 6500,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI知识库定制",
+      "metadata": {
+        "itemId": 3
       },
-      "createdAt": "2025-04-16T04:06:50.109Z",
-      "updatedAt": "2025-04-16T04:06:58.461Z",
+      "createdAt": "2025-04-28T02:54:40.798Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d73a"
+        "$oid": "680eedf21ebe3a73af525235"
       },
-      "title": "如何办理校园卡",
-      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
-      "robotName": "all",
-      "category": "校园卡",
-      "tags": [
-        "校园卡",
-        "办理",
-        "一卡通"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "办": 1,
-        "理": 1,
-        "校": 1,
-        "园": 1,
-        "卡": 1
+      "userId": "67ff2d876fb224e24ddf4dda",
+      "type": "spend",
+      "amount": -5000,
+      "balance": 1500,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI年度会员",
+      "metadata": {
+        "itemId": 4
       },
-      "createdAt": "2025-04-16T04:06:50.110Z",
-      "updatedAt": "2025-04-16T04:06:58.465Z",
+      "createdAt": "2025-04-28T02:54:42.318Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d73b"
+        "$oid": "680f04fd8e1d572f015fe2a6"
       },
-      "title": "如何申请勤工助学",
-      "content": "勤工助学申请流程：\n1. 关注学校勤工助学岗位信息\n2. 准备个人简历\n3. 填写申请表\n4. 参加面试\n5. 签订工作协议",
-      "robotName": "all",
-      "category": "勤工助学",
-      "tags": [
-        "勤工助学",
-        "兼职",
-        "工作"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "申": 1,
-        "请": 1,
-        "勤": 1,
-        "工": 1,
-        "助": 1,
-        "学": 1
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "spend",
+      "amount": -500,
+      "balance": 9499,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI月卡",
+      "metadata": {
+        "itemId": 1
       },
-      "createdAt": "2025-04-16T04:06:50.111Z",
-      "updatedAt": "2025-04-16T04:06:58.470Z",
+      "createdAt": "2025-04-28T04:33:01.181Z",
       "__v": 0
     },
     {
       "_id": {
-        "$oid": "67ff2cdab67bf8d37366d73c"
+        "$oid": "680f11b5363eff76fa4b58aa"
       },
-      "title": "如何办理毕业手续",
-      "content": "毕业手续办理流程：\n1. 完成所有课程和学分\n2. 提交毕业论文\n3. 参加毕业答辩\n4. 办理离校手续\n5. 领取毕业证书和学位证书",
-      "robotName": "all",
-      "category": "毕业相关",
-      "tags": [
-        "毕业",
-        "手续",
-        "离校"
-      ],
-      "status": "active",
-      "embeddings": true,
-      "vector": {
-        "如": 1,
-        "何": 1,
-        "办": 1,
-        "理": 1,
-        "毕": 1,
-        "业": 1,
-        "手": 1,
-        "续": 1
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "spend",
+      "amount": -1000,
+      "balance": 8499,
+      "sourceType": "other",
+      "description": "兑换商品: AI个性化形象定制",
+      "metadata": {
+        "itemId": 2
       },
-      "createdAt": "2025-04-16T04:06:50.111Z",
-      "updatedAt": "2025-04-16T04:06:58.473Z",
+      "createdAt": "2025-04-28T05:27:17.917Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f19b8363eff76fa4b58d4"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "spend",
+      "amount": -500,
+      "balance": 7999,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI月卡",
+      "metadata": {
+        "itemId": 1
+      },
+      "createdAt": "2025-04-28T06:01:28.365Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f19db363eff76fa4b58ee"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "spend",
+      "amount": -5000,
+      "balance": 2999,
+      "sourceType": "other",
+      "description": "兑换商品: 思意AI年度会员",
+      "metadata": {
+        "itemId": 4
+      },
+      "createdAt": "2025-04-28T06:02:03.588Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f43363eff76fa4b59ea"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 3000,
+      "sourceType": "chat",
+      "sourceId": "680f1f43363eff76fa4b59de",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-28T06:25:07.802Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f1f4c363eff76fa4b59fc"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 3001,
+      "sourceType": "chat",
+      "sourceId": "680f1f4c363eff76fa4b59f0",
+      "sourceModel": "ChatMessage",
+      "description": "完成对话获得1积分",
+      "createdAt": "2025-04-28T06:25:16.465Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f47005022f2efa591a2bf"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 2,
+      "balance": 3013,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 7,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:14:40.451Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f47005022f2efa591a2c3"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 2,
+      "balance": 3015,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 8,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:14:40.468Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f47315022f2efa591a2eb"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 2,
+      "balance": 3017,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 9,
+        "feedbackType": "其他"
+      },
+      "createdAt": "2025-04-28T09:15:29.773Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f47555022f2efa591a303"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 2,
+      "balance": 3019,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 10,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:16:05.543Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f485a49112d9cdaab8bbd"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "type": "earn",
+      "amount": 1,
+      "balance": 3020,
+      "sourceType": "chat",
+      "sourceId": "680f485a49112d9cdaab8bb8",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:20:26.285Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8c5f87c02e22ccf463"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 4,
+      "sourceType": "chat",
+      "sourceId": "680f4b8c5f87c02e22ccf458",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:04.483Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b8e5f87c02e22ccf472"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 5,
+      "sourceType": "chat",
+      "sourceId": "680f4b8e5f87c02e22ccf467",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:06.044Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b975f87c02e22ccf4a2"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 6,
+      "sourceType": "chat",
+      "sourceId": "680f4b975f87c02e22ccf497",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:15.925Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b995f87c02e22ccf4b1"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 7,
+      "sourceType": "chat",
+      "sourceId": "680f4b995f87c02e22ccf4a6",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:17.235Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9a5f87c02e22ccf4c0"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 8,
+      "sourceType": "chat",
+      "sourceId": "680f4b9a5f87c02e22ccf4b5",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:18.727Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9c5f87c02e22ccf4cf"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 9,
+      "sourceType": "chat",
+      "sourceId": "680f4b9c5f87c02e22ccf4c4",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:20.396Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4b9e5f87c02e22ccf4de"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 10,
+      "sourceType": "chat",
+      "sourceId": "680f4b9e5f87c02e22ccf4d3",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:22.987Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba05f87c02e22ccf4ed"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 11,
+      "sourceType": "chat",
+      "sourceId": "680f4ba05f87c02e22ccf4e2",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:24.895Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba25f87c02e22ccf4fc"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 12,
+      "sourceType": "chat",
+      "sourceId": "680f4ba25f87c02e22ccf4f1",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:26.279Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4ba65f87c02e22ccf50b"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 1,
+      "balance": 13,
+      "sourceType": "chat",
+      "sourceId": "680f4ba65f87c02e22ccf500",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T09:34:30.226Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4bd95f87c02e22ccf568"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 2,
+      "balance": 15,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 11,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:35:21.290Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4bdc5f87c02e22ccf56e"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 2,
+      "balance": 17,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 12,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:35:24.097Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4bdf5f87c02e22ccf574"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 2,
+      "balance": 19,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 13,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:35:27.424Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f4be25f87c02e22ccf57a"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "type": "earn",
+      "amount": 2,
+      "balance": 21,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 14,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T09:35:30.209Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7740de0fd2b08ad636c4"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "type": "earn",
+      "amount": 1,
+      "balance": 1,
+      "sourceType": "chat",
+      "sourceId": "680f7740de0fd2b08ad636b9",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T12:40:32.288Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7744de0fd2b08ad636d3"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "type": "earn",
+      "amount": 1,
+      "balance": 2,
+      "sourceType": "chat",
+      "sourceId": "680f7744de0fd2b08ad636c8",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T12:40:36.399Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f7757de0fd2b08ad636f1"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "type": "earn",
+      "amount": 2,
+      "balance": 4,
+      "sourceType": "feedback",
+      "sourceId": null,
+      "sourceModel": "Feedback",
+      "description": "提交反馈获得2积分",
+      "metadata": {
+        "feedbackId": 17,
+        "feedbackType": "功能建议"
+      },
+      "createdAt": "2025-04-28T12:40:55.917Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680f77a9de0fd2b08ad63738"
+      },
+      "userId": "680f7314de0fd2b08ad635fc",
+      "type": "earn",
+      "amount": 1,
+      "balance": 5,
+      "sourceType": "chat",
+      "sourceId": "680f77a9de0fd2b08ad6372d",
+      "sourceModel": "ChatMessage",
+      "description": "聊天获得1积分",
+      "createdAt": "2025-04-28T12:42:17.390Z",
       "__v": 0
     }
   ]

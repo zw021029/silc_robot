@@ -1,11 +1,14 @@
 // export_db.js
+const config = require('../src/config');
+
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
 const DB_NAME = 'silc_robot';
 const EXPORT_PATH = path.join(__dirname, 'silc_robot_export.json');
-const MONGO_URI = `mongodb://localhost:27017/${DB_NAME}`;
+const MONGO_URI = config.database.url;
+
 
 async function exportDatabase() {
   await mongoose.connect(MONGO_URI);

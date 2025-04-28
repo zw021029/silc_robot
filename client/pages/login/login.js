@@ -160,7 +160,7 @@ Page({
       }
       
       // 用户是管理员
-      if (res.user && (res.user.role === 'admin' || res.user.isAdmin === true)) {
+      if (res.data.user && (res.data.user.role === 'admin' || res.data.user.isAdmin === true)) {
         wx.setStorageSync('isAdmin', true)
         app.globalData.isAdmin = true
         reLaunch('/pages/admin/index')
@@ -182,7 +182,7 @@ Page({
         wx.navigateBack()
       } else {
         // 普通用户处理逻辑
-        if (res.user && res.user.selectedRobot) {
+        if (res.data.user && res.data.user.selectedRobot) {
           reLaunch('/pages/chat/chat')
         } else {
           reLaunch('/pages/robot-select/robot-select')

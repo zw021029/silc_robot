@@ -19,7 +19,9 @@ module.exports = {
       socketTimeoutMS: 45000,
       dbName: 'silc_robot',
       authSource: 'silc_robot'
-    }
+    },
+    mongo_username: process.env.MONGODB_USERNAME,
+    mongo_password: process.env.MONGODB_PASSWORD,
   },
 
   // 日志配置

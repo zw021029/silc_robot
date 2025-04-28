@@ -1,11 +1,13 @@
 // import_db.js
+const config = require('../src/config');
+
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
 const DB_NAME = 'silc_robot';
 const IMPORT_PATH = path.join(__dirname, 'silc_robot_export.json');
-const MONGO_URI = `mongodb://127.0.0.1:27017/${DB_NAME}`; // 注意使用用户名和密码验证
+const MONGO_URI = config.database.url;
 
 async function importDatabase() {
   const rawData = fs.readFileSync(IMPORT_PATH);

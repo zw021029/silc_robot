@@ -29,7 +29,7 @@
               <text class="robot-tag">{{robot.personality === 'male' ? '稳重' : '贴心'}}</text>
               <text class="robot-tag">{{robot.personality === 'male' ? '理性' : '感性'}}</text>
             </view>
-            <text class="robot-desc" style="position: relative; left: 0rpx; top: -32rpx">{{robot.description}}</text>
+            <text class="robot-desc" style="position: relative; left: 0rpx; top: -16rpx">{{robot.description}}</text>
           </view>
         </view>
       </swiper-item>
