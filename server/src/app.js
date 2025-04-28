@@ -5,9 +5,18 @@ const WebSocket = require('ws');
 const config = require('./config');
 const { connectDB } = require('./utils/database');
 const logger = require('./utils/logger');
-const apiRoutes = require('./api');
 const { setupErrorHandlers } = require('./middlewares/error');
 const { verifyToken } = require('./middlewares/auth');
+const path = require('path');
+
+// 打印环境变量和配置信息
+console.log('应用启动信息:');
+console.log('- 当前工作目录:', process.cwd());
+console.log('- 环境:', process.env.NODE_ENV);
+console.log('- .env 文件路径:', path.resolve('../../.env'));
+console.log('- MongoDB URI:', process.env.MONGODB_URI);
+console.log('- 数据库配置:', config.database);
+console.log('- 服务器配置:', config.server);
 
 // 导入路由
 const userRoutes = require('./routes/user');

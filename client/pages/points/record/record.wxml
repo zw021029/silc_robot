@@ -48,7 +48,9 @@
     <view class="modal-content" catchtap="stopPropagation">
       <view class="modal-header">
         <text>兑换详情</text>
-        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRecordDetail"></image>
+        <view class="close-btn" bindtap="hideRecordDetail">
+          <image src="/assets/icons/close.png" mode="aspectFit"></image>
+        </view>
       </view>
       <view class="detail-content">
         <view class="goods-info">

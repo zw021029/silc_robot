@@ -1,7 +1,763 @@
 {
+  "pointstransactions": [],
+  "knowledgecategories": [],
+  "messages": [
+    {
+      "_id": {
+        "$oid": "67ff2f3d31a3a7bdbc7d9693"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T04:17:01.888Z",
+      "updatedAt": "2025-04-16T04:17:01.889Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff2f3d31a3a7bdbc7d9698"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T04:17:01.931Z",
+      "updatedAt": "2025-04-16T04:17:01.932Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff4ab535dc75cf3e2afd49"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:14:13.819Z",
+      "updatedAt": "2025-04-16T06:14:13.823Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff4ab535dc75cf3e2afd4e"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:14:13.867Z",
+      "updatedAt": "2025-04-16T06:14:13.868Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52b3fed9676b2b326b90"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:19.109Z",
+      "updatedAt": "2025-04-16T06:48:19.109Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52b3fed9676b2b326b95"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:19.149Z",
+      "updatedAt": "2025-04-16T06:48:19.149Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52b7fed9676b2b326ba0"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:23.104Z",
+      "updatedAt": "2025-04-16T06:48:23.107Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52b7fed9676b2b326ba5"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:23.141Z",
+      "updatedAt": "2025-04-16T06:48:23.141Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52bafed9676b2b326bb0"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:26.064Z",
+      "updatedAt": "2025-04-16T06:48:26.064Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff52bafed9676b2b326bb5"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "chatId": "67ff52b3fed9676b2b326b8e",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T06:48:26.094Z",
+      "updatedAt": "2025-04-16T06:48:26.094Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dca005492f3832b5096"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:38.350Z",
+      "updatedAt": "2025-04-16T07:35:38.352Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dca005492f3832b509b"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:38.392Z",
+      "updatedAt": "2025-04-16T07:35:38.393Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dcd005492f3832b50a6"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:41.432Z",
+      "updatedAt": "2025-04-16T07:35:41.433Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dcd005492f3832b50ab"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:41.478Z",
+      "updatedAt": "2025-04-16T07:35:41.480Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dd6005492f3832b50b6"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:50.612Z",
+      "updatedAt": "2025-04-16T07:35:50.617Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dd6005492f3832b50bb"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "chatId": "67ff5dca005492f3832b5094",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-16T07:35:50.655Z",
+      "updatedAt": "2025-04-16T07:35:50.655Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "68012a06005492f3832b52f4"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:19:18.057Z",
+      "updatedAt": "2025-04-17T16:19:18.060Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "68012a06005492f3832b52f9"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:19:18.095Z",
+      "updatedAt": "2025-04-17T16:19:18.097Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680131c0005492f3832b54ed"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:52:16.683Z",
+      "updatedAt": "2025-04-17T16:52:16.685Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680131c0005492f3832b54f2"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:52:16.721Z",
+      "updatedAt": "2025-04-17T16:52:16.726Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680131c6005492f3832b54fd"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:52:22.762Z",
+      "updatedAt": "2025-04-17T16:52:22.762Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680131c6005492f3832b5502"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:52:22.792Z",
+      "updatedAt": "2025-04-17T16:52:22.795Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "6801320e005492f3832b5532"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较斤斤计较",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:53:34.224Z",
+      "updatedAt": "2025-04-17T16:53:34.224Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "6801320e005492f3832b5537"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T16:53:34.239Z",
+      "updatedAt": "2025-04-17T16:53:34.239Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "6801365e005492f3832b55ca"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T17:11:58.773Z",
+      "updatedAt": "2025-04-17T17:11:58.774Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "6801365e005492f3832b55cf"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T17:11:58.816Z",
+      "updatedAt": "2025-04-17T17:11:58.819Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680145dc005492f3832b5a22"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "留学",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T18:18:04.434Z",
+      "updatedAt": "2025-04-17T18:18:04.435Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680145dc005492f3832b5a27"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T18:18:04.467Z",
+      "updatedAt": "2025-04-17T18:18:04.467Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "68014b80005492f3832b5b2b"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T18:42:08.035Z",
+      "updatedAt": "2025-04-17T18:42:08.036Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "68014b80005492f3832b5b30"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-17T18:42:08.067Z",
+      "updatedAt": "2025-04-17T18:42:08.067Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680c9668005492f3832b5ce9"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "nih",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-26T08:16:40.873Z",
+      "updatedAt": "2025-04-26T08:16:40.874Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680c9668005492f3832b5cee"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-26T08:16:40.905Z",
+      "updatedAt": "2025-04-26T08:16:40.906Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd42005492f3832b5d3d"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:47:46.157Z",
+      "updatedAt": "2025-04-27T09:47:46.157Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd42005492f3832b5d42"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:47:46.184Z",
+      "updatedAt": "2025-04-27T09:47:46.187Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd95005492f3832b5d58"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "你好",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:09.167Z",
+      "updatedAt": "2025-04-27T09:49:09.168Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd95005492f3832b5d5d"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "抱歉，人家暂时不知道该怎么回答这个问题。",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:09.188Z",
+      "updatedAt": "2025-04-27T09:49:09.188Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd9b005492f3832b5d68"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "奖学金",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:15.770Z",
+      "updatedAt": "2025-04-27T09:49:15.773Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfd9b005492f3832b5d6d"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:15.818Z",
+      "updatedAt": "2025-04-27T09:49:15.819Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdae005492f3832b5d80"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校规",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:34.424Z",
+      "updatedAt": "2025-04-27T09:49:34.425Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdae005492f3832b5d85"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:34.465Z",
+      "updatedAt": "2025-04-27T09:49:34.467Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdbf005492f3832b5d90"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校园卡",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:51.306Z",
+      "updatedAt": "2025-04-27T09:49:51.307Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdbf005492f3832b5d95"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:49:51.335Z",
+      "updatedAt": "2025-04-27T09:49:51.335Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdc8005492f3832b5da0"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "学费",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:50:00.218Z",
+      "updatedAt": "2025-04-27T09:50:00.218Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdc8005492f3832b5da5"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:50:00.259Z",
+      "updatedAt": "2025-04-27T09:50:00.260Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdd1005492f3832b5db0"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校草",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:50:09.527Z",
+      "updatedAt": "2025-04-27T09:50:09.528Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680dfdd1005492f3832b5db5"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "chatId": "680dfd95005492f3832b5d56",
+      "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T09:50:09.548Z",
+      "updatedAt": "2025-04-27T09:50:09.548Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680eaf06005492f3832b5f8f"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖状",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T22:26:14.690Z",
+      "updatedAt": "2025-04-27T22:26:14.690Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680eaf06005492f3832b5f94"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T22:26:14.737Z",
+      "updatedAt": "2025-04-27T22:26:14.740Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680eaf12005492f3832b5f9f"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖章",
+      "type": "user",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T22:26:26.591Z",
+      "updatedAt": "2025-04-27T22:26:26.592Z",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "680eaf12005492f3832b5fa4"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "chatId": "67ff2f3d31a3a7bdbc7d9691",
+      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
+      "type": "robot",
+      "contentType": "text",
+      "evaluated": false,
+      "createdAt": "2025-04-27T22:26:26.619Z",
+      "updatedAt": "2025-04-27T22:26:26.619Z",
+      "__v": 0
+    }
+  ],
   "robots": [
     {
-      "_id": "67fe89db2b79f8905363cc1c",
+      "_id": {
+        "$oid": "67ff2cc301f5d027d02606d7"
+      },
       "name": "悉文",
       "displayName": "悉文",
       "description": "直男风格，适合简单直接的问答",
@@ -32,12 +788,14 @@
       },
       "pointsPerInteraction": 1,
       "isActive": true,
-      "createdAt": "2025-04-15T16:31:23.670Z",
-      "updatedAt": "2025-04-15T16:31:23.671Z",
+      "createdAt": "2025-04-16T04:06:27.205Z",
+      "updatedAt": "2025-04-16T04:06:27.211Z",
       "__v": 0
     },
     {
-      "_id": "67fe89db2b79f8905363cc1f",
+      "_id": {
+        "$oid": "67ff2cc301f5d027d02606db"
+      },
       "name": "悉荟",
       "displayName": "悉荟",
       "description": "温柔可爱，适合情感交流",
@@ -68,166 +826,69 @@
       },
       "pointsPerInteraction": 1,
       "isActive": true,
-      "createdAt": "2025-04-15T16:31:23.678Z",
-      "updatedAt": "2025-04-15T16:31:23.679Z",
+      "createdAt": "2025-04-16T04:06:27.231Z",
+      "updatedAt": "2025-04-16T04:06:27.232Z",
       "__v": 0
+    }
+  ],
+  "tasks": [],
+  "chats": [
+    {
+      "_id": {
+        "$oid": "67ff2f3d31a3a7bdbc7d9691"
+      },
+      "userId": "67ff2d97e7f230f99573f798",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-16T04:17:01.878Z",
+      "updatedAt": "2025-04-27T22:26:26.623Z",
+      "__v": 0,
+      "userMessage": "680eaf12005492f3832b5f9f",
+      "robotReply": "680eaf12005492f3832b5fa4"
+    },
+    {
+      "_id": {
+        "$oid": "67ff52b3fed9676b2b326b8e"
+      },
+      "userId": "67ff2d97e7f230f99573f7a3",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-16T06:48:19.100Z",
+      "updatedAt": "2025-04-16T06:48:26.099Z",
+      "__v": 0,
+      "userMessage": "67ff52bafed9676b2b326bb0",
+      "robotReply": "67ff52bafed9676b2b326bb5"
+    },
+    {
+      "_id": {
+        "$oid": "67ff5dca005492f3832b5094"
+      },
+      "userId": "67ff2d97e7f230f99573f7a6",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-16T07:35:38.343Z",
+      "updatedAt": "2025-04-16T07:35:50.663Z",
+      "__v": 0,
+      "userMessage": "67ff5dd6005492f3832b50b6",
+      "robotReply": "67ff5dd6005492f3832b50bb"
+    },
+    {
+      "_id": {
+        "$oid": "680dfd95005492f3832b5d56"
+      },
+      "userId": "67ff2d97e7f230f99573f7a0",
+      "robotId": "xiwen",
+      "createdAt": "2025-04-27T09:49:09.165Z",
+      "updatedAt": "2025-04-27T09:50:09.553Z",
+      "__v": 0,
+      "userMessage": "680dfdd1005492f3832b5db0",
+      "robotReply": "680dfdd1005492f3832b5db5"
     }
   ],
   "users": [
     {
-      "_id": "67fe89fcff7d3125ec81eb1f",
-      "username": "batch_user_9158738",
-      "password": "$2a$10$G.Cs639z3Ibl5GXjxFLHne0rjRFRWoE14HOznIxPpPAXX.1rlEIYK",
-      "email": "batch_user_9158738@example.com",
-      "nickname": "批量用户1",
-      "points": 144,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:56.732Z",
-      "updatedAt": "2025-04-15T16:31:56.813Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fcff7d3125ec81eb26",
-      "username": "batch_user_6303248",
-      "password": "$2a$10$gcH/wAqqsK8ZW8P6KVlvc.chkYq6H4lm7ZbFxPuIQ96bnL7r/nViW",
-      "email": "batch_user_6303248@example.com",
-      "nickname": "批量用户2",
-      "points": 163,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:56.890Z",
-      "updatedAt": "2025-04-15T16:31:56.955Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb2e",
-      "username": "batch_user_2397715",
-      "password": "$2a$10$VxQwbPHYsRdSSaZi3NSf7.cRnSGiNf.Q5vCnb3S7tW1xc7uAGDvv.",
-      "email": "batch_user_2397715@example.com",
-      "nickname": "批量用户3",
-      "points": 144,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.024Z",
-      "updatedAt": "2025-04-15T16:31:57.088Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb32",
-      "username": "batch_user_3166502",
-      "password": "$2a$10$FC/xaIcdBfBTVOaMvbN3Mezvhjl1vyMKReaT3gv6W5jbeCmXDeTQ.",
-      "email": "batch_user_3166502@example.com",
-      "nickname": "批量用户4",
-      "points": 191,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.171Z",
-      "updatedAt": "2025-04-15T16:31:57.241Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb35",
-      "username": "batch_user_3142952",
-      "password": "$2a$10$dRjaYjFc7j3GWXZE6KyHCeApYYaI6hEtzJk.Ij85v5vFMFg7TPb8S",
-      "email": "batch_user_3142952@example.com",
-      "nickname": "批量用户5",
-      "points": 113,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.311Z",
-      "updatedAt": "2025-04-15T16:31:57.376Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb38",
-      "username": "batch_user_7594070",
-      "password": "$2a$10$BA4/4PBUKq2JefV/DgbY9u.asB8JuMLtaCqF6H1FpGrqfmntbHPlq",
-      "email": "batch_user_7594070@example.com",
-      "nickname": "批量用户6",
-      "points": 9,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.451Z",
-      "updatedAt": "2025-04-15T16:31:57.524Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb3b",
-      "username": "batch_user_3461993",
-      "password": "$2a$10$WGU6R.XBTsoE2EcUTIduBOX2cHYCGJkkL5QXHzoXSMNjj.KSz7Zxa",
-      "email": "batch_user_3461993@example.com",
-      "nickname": "批量用户7",
-      "points": 34,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.594Z",
-      "updatedAt": "2025-04-15T16:31:57.663Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb3e",
-      "username": "batch_user_9407952",
-      "password": "$2a$10$N8kaxPG3GYlzLwA7yOdfpuoO3iCbxXLgtPNXkS00bzsovS9o39nQe",
-      "email": "batch_user_9407952@example.com",
-      "nickname": "批量用户8",
-      "points": 186,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.730Z",
-      "updatedAt": "2025-04-15T16:31:57.794Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb41",
-      "username": "batch_user_6971406",
-      "password": "$2a$10$.k8upyE/6N7wiZUpTZ00b.ZzuER9YN8x/hNzfcH8c1x1LOafFMh62",
-      "email": "batch_user_6971406@example.com",
-      "nickname": "批量用户9",
-      "points": 39,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉文",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.860Z",
-      "updatedAt": "2025-04-15T16:31:57.925Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89fdff7d3125ec81eb44",
-      "username": "batch_user_2992288",
-      "password": "$2a$10$bu.M2YDzI/AHUWksfhvIgu0QQeyEaUEv7FArwrOWMVUBNwA3FhDmu",
-      "email": "batch_user_2992288@example.com",
-      "nickname": "批量用户10",
-      "points": 130,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "悉荟",
-      "status": "active",
-      "createdAt": "2025-04-15T16:31:57.994Z",
-      "updatedAt": "2025-04-15T16:31:58.058Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe89ffe90a7ac5ca53d7b9",
+      "_id": {
+        "$oid": "67ff2d866fb224e24ddf4dcf"
+      },
       "username": "xiwen_user",
-      "password": "$2a$10$sDILt3OP3HnS1.7KXSox0.G0lNPa44jp7dIGfpqardShh8zbXeaCe",
+      "password": "$2a$10$YCiqC3o7wgdhH9Q1qUmEZeotZXolDI1X12.XyY0x4j58ac0IsC33G",
       "email": "xiwen@example.com",
       "nickname": "悉文用户",
       "points": 20,
@@ -235,14 +896,16 @@
       "isAdmin": false,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:31:59.791Z",
-      "updatedAt": "2025-04-15T16:31:59.864Z",
+      "createdAt": "2025-04-16T04:09:42.633Z",
+      "updatedAt": "2025-04-16T04:09:42.773Z",
       "__v": 0
     },
     {
-      "_id": "67fe89ffe90a7ac5ca53d7c1",
+      "_id": {
+        "$oid": "67ff2d866fb224e24ddf4dd4"
+      },
       "username": "xihui_user",
-      "password": "$2a$10$iqvlD/d/002VeUGodovcg.0xoEVUjmnRa7txkY0uhGPBmin.gWPvi",
+      "password": "$2a$10$a/Vr.A7K5Ou7miCm103.UO3atBifypJd8XDqim42Pf9.Clc5wGikO",
       "email": "xihui@example.com",
       "phone": "13900000002",
       "nickname": "悉荟用户",
@@ -251,14 +914,16 @@
       "isAdmin": false,
       "selectedRobot": "悉荟",
       "status": "active",
-      "createdAt": "2025-04-15T16:31:59.937Z",
-      "updatedAt": "2025-04-15T16:32:00.003Z",
+      "createdAt": "2025-04-16T04:09:42.887Z",
+      "updatedAt": "2025-04-16T04:09:42.981Z",
       "__v": 0
     },
     {
-      "_id": "67fe8a00e90a7ac5ca53d7c6",
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4dd7"
+      },
       "username": "new_user",
-      "password": "$2a$10$.mRehgi9ukfgqxsAcyfD7uSzBWo6AIs0CgC7VUbbUZiH8cNYqjZRa",
+      "password": "$2a$10$G06onlyobFJJ5pqZySL4Ku/yulrvveSVXBFRaZmRNTC0E5BZW8kia",
       "email": "new@example.com",
       "nickname": "新用户",
       "points": 0,
@@ -266,14 +931,17 @@
       "isAdmin": false,
       "selectedRobot": "",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:00.069Z",
-      "updatedAt": "2025-04-15T16:32:00.140Z",
-      "__v": 0
+      "createdAt": "2025-04-16T04:09:43.076Z",
+      "updatedAt": "2025-04-26T08:21:34.711Z",
+      "__v": 0,
+      "lastLogin": "2025-04-26T08:21:34.711Z"
     },
     {
-      "_id": "67fe8a00e90a7ac5ca53d7c9",
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4dda"
+      },
       "username": "rich_user",
-      "password": "$2a$10$Qo6bvmyEekdNd91vtsuiZOgZ8wCydswGCO4SwT.QgYhFYRxsDcVkK",
+      "password": "$2a$10$KwGY.OzAPglbqCpSZsxKEeZg0i/dlWLt2B0JiThAHLEP31m7imd0O",
       "email": "rich@example.com",
       "nickname": "土豪用户",
       "points": 9999,
@@ -281,14 +949,16 @@
       "isAdmin": false,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:00.205Z",
-      "updatedAt": "2025-04-15T16:32:00.269Z",
+      "createdAt": "2025-04-16T04:09:43.267Z",
+      "updatedAt": "2025-04-16T04:09:43.364Z",
       "__v": 0
     },
     {
-      "_id": "67fe8a00e90a7ac5ca53d7cc",
+      "_id": {
+        "$oid": "67ff2d876fb224e24ddf4ddd"
+      },
       "username": "superadmin",
-      "password": "$2a$10$Li76M/cZSI36b86w8skKL.zrBsq5CggIqNg3FWoLi4WKetdr.tX2W",
+      "password": "$2a$10$1OaLxb/Cj8njqxCKjub3buCoNHheJbGzSwydJeHQdGcTufFhvLmmW",
       "email": "super@example.com",
       "nickname": "超级管理员",
       "points": 1000,
@@ -296,77 +966,90 @@
       "isAdmin": true,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:00.335Z",
-      "updatedAt": "2025-04-15T16:36:29.877Z",
+      "createdAt": "2025-04-16T04:09:43.456Z",
+      "updatedAt": "2025-04-26T08:25:14.741Z",
       "__v": 0,
-      "lastLogin": "2025-04-15T16:36:29.876Z"
+      "lastLogin": "2025-04-26T08:25:14.740Z"
     },
     {
-      "_id": "67fe8a03afc588fc1eb205b0",
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f798"
+      },
       "username": "testuser1",
-      "password": "$2a$10$QifIKEiVaw.QWZxI6LANNO2tEOUvwsWj7BpywRfe3vf.wUdPzZ8dq",
+      "password": "$2a$10$ZsnZkVoTuMI/nqC5IuGOi.WjTBY3tzZucgq3t5A.P1VU6nsgT6s1a",
       "email": "test1@example.com",
       "nickname": "测试用户1",
-      "points": 2,
+      "points": 14,
       "role": "user",
       "isAdmin": false,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:03.010Z",
-      "updatedAt": "2025-04-15T17:20:40.675Z",
+      "createdAt": "2025-04-16T04:09:59.259Z",
+      "updatedAt": "2025-04-27T22:26:26.697Z",
       "__v": 0,
-      "lastLogin": "2025-04-15T17:20:40.666Z"
+      "lastLogin": "2025-04-27T21:31:39.411Z"
     },
     {
-      "_id": "67fe8a03afc588fc1eb205b8",
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a0"
+      },
       "username": "testuser2",
-      "password": "$2a$10$vcxgeMjbFO5/6qMpR50oK.O/XIDCdPuca78QZ2r/UQcs3ISve84NC",
+      "password": "$2a$10$ocgsxiDNxxAhEtltxSRMC./qp9zjkTvRVORBEmOTWJLh2VlVEW7wy",
       "email": "testuser2@example.com",
       "phone": "13800000002",
       "nickname": "测试用户2",
-      "points": 0,
+      "points": 6,
       "role": "user",
       "isAdmin": false,
       "selectedRobot": "悉荟",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:03.170Z",
-      "updatedAt": "2025-04-15T16:32:03.237Z",
-      "__v": 0
+      "createdAt": "2025-04-16T04:09:59.471Z",
+      "updatedAt": "2025-04-27T14:00:57.167Z",
+      "__v": 0,
+      "lastLogin": "2025-04-27T14:00:57.166Z"
     },
     {
-      "_id": "67fe8a03afc588fc1eb205be",
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a3"
+      },
       "username": "testuser3",
-      "password": "$2a$10$3JP85IAG3ULeKJs4iRUYJudiKahZhRmU1cfIq8Vr2.HhvOVNUgDT.",
+      "password": "$2a$10$J6DvuLdTalkXkfy70LG18uwHdeRQzfiOsDCvdA8EPCv1LJRvk2CWu",
       "email": "test3@example.com",
       "nickname": "测试用户3",
-      "points": 0,
-      "role": "user",
-      "isAdmin": false,
-      "selectedRobot": "",
-      "status": "active",
-      "createdAt": "2025-04-15T16:32:03.303Z",
-      "updatedAt": "2025-04-15T16:32:03.367Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe8a03afc588fc1eb205c1",
-      "username": "testuser4",
-      "password": "$2a$10$iQt80hqKR.oiGv5FcUh/n.j7BqZ7Tk95X.yWKTmprGyxibYXFS3om",
-      "email": "test4@example.com",
-      "nickname": "测试用户4",
-      "points": 100,
+      "points": 3,
       "role": "user",
       "isAdmin": false,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:03.433Z",
-      "updatedAt": "2025-04-15T16:32:03.496Z",
-      "__v": 0
+      "createdAt": "2025-04-16T04:09:59.668Z",
+      "updatedAt": "2025-04-17T18:21:41.517Z",
+      "__v": 0,
+      "lastLogin": "2025-04-17T18:21:41.516Z"
     },
     {
-      "_id": "67fe8a03afc588fc1eb205c4",
+      "_id": {
+        "$oid": "67ff2d97e7f230f99573f7a6"
+      },
+      "username": "testuser4",
+      "password": "$2a$10$EcG.oCx.aNr27KvbEcfV6eOsEiQlUdSwN8iVxdVsQdba1LkPuh4Gu",
+      "email": "test4@example.com",
+      "nickname": "测试用户4",
+      "points": 103,
+      "role": "user",
+      "isAdmin": false,
+      "selectedRobot": "悉文",
+      "status": "active",
+      "createdAt": "2025-04-16T04:09:59.865Z",
+      "updatedAt": "2025-04-16T07:35:50.846Z",
+      "__v": 0,
+      "lastLogin": "2025-04-16T07:23:28.736Z"
+    },
+    {
+      "_id": {
+        "$oid": "67ff2d98e7f230f99573f7a9"
+      },
       "username": "testuser5",
-      "password": "$2a$10$vRDEbsgO9xiCgaZ7FyFyG.T6oOX/389bSfmDxROjL3g0pR5IZBH0u",
+      "password": "$2a$10$UHGpQWdL41WKKOSeMP94PeO13gU0L6.Rx0nCktZlL6ccC/tfuPmLq",
       "email": "testuser5@example.com",
       "phone": "13800000005",
       "nickname": "测试用户5",
@@ -375,14 +1058,16 @@
       "isAdmin": false,
       "selectedRobot": "悉荟",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:03.570Z",
-      "updatedAt": "2025-04-15T16:32:03.642Z",
+      "createdAt": "2025-04-16T04:10:00.051Z",
+      "updatedAt": "2025-04-16T04:10:00.144Z",
       "__v": 0
     },
     {
-      "_id": "67fe8a03afc588fc1eb205c7",
+      "_id": {
+        "$oid": "67ff2d98e7f230f99573f7ac"
+      },
       "username": "admin",
-      "password": "$2a$10$M5Oh1ToIdkQiYEUS02ABIO9MlT8ZLLEC8CGnthha/I9Msg.G5ivhK",
+      "password": "$2a$10$JGpL9LQIaqneBsVZzmmQWe4xOx2/qp1De78kkLaRbAQwyY7YlR4YO",
       "email": "admin@example.com",
       "nickname": "管理员",
       "points": 0,
@@ -390,15 +1075,16 @@
       "isAdmin": true,
       "selectedRobot": "悉文",
       "status": "active",
-      "createdAt": "2025-04-15T16:32:03.715Z",
-      "updatedAt": "2025-04-15T16:32:03.787Z",
+      "createdAt": "2025-04-16T04:10:00.237Z",
+      "updatedAt": "2025-04-16T04:10:00.326Z",
       "__v": 0
     }
   ],
-  "tasks": [],
   "knowledgearticles": [
     {
-      "_id": "67fe89f1993e3f634db1d2b7",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d733"
+      },
       "title": "如何查询课程表",
       "content": "你可以通过以下方式查询课程表：\n1. 登录教务系统\n2. 点击\"课程表查询\"选项\n3. 选择相应的学期\n4. 系统会显示你的完整课程表",
       "robotName": "all",
@@ -419,12 +1105,14 @@
         "程": 1,
         "表": 1
       },
-      "createdAt": "2025-04-15T16:31:45.553Z",
-      "updatedAt": "2025-04-15T16:31:49.295Z",
+      "createdAt": "2025-04-16T04:06:50.106Z",
+      "updatedAt": "2025-04-16T04:06:58.405Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2b8",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d734"
+      },
       "title": "如何申请缓考",
       "content": "申请缓考的步骤如下：\n1. 在考试前至少3天提交缓考申请\n2. 准备相关证明材料（如医院证明等）\n3. 填写缓考申请表\n4. 提交给所在学院教务办公室\n5. 等待审核结果",
       "robotName": "all",
@@ -444,12 +1132,14 @@
         "缓": 1,
         "考": 1
       },
-      "createdAt": "2025-04-15T16:31:45.555Z",
-      "updatedAt": "2025-04-15T16:31:49.308Z",
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.419Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2b9",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d735"
+      },
       "title": "如何办理学生证补办",
       "content": "学生证补办流程：\n1. 准备一寸照片\n2. 填写补办申请表\n3. 到学生事务中心办理\n4. 缴纳补办费用\n5. 等待3-5个工作日领取新证",
       "robotName": "all",
@@ -471,12 +1161,14 @@
         "证": 1,
         "补": 1
       },
-      "createdAt": "2025-04-15T16:31:45.555Z",
-      "updatedAt": "2025-04-15T16:31:49.314Z",
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.442Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2ba",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d736"
+      },
       "title": "如何申请奖学金",
       "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
       "robotName": "all",
@@ -497,12 +1189,14 @@
         "学": 1,
         "金": 1
       },
-      "createdAt": "2025-04-15T16:31:45.555Z",
-      "updatedAt": "2025-04-15T16:31:49.322Z",
+      "createdAt": "2025-04-16T04:06:50.108Z",
+      "updatedAt": "2025-04-16T04:06:58.449Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2bb",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d737"
+      },
       "title": "如何办理休学手续",
       "content": "休学办理流程：\n1. 提交休学申请\n2. 准备相关证明材料\n3. 填写休学申请表\n4. 经辅导员、学院领导审批\n5. 到教务处办理手续",
       "robotName": "all",
@@ -524,12 +1218,14 @@
         "手": 1,
         "续": 1
       },
-      "createdAt": "2025-04-15T16:31:45.556Z",
-      "updatedAt": "2025-04-15T16:31:49.338Z",
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.454Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2bc",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d738"
+      },
       "title": "如何查询成绩",
       "content": "成绩查询方式：\n1. 登录教务系统\n2. 点击\"成绩查询\"选项\n3. 选择相应学期\n4. 查看各科成绩\n5. 可打印成绩单",
       "robotName": "all",
@@ -549,12 +1245,14 @@
         "成": 1,
         "绩": 1
       },
-      "createdAt": "2025-04-15T16:31:45.556Z",
-      "updatedAt": "2025-04-15T16:31:49.342Z",
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.458Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2bd",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d739"
+      },
       "title": "如何申请转专业",
       "content": "转专业申请流程：\n1. 关注学校转专业通知\n2. 准备申请材料（成绩单、转专业申请表等）\n3. 提交给所在学院\n4. 参加转专业考试\n5. 等待审核结果",
       "robotName": "all",
@@ -575,12 +1273,14 @@
         "专": 1,
         "业": 1
       },
-      "createdAt": "2025-04-15T16:31:45.557Z",
-      "updatedAt": "2025-04-15T16:31:49.352Z",
+      "createdAt": "2025-04-16T04:06:50.109Z",
+      "updatedAt": "2025-04-16T04:06:58.461Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2be",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73a"
+      },
       "title": "如何办理校园卡",
       "content": "校园卡办理流程：\n1. 准备一寸照片\n2. 到校园卡服务中心\n3. 填写申请表\n4. 缴纳工本费\n5. 等待制卡（约3个工作日）",
       "robotName": "all",
@@ -601,12 +1301,14 @@
         "园": 1,
         "卡": 1
       },
-      "createdAt": "2025-04-15T16:31:45.558Z",
-      "updatedAt": "2025-04-15T16:31:49.356Z",
+      "createdAt": "2025-04-16T04:06:50.110Z",
+      "updatedAt": "2025-04-16T04:06:58.465Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2bf",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73b"
+      },
       "title": "如何申请勤工助学",
       "content": "勤工助学申请流程：\n1. 关注学校勤工助学岗位信息\n2. 准备个人简历\n3. 填写申请表\n4. 参加面试\n5. 签订工作协议",
       "robotName": "all",
@@ -628,12 +1330,14 @@
         "助": 1,
         "学": 1
       },
-      "createdAt": "2025-04-15T16:31:45.558Z",
-      "updatedAt": "2025-04-15T16:31:49.365Z",
+      "createdAt": "2025-04-16T04:06:50.111Z",
+      "updatedAt": "2025-04-16T04:06:58.470Z",
       "__v": 0
     },
     {
-      "_id": "67fe89f1993e3f634db1d2c0",
+      "_id": {
+        "$oid": "67ff2cdab67bf8d37366d73c"
+      },
       "title": "如何办理毕业手续",
       "content": "毕业手续办理流程：\n1. 完成所有课程和学分\n2. 提交毕业论文\n3. 参加毕业答辩\n4. 办理离校手续\n5. 领取毕业证书和学位证书",
       "robotName": "all",
@@ -655,77 +1359,9 @@
         "手": 1,
         "续": 1
       },
-      "createdAt": "2025-04-15T16:31:45.559Z",
-      "updatedAt": "2025-04-15T16:31:49.369Z",
+      "createdAt": "2025-04-16T04:06:50.111Z",
+      "updatedAt": "2025-04-16T04:06:58.473Z",
       "__v": 0
     }
-  ],
-  "messages": [
-    {
-      "_id": "67fe8ab425415392903595ad",
-      "userId": "67fe8a03afc588fc1eb205b0",
-      "robotId": "xiwen",
-      "chatId": "67fe8ab425415392903595ab",
-      "content": "你好",
-      "type": "user",
-      "contentType": "text",
-      "evaluated": false,
-      "createdAt": "2025-04-15T16:35:00.817Z",
-      "updatedAt": "2025-04-15T16:35:00.818Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe8ab425415392903595b2",
-      "userId": "67fe8a03afc588fc1eb205b0",
-      "robotId": "xiwen",
-      "chatId": "67fe8ab425415392903595ab",
-      "content": "抱歉，俺暂时不知道该怎么回答这个问题。",
-      "type": "robot",
-      "contentType": "text",
-      "evaluated": false,
-      "createdAt": "2025-04-15T16:35:00.837Z",
-      "updatedAt": "2025-04-15T16:35:00.838Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe8abb25415392903595bd",
-      "userId": "67fe8a03afc588fc1eb205b0",
-      "robotId": "xiwen",
-      "chatId": "67fe8ab425415392903595ab",
-      "content": "奖学金",
-      "type": "user",
-      "contentType": "text",
-      "evaluated": false,
-      "createdAt": "2025-04-15T16:35:07.160Z",
-      "updatedAt": "2025-04-15T16:35:07.161Z",
-      "__v": 0
-    },
-    {
-      "_id": "67fe8abb25415392903595c2",
-      "userId": "67fe8a03afc588fc1eb205b0",
-      "robotId": "xiwen",
-      "chatId": "67fe8ab425415392903595ab",
-      "content": "奖学金申请流程：\n1. 关注学校奖学金通知\n2. 准备申请材料（成绩单、获奖证书等）\n3. 填写奖学金申请表\n4. 提交给辅导员\n5. 等待评审结果",
-      "type": "robot",
-      "contentType": "text",
-      "evaluated": false,
-      "createdAt": "2025-04-15T16:35:07.181Z",
-      "updatedAt": "2025-04-15T16:35:07.182Z",
-      "__v": 0
-    }
-  ],
-  "knowledgecategories": [],
-  "chats": [
-    {
-      "_id": "67fe8ab425415392903595ab",
-      "userId": "67fe8a03afc588fc1eb205b0",
-      "robotId": "xiwen",
-      "createdAt": "2025-04-15T16:35:00.813Z",
-      "updatedAt": "2025-04-15T16:35:07.185Z",
-      "__v": 0,
-      "userMessage": "67fe8abb25415392903595bd",
-      "robotReply": "67fe8abb25415392903595c2"
-    }
-  ],
-  "pointstransactions": []
+  ]
 }

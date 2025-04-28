@@ -8,16 +8,17 @@ module.exports = {
     debug: process.env.DEBUG || true,
     baseUrl: process.env.API_BASE_URL || 'http://localhost:3005'
   },
-
+  
   // 数据库配置
   database: {
-    url: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/silc_robot',
+    url: process.env.MONGODB_URI || 'mongodb://sirius:132239@127.0.0.1:27017/silc_robot',
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      dbName: 'silc_robot'
+      dbName: 'silc_robot',
+      authSource: 'silc_robot'
     }
   },
 

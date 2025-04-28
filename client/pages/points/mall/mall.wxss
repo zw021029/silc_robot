@@ -6,7 +6,7 @@
 
 /* 头部积分信息 */
 .header {
-  background: #07c160;
+  background: #1890ff;
   padding: 40rpx 30rpx;
   color: #fff;
   border-radius: 0 0 24rpx 24rpx;
@@ -138,7 +138,7 @@
 .points-value {
   font-size: 32rpx;
   font-weight: bold;
-  color: #fa5151;
+  color: #1890ff;
 }
 
 .points-label {
@@ -158,11 +158,12 @@
   height: 56rpx;
   line-height: 56rpx;
   text-align: center;
-  background: #07c160;
+  background: #1890ff;
   color: #fff;
   font-size: 24rpx;
   border-radius: 28rpx;
   padding: 0 20rpx;
+  transition: all 0.3s ease;
 }
 
 .exchange-btn.disabled {
@@ -170,6 +171,7 @@
 }
 
 .exchange-btn:active {
+  transform: scale(0.95);
   opacity: 0.9;
 }
 
@@ -227,7 +229,7 @@
   align-items: center;
   padding: 24rpx 30rpx;
   border-bottom: 1rpx solid #f2f2f2;
-  background: #07c160;
+  background: #1890ff;
   color: #fff;
 }
 
@@ -275,7 +277,7 @@
 
 .preview-points {
   font-size: 26rpx;
-  color: #fa5151;
+  color: #1890ff;
   display: block;
 }
 
@@ -287,7 +289,7 @@
 }
 
 .highlight {
-  color: #fa5151;
+  color: #1890ff;
   font-weight: bold;
   margin: 0 4rpx;
 }
@@ -317,8 +319,12 @@
 }
 
 .confirm-btn {
-  background: #07c160;
+  background: #1890ff;
   color: #fff;
+  border-radius: 8rpx;
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
 }
 
 .confirm-btn:active {

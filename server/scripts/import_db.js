@@ -5,7 +5,7 @@ const path = require('path');
 
 const DB_NAME = 'silc_robot';
 const IMPORT_PATH = path.join(__dirname, 'silc_robot_export.json');
-const MONGO_URI = `mongodb://localhost:27017/${DB_NAME}`;
+const MONGO_URI = `mongodb://127.0.0.1:27017/${DB_NAME}`; // 注意使用用户名和密码验证
 
 async function importDatabase() {
   const rawData = fs.readFileSync(IMPORT_PATH);
@@ -16,8 +16,17 @@ async function importDatabase() {
   for (const collectionName in jsonData) {
     const collection = mongoose.connection.db.collection(collectionName);
     await collection.deleteMany({}); // 清空旧数据
-    if (jsonData[collectionName].length > 0) {
-      await collection.insertMany(jsonData[collectionName]);
+    
+    // 处理数据，将$oid格式转换回ObjectId
+    const processedData = jsonData[collectionName].map(doc => {
+      if (doc._id && doc._id.$oid) {
+        doc._id = new mongoose.Types.ObjectId(doc._id.$oid);
+      }
+      return doc;
+    });
+
+    if (processedData.length > 0) {
+      await collection.insertMany(processedData);
     }
     console.log(`📥 导入集合 ${collectionName}`);
   }

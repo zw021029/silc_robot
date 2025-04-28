@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const logger = require('./logger');
 const config = require('../config');
+const path = require('path');
+
+// 打印环境变量和配置信息
+console.log('当前工作目录:', process.cwd());
+console.log('.env 文件路径:', path.resolve('../../.env'));
+console.log('MongoDB URI:', process.env.MONGODB_URI);
+console.log('数据库配置:', config.database);
 
 // 设置 mongoose 选项
 mongoose.set('strictQuery', false);
@@ -8,36 +15,57 @@ mongoose.set('debug', config.server.debug);
 
 async function connectDB() {
   try {
+    console.log('开始连接数据库...');
+    console.log('连接URL:', config.database.url);
+    console.log('连接选项:', config.database.options);
+    
     const conn = await mongoose.connect(config.database.url, config.database.options);
+    
+    console.log('MongoDB 连接成功:');
+    console.log('- 主机:', conn.connection.host);
+    console.log('- 端口:', conn.connection.port);
+    console.log('- 数据库:', conn.connection.name);
+    console.log('- 连接状态:', conn.connection.readyState);
+    
     logger.info('MongoDB 连接成功:', {
       host: conn.connection.host,
       port: conn.connection.port,
-      database: conn.connection.name
+      database: conn.connection.name,
+      readyState: conn.connection.readyState
     });
   } catch (error) {
+    console.error('MongoDB 连接失败:');
+    console.error('- 错误信息:', error.message);
+    console.error('- 错误堆栈:', error.stack);
+    
     logger.error('MongoDB 连接失败:', error);
     process.exit(1);
   }
 }
 
 mongoose.connection.on('error', (err) => {
+  console.error('MongoDB 连接错误:', err);
   logger.error('MongoDB 连接错误:', err);
 });
 
 mongoose.connection.on('disconnected', () => {
+  console.warn('MongoDB 连接断开');
   logger.warn('MongoDB 连接断开');
 });
 
 mongoose.connection.on('reconnected', () => {
+  console.log('MongoDB 重新连接成功');
   logger.info('MongoDB 重新连接成功');
 });
 
 process.on('SIGINT', async () => {
   try {
     await mongoose.connection.close();
+    console.log('MongoDB 连接已关闭');
     logger.info('MongoDB 连接已关闭');
     process.exit(0);
   } catch (error) {
+    console.error('关闭 MongoDB 连接时出错:', error);
     logger.error('关闭 MongoDB 连接时出错:', error);
     process.exit(1);
   }

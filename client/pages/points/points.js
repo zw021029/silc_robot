@@ -1,6 +1,6 @@
-import { 
-  getPointsBalance, 
-  getPointsHistory, 
+import {
+  getPointsBalance,
+  getPointsHistory,
   getExchangeItems,
   exchangeItem,
   getPointsRules,
@@ -18,7 +18,6 @@ Page({
     page: 1,
     pageSize: 10,
     hasMore: true,
-    showRules: false,
     totalPoints: 0, // 总积分
     monthPoints: 0, // 本月积分
     usedPoints: 0, // 已使用积分
@@ -27,11 +26,11 @@ Page({
   },
 
   onLoad() {
-    this.loadPointsBalance()
-    this.loadPointsList()
-    this.loadExchangeItems()
-    this.loadPointsRules()
-    this.loadPointsStats()
+    this.loadPointsBalance()    // 加载积分余额
+    this.loadPointsList()      // 加载积分明细
+    this.loadExchangeItems()   // 加载兑换商品
+    this.loadPointsRules()     // 加载积分规则
+    this.loadPointsStats()     // 加载积分统计
   },
 
   onShow() {
@@ -63,7 +62,7 @@ Page({
       wx.showLoading({ title: '加载中' })
       const res = await getPointsStats()
       if (res.success) {
-        this.setData({ 
+        this.setData({
           totalPoints: res.data.totalPoints,
           monthPoints: res.data.monthPoints,
           usedPoints: res.data.usedPoints
@@ -71,7 +70,7 @@ Page({
       }
     } catch (error) {
       console.error('加载积分统计失败:', error)
-      
+
       // 提供一个默认值，防止UI显示错误
       this.setData({
         totalPoints: 0,
@@ -80,7 +79,7 @@ Page({
       })
 
       // 判断是否未登录
-      if(error.statusCode === 401){
+      if (error.statusCode === 401) {
         wx.showToast({
           title: '请先登录',
           icon: 'none'
@@ -101,9 +100,9 @@ Page({
     if (this.data.loading) return
 
     const { page, pageSize, pointsList, dateRangeIndex } = this.data
-    
+
     if (refresh) {
-      this.setData({ 
+      this.setData({
         page: 1,
         pointsList: [],
         hasMore: true
@@ -139,7 +138,7 @@ Page({
       }
 
       const res = await getPointsHistory(params)
-      
+
       if (res.success) {
         // 格式化数据
         const formattedList = res.data.list.map(item => {
@@ -208,21 +207,11 @@ Page({
     }
   },
 
-  // 显示规则
-  handleShowRules() {
-    this.setData({ showRules: true })
-  },
-
-  // 隐藏规则
-  handleHideRules() {
-    this.setData({ showRules: false })
-  },
-
   // 兑换商品
   async handleExchange(e) {
     const { id } = e.currentTarget.dataset
     const item = this.data.exchangeItems.find(item => item.id === id)
-    
+
     if (!item) {
       wx.showToast({
         title: '商品不存在',
@@ -247,13 +236,13 @@ Page({
           try {
             wx.showLoading({ title: '兑换中' })
             const result = await exchangeItem(id)
-            
+
             if (result.success) {
               wx.showToast({
                 title: '兑换成功',
                 icon: 'success'
               })
-              
+
               // 刷新积分余额和商品列表
               this.loadPointsBalance()
               this.loadPointsStats()

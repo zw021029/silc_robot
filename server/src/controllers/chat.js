@@ -12,6 +12,7 @@ const {
   getRobotDetails, 
   adjustReplyStyle 
 } = require('../services/chat');
+const PointsTransaction = require('../models/points');
 
 // 获取聊天历史
 exports.getChatHistory = async (req, res, next) => {
@@ -389,6 +390,22 @@ exports.getChatPoints = async (req, res, next) => {
     
     // 更新积分
     const totalPoints = (user.points || 0) + points;
+    
+    // 创建积分记录
+    const pointsTransaction = new PointsTransaction({
+      userId: userId,
+      type: 'earn',
+      amount: points,
+      balance: totalPoints,
+      sourceType: 'chat',
+      sourceId: message._id,
+      sourceModel: 'ChatMessage',
+      description: `完成对话获得${points}积分`
+    });
+    
+    await pointsTransaction.save();
+    
+    // 更新用户积分
     await User.findByIdAndUpdate(userId, { 
       points: totalPoints,
       updatedAt: new Date()
@@ -398,7 +415,8 @@ exports.getChatPoints = async (req, res, next) => {
       points: {
         points,
         totalPoints
-      }
+      },
+      transactionId: pointsTransaction._id.toString()
     });
     
     res.status(200).json({

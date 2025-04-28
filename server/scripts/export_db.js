@@ -14,7 +14,14 @@ async function exportDatabase() {
 
   for (const { name } of collections) {
     const data = await mongoose.connection.db.collection(name).find().toArray();
-    exportData[name] = data;
+    // 将ObjectId转换为可序列化的格式
+    const processedData = data.map(doc => {
+      if (doc._id) {
+        doc._id = { $oid: doc._id.toString() };
+      }
+      return doc;
+    });
+    exportData[name] = processedData;
   }
 
   fs.writeFileSync(EXPORT_PATH, JSON.stringify(exportData, null, 2));
