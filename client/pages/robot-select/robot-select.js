@@ -11,11 +11,22 @@ Page({
     selectedRobot: null,
     currentRobotId: '',
     currentRobotIndex: 0,
+    audioContext: null,
   },
 
   async onLoad(options) {
     console.log('robot-select页面加载');
+    // 创建音频上下文
+    const audioContext = wx.createInnerAudioContext();
+    this.setData({ audioContext });
     await this.initPage(options);
+  },
+
+  onUnload() {
+    // 页面卸载时销毁音频上下文
+    if (this.data.audioContext) {
+      this.data.audioContext.destroy();
+    }
   },
 
   async initPage(options) {
@@ -129,6 +140,9 @@ Page({
         currentRobotId: robot._id,
         selectedRobot: robot
       });
+      
+      // 播放对应的音频
+      this.playRobotAudio(robot);
     }
   },
 
@@ -143,7 +157,26 @@ Page({
         currentRobotId: robot._id,
         selectedRobot: robot
       });
+      
+      // 播放对应的音频
+      this.playRobotAudio(robot);
     }
+  },
+
+  // 播放机器人音频
+  playRobotAudio(robot) {
+    if (!this.data.audioContext) return;
+    
+    // 停止当前播放的音频
+    this.data.audioContext.stop();
+    
+    // 设置音频源
+    this.data.audioContext.src = robot.personality === 'male' 
+      ? '/assets/xiwen.mp3' 
+      : '/assets/xihui.mp3';
+    
+    // 播放音频
+    this.data.audioContext.play();
   },
 
   // 处理选择机器人
