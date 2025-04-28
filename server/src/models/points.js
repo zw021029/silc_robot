@@ -22,7 +22,7 @@ const pointsTransactionSchema = new Schema({
   },
   sourceType: {
     type: String,
-    enum: ['chat', 'login', 'share', 'admin', 'system', 'other'],
+    enum: ['chat', 'login', 'share', 'admin', 'system', 'other', 'feedback'],
     required: true
   },
   sourceId: {
@@ -31,7 +31,7 @@ const pointsTransactionSchema = new Schema({
   },
   sourceModel: {
     type: String,
-    enum: ['ChatMessage', 'User', 'Reward', null]
+    enum: ['ChatMessage', 'User', 'Reward', null, 'Feedback']
   },
   description: {
     type: String,

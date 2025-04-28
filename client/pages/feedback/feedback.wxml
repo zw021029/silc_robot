@@ -10,6 +10,15 @@
         <view class="word-count">{{wordCount}}/200</view>
       </view>
     </view>
+
+    <view class="form-group">
+      <view class="type-title">反馈类型</view>
+      <picker bindchange="onTypeChange" value="{{typeIndex}}" range="{{typeArray}}">
+        <view class="picker">
+          {{typeArray[typeIndex]}}
+        </view>
+      </picker>
+    </view>
     
     <view class="form-group">
       <view class="contact-title">联系方式（选填）</view>

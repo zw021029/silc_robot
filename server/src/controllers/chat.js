@@ -13,6 +13,7 @@ const {
   adjustReplyStyle 
 } = require('../services/chat');
 const PointsTransaction = require('../models/points');
+const mongoose = require('mongoose');
 
 // 获取聊天历史
 exports.getChatHistory = async (req, res, next) => {
@@ -118,150 +119,151 @@ exports.getChatHistory = async (req, res, next) => {
 
 // 发送消息
 exports.sendMessage = async (req, res, next) => {
-  try {
-    // 身份验证，获取用户ID
-    const userId = req.user ? req.user.id : null;
-    console.log('发送消息API请求: 用户ID =', userId);
-    
-    if (!userId) {
-      console.error('发送消息失败: 用户ID为空');
-      return next(new AppError('用户ID不能为空', 400));
-    }
-    
-    // 获取消息内容
-    const { content, robotId, type = 'text' } = req.body;
-    
-    // 参数验证
-    if (!content) {
-      return next(new AppError('消息内容不能为空', 400));
-    }
-    
-    // 获取用户信息
-    const user = await User.findById(userId);
-    if (!user) {
-      return next(new AppError('用户不存在', 404));
-    }
-    
-    // 确定使用哪个机器人ID
-    const selectedRobotId = robotId || user.selectedRobot;
-    
-    if (!selectedRobotId) {
-      return next(new AppError('请先选择一个机器人对话', 400));
-    }
-    
-    logger.info(`发送消息: ${content}`, {
-      userId,
-      robotName: selectedRobotId
-    });
-    
-    // 获取最新的聊天记录
-    let chat = await Chat.findOne({ 
-      userId, 
-      robotId: selectedRobotId 
-    }).sort({ createdAt: -1 });
-    
-    // 如果没有聊天记录，创建一个新的
-    if (!chat) {
-      chat = new Chat({
-        userId,
-        robotId: selectedRobotId
-      });
-      await chat.save();
-      console.log('创建新聊天记录:', chat._id);
-    }
-    
-    // 创建用户消息
-    const userMessage = new Message({
-      userId,
-      robotId: selectedRobotId,
-      chatId: chat._id,
-      content,
-      type: 'user',
-      contentType: type
-    });
-    
-    // 保存用户消息
-    await userMessage.save();
-    
-    // 更新聊天记录
-    chat.userMessage = userMessage._id;
-    await chat.save();
-    
-    logger.info('更新用户消息', {
-      chatId: chat._id.toString(),
-      messageId: userMessage._id.toString()
-    });
-    
-    // 获取机器人回复
-    let robotReplyContent = '';
-    let replyKnowledgeId = null;
-    
     try {
-      const robotReply = await getRobotReply(userId, content);
-      robotReplyContent = robotReply.content;
-      replyKnowledgeId = robotReply._id; // 如果使用了知识库，保存知识ID
-    } catch (error) {
-      logger.error('获取机器人回复失败:', error);
-      robotReplyContent = '抱歉，我暂时无法回应，请稍后再试。';
-    }
-    
-    // 创建机器人回复消息
-    const robotReply = new Message({
-      userId,
-      robotId: selectedRobotId,
-      chatId: chat._id,
-      content: robotReplyContent,
-      type: 'robot',
-      contentType: 'text',
-      knowledgeId: replyKnowledgeId
-    });
-    
-    // 保存机器人回复
-    await robotReply.save();
-    
-    // 更新聊天记录
-    chat.robotReply = robotReply._id;
-    await chat.save();
-    
-    logger.info('更新机器人回复', {
-      chatId: chat._id.toString(),
-      messageId: robotReply._id.toString()
-    });
-    
-    logger.info('消息处理完成', {
-      userId,
-      userMessageId: userMessage._id.toString(),
-      robotReplyId: robotReply._id.toString()
-    });
-    
-    // 返回结果
-    res.status(200).json({
-      success: true,
-      data: {
-        userMessage: {
-          id: userMessage._id,
-          _id: userMessage._id,
-          content: userMessage.content,
-          type: userMessage.contentType,
-          time: userMessage.createdAt,
-          createdAt: userMessage.createdAt,
-          isUser: true
-        },
-        robotReply: {
-          id: robotReply._id,
-          _id: robotReply._id,
-          content: robotReply.content,
-          type: robotReply.contentType,
-          time: robotReply.createdAt,
-          createdAt: robotReply.createdAt,
-          isUser: false
+        const userId = req.user.id;
+        const { content, robotId } = req.body;
+
+        // 开始事务
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            // 获取或创建聊天记录
+            let chat = await Chat.findOne({
+                userId,
+                robotId
+            }).sort({ createdAt: -1 });
+
+            if (!chat) {
+                chat = new Chat({
+                    userId,
+                    robotId
+                });
+                await chat.save();
+            }
+
+            // 创建用户消息记录
+            const userMessage = new Message({
+                userId,
+                robotId,
+                chatId: chat._id,
+                content,
+                type: 'user',
+                contentType: 'text'
+            });
+            await userMessage.save();
+
+            // 更新聊天记录
+            chat.userMessage = userMessage._id;
+            await chat.save();
+
+            // 获取机器人回复
+            let robotReplyContent = '';
+            let replyKnowledgeId = null;
+            
+            try {
+                const robotReply = await getRobotReply(userId, content);
+                robotReplyContent = robotReply.content;
+                replyKnowledgeId = robotReply._id;
+            } catch (error) {
+                logger.error('获取机器人回复失败:', error);
+                robotReplyContent = '抱歉，我暂时无法回应，请稍后再试。';
+            }
+
+            // 创建机器人回复消息
+            const robotMessage = new Message({
+                userId,
+                robotId,
+                chatId: chat._id,
+                content: robotReplyContent,
+                type: 'robot',
+                contentType: 'text',
+                knowledgeId: replyKnowledgeId
+            });
+            await robotMessage.save();
+
+            // 更新聊天记录
+            chat.robotReply = robotMessage._id;
+            await chat.save();
+
+            // 检查今日聊天积分是否达到上限
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const todayChatCount = await PointsTransaction.countDocuments({
+                userId: mongoose.Types.ObjectId(userId),
+                type: 'earn',
+                sourceType: 'chat',
+                createdAt: { $gte: today }
+            });
+
+            let pointsEarned = 0;
+            let newPoints = 0;
+
+            // 如果未达到积分上限，则添加积分
+            if (todayChatCount < 10) {
+                // 获取用户信息
+                const user = await User.findById(userId);
+                if (!user) {
+                    throw new Error('用户不存在');
+                }
+
+                // 更新用户积分
+                newPoints = (user.points || 0) + 1;
+                await User.findByIdAndUpdate(userId, { points: newPoints });
+
+                // 创建积分交易记录
+                const pointsTransaction = new PointsTransaction({
+                    userId,
+                    type: 'earn',
+                    amount: 1,
+                    balance: newPoints,
+                    sourceType: 'chat',
+                    sourceId: userMessage._id,
+                    sourceModel: 'ChatMessage',
+                    description: '聊天获得1积分'
+                });
+                await pointsTransaction.save();
+
+                pointsEarned = 1;
+            }
+
+            await session.commitTransaction();
+            session.endSession();
+
+            res.json({
+                success: true,
+                data: {
+                    userMessage: {
+                        id: userMessage._id,
+                        content: userMessage.content,
+                        type: userMessage.type,
+                        time: userMessage.createdAt
+                    },
+                    robotReply: {
+                        id: robotMessage._id,
+                        content: robotMessage.content,
+                        type: robotMessage.type,
+                        time: robotMessage.createdAt
+                    },
+                    points: {
+                        earned: pointsEarned,
+                        total: newPoints || (await User.findById(userId)).points || 0
+                    }
+                }
+            });
+        } catch (error) {
+            await session.abortTransaction();
+            session.endSession();
+            throw error;
         }
-      }
-    });
-  } catch (error) {
-    console.error('发送消息处理出错:', error);
-    next(error);
-  }
+    } catch (error) {
+        logger.error('Error sending message:', error);
+        res.status(500).json({
+            success: false,
+            message: '发送消息失败'
+        });
+    }
 };
 
 // 获取机器人回复

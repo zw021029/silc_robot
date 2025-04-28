@@ -6,8 +6,8 @@
     <view class="user-info">
       <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
       <view class="user-detail">
-        <text class="nickname">{{userInfo.nickName || userInfo.username || '未登录'}}</text>
-        <text class="user-id">ID: {{userInfo._id || 'N/A'}}</text>
+        <text class="nickname">{{userInfo.nickname || userInfo.username || '未登录'}}</text>
+        <text class="user-id">ID: {{userInfo.username || 'N/A'}}</text>
       </view>
       <view class="points-info">
         <text class="points-value">{{points || 0}}</text>

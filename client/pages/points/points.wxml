@@ -1,5 +1,7 @@
 <view class="container">
-  <view class="header">
+  <!-- 积分卡片 -->
+  <view class="points-card">
+    <view class="points-card-bg"></view>
     <view class="points-info">
       <view class="total-points">
         <text class="label">我的积分</text>

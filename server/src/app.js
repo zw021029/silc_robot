@@ -26,6 +26,7 @@ const knowledgeRoutes = require('./routes/knowledge');
 const historyRoutes = require('./routes/history');
 const pointsRoutes = require('./routes/points');
 const taskRoutes = require('./routes/taskRoutes');
+const feedbackRoutes = require('./routes/feedback');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
@@ -108,6 +109,7 @@ app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/points', pointsRoutes);
 app.use('/api/task', taskRoutes);
+app.use('/api/feedback', feedbackRoutes);
 app.use('/api/admin', adminRoutes);  // 确保这个路由在最后注册
 
 // 错误处理中间件

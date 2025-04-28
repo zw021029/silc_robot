@@ -99,7 +99,7 @@
 }
 
 .user-avatar.text-avatar {
-  background-color: #0080ff;
+  background-color: #4a90e2;
 }
 
 .robot-avatar.text-avatar {
@@ -125,7 +125,7 @@
 }
 
 .user-message .message-content {
-  background-color: #0080ff;
+  background-color: #4a90e2;
   color: #fff;
   border-radius: 18rpx 4rpx 18rpx 18rpx;
   margin-right: 12rpx;

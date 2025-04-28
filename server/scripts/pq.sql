@@ -34,3 +34,13 @@ CREATE TABLE exchange_records (
     is_redeemed BOOLEAN DEFAULT FALSE,
     redeemed_at TIMESTAMP
 );
+
+-- 创建反馈表
+CREATE TABLE feedback (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    user_id VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    contact_info TEXT,
+    feedback_type VARCHAR(50) NOT NULL
+); 
