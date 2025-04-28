@@ -21,4 +21,7 @@ router.get('/rules', auth.verifyToken, pointsController.getPointsRules);
 // 获取积分统计
 router.get('/stats', auth.verifyToken, pointsController.getPointsStats);
 
+// 获取兑换记录
+router.get('/records', auth.verifyToken, pointsController.getExchangeRecords);
+
 module.exports = router; 

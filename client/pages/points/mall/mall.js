@@ -10,8 +10,10 @@ Page({
     exchangeItems: [],
     loading: false,
     showConfirmModal: false,
+    showRedeemModal: false,
     currentItem: {},
-    currentItemIndex: 0
+    currentItemIndex: 0,
+    redeemCode: ''
   },
 
   onLoad() {
@@ -145,16 +147,17 @@ Page({
       const result = await exchangeItem(item.id)
       
       if (result.success) {
-        wx.showToast({
-          title: '兑换成功',
-          icon: 'success'
+        // 显示兑换码
+        this.setData({
+          showRedeemModal: true,
+          redeemCode: result.data.redeemCode
         })
         
         // 刷新积分余额和商品列表
         await this.loadPointsBalance()
         await this.loadExchangeItems()
         
-        // 隐藏弹窗
+        // 隐藏确认弹窗
         this.hideConfirmModal()
       } else {
         throw new Error(result.message || '兑换失败')
@@ -168,6 +171,14 @@ Page({
     } finally {
       wx.hideLoading()
     }
+  },
+
+  // 隐藏兑换码弹窗
+  hideRedeemModal() {
+    this.setData({
+      showRedeemModal: false,
+      redeemCode: ''
+    })
   },
 
   // 错误图片处理

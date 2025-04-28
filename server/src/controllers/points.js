@@ -2,6 +2,7 @@ const logger = require('../utils/logger');
 const PointsTransaction = require('../models/points');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const { pgPool } = require('../utils/database');
 
 // 获取积分余额
 exports.getPointsBalance = async (req, res) => {
@@ -100,45 +101,14 @@ exports.getPointsHistory = async (req, res) => {
 // 获取兑换商品列表
 exports.getExchangeItems = async (req, res) => {
   try {
-    // 从数据库获取兑换商品列表
-    const items = [
-      {
-        id: 1,
-        name: '思意AI月卡',
-        points: 500,
-        description: '畅享思意AI高级功能一个月',
-        image: '/assets/images/items/monthly-card.png',
-        stock: 100
-      },
-      {
-        id: 2,
-        name: 'AI个性化形象定制',
-        points: 1000,
-        description: '专业AI定制专属于您的个性化形象',
-        image: '/assets/images/items/avatar-customize.png',
-        stock: 50
-      },
-      {
-        id: 3,
-        name: '思意AI知识库定制',
-        points: 2000,
-        description: '根据您的需求定制专属知识库',
-        image: '/assets/images/items/knowledge-base.png',
-        stock: 30
-      },
-      {
-        id: 4,
-        name: '思意AI年度会员',
-        points: 5000,
-        description: '全年畅享思意AI高级功能',
-        image: '/assets/images/items/annual-member.png',
-        stock: 20
-      }
-    ];
+    const client = await pgPool.connect();
+    const result = await client.query('SELECT * FROM exchange_items ORDER BY id');
+    logger.info('result', result);
+    client.release();
     
     res.json({
       success: true,
-      data: items
+      data: result.rows
     });
   } catch (error) {
     logger.error('获取兑换商品列表失败:', error);
@@ -154,36 +124,19 @@ exports.getPointsRules = async (req, res) => {
   try {
     // 从数据库获取积分规则
     const rules = [
+      
       {
         id: 1,
-        title: '每日签到',
-        points: 10,
-        description: '每日签到可获得10积分，连续签到额外奖励'
+        title: '聊天奖励',
+        points: 1,
+        description: '每次与思意AI对话可获得1积分'
       },
       {
         id: 2,
-        title: '聊天奖励',
+        title: '问题反馈',
         points: 2,
-        description: '每次与思意AI对话可获得2积分（每日上限30分）'
+        description: '反馈问题可获得2积分'
       },
-      {
-        id: 3,
-        title: '分享思意',
-        points: 20,
-        description: '分享思意给好友，好友使用后您可获得20积分'
-      },
-      {
-        id: 4,
-        title: '评价机器人回复',
-        points: 5,
-        description: '对机器人回复进行评价获得5积分（每日上限20分）'
-      },
-      {
-        id: 5,
-        title: '完成新手任务',
-        points: 50,
-        description: '完成所有新手任务一次性奖励50积分'
-      }
     ];
     
     res.json({
@@ -213,18 +166,22 @@ exports.exchangeItem = async (req, res) => {
     }
 
     // 获取商品信息
-    const items = await exports.getExchangeItems();
-    const item = items.data.find(i => i.id === parseInt(itemId));
+    const client = await pgPool.connect();
+    const result = await client.query('SELECT * FROM exchange_items WHERE id = $1', [itemId]);
     
-    if (!item) {
+    if (result.rows.length === 0) {
+      client.release();
       return res.status(404).json({
         success: false,
         message: '商品不存在'
       });
     }
 
+    const item = result.rows[0];
+
     // 检查库存
     if (item.stock <= 0) {
+      client.release();
       return res.status(400).json({
         success: false,
         message: '商品库存不足'
@@ -234,6 +191,7 @@ exports.exchangeItem = async (req, res) => {
     // 检查用户积分是否足够
     const user = await User.findById(userId);
     if (!user) {
+      client.release();
       return res.status(404).json({
         success: false,
         message: '用户不存在'
@@ -242,43 +200,127 @@ exports.exchangeItem = async (req, res) => {
 
     const userPoints = user.points || 0;
     if (userPoints < item.points) {
+      client.release();
       return res.status(400).json({
         success: false,
         message: '积分不足'
       });
     }
 
-    // 扣除积分
-    user.points = userPoints - item.points;
-    await user.save();
+    // 生成订单号和兑换码
+    const orderNo = `EX${Date.now()}${Math.floor(Math.random() * 1000)}`;
+    const redeemCode = `RC${Date.now()}${Math.floor(Math.random() * 1000)}`;
 
-    // 记录交易
-    const transaction = new PointsTransaction({
-      userId,
-      type: 'spend',
-      amount: -item.points,
-      balance: user.points,
-      sourceType: 'other',
-      description: `兑换商品: ${item.name}`,
-      metadata: { itemId: item.id }
-    });
-    await transaction.save();
+    // 开始事务
+    await client.query('BEGIN');
 
-    // TODO: 处理商品兑换逻辑，如发放优惠券等
+    try {
+      // 扣除积分
+      user.points = userPoints - item.points;
+      await user.save();
 
-    res.json({
-      success: true,
-      message: '兑换成功',
-      data: {
+      // 记录积分变化
+      const transaction = new PointsTransaction({
+        userId,
+        type: 'spend',
+        amount: -item.points,
         balance: user.points,
-        item: item.name
-      }
-    });
+        sourceType: 'other',
+        description: `兑换商品: ${item.name}`,
+        metadata: { itemId: item.id }
+      });
+      await transaction.save();
+
+      // 创建兑换记录
+      await client.query(
+        'INSERT INTO exchange_records (order_no, user_id, item_id, redeem_code) VALUES ($1, $2, $3, $4)',
+        [orderNo, userId, itemId, redeemCode]
+      );
+
+      // 更新商品库存
+      await client.query('UPDATE exchange_items SET stock = stock - 1 WHERE id = $1', [itemId]);
+
+      // 提交事务
+      await client.query('COMMIT');
+
+      res.json({
+        success: true,
+        message: '兑换成功',
+        data: {
+          balance: user.points,
+          item: item.name,
+          redeemCode: redeemCode
+        }
+      });
+    } catch (error) {
+      // 回滚事务
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
   } catch (error) {
     logger.error('商品兑换失败:', error);
     res.status(500).json({
       success: false,
       message: '商品兑换失败'
+    });
+  }
+};
+
+// 获取兑换记录
+exports.getExchangeRecords = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { page = 1, pageSize = 10 } = req.query;
+    const offset = (page - 1) * pageSize;
+
+    const client = await pgPool.connect();
+    
+    // 获取总记录数
+    const countResult = await client.query(
+      'SELECT COUNT(*) FROM exchange_records WHERE user_id = $1',
+      [userId]
+    );
+    const total = parseInt(countResult.rows[0].count);
+
+    // 获取记录列表
+    const result = await client.query(`
+      SELECT r.*, i.name as item_name, i.image as item_image
+      FROM exchange_records r
+      JOIN exchange_items i ON r.item_id = i.id
+      WHERE r.user_id = $1
+      ORDER BY r.created_at DESC
+      LIMIT $2 OFFSET $3
+    `, [userId, pageSize, offset]);
+
+    client.release();
+
+    const records = result.rows.map(record => ({
+      id: record.id,
+      orderNo: record.order_no,
+      itemName: record.item_name,
+      itemImage: record.item_image,
+      redeemCode: record.redeem_code,
+      createdAt: record.created_at,
+      isRedeemed: record.is_redeemed,
+      redeemedAt: record.redeemed_at
+    }));
+
+    res.json({
+      success: true,
+      data: {
+        list: records,
+        total,
+        page: parseInt(page),
+        pageSize: parseInt(pageSize)
+      }
+    });
+  } catch (error) {
+    logger.error('获取兑换记录失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '获取兑换记录失败'
     });
   }
 };

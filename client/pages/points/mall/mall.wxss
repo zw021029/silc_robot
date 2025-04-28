@@ -296,37 +296,128 @@
 
 .modal-footer {
   display: flex;
-  padding: 20rpx 30rpx 30rpx;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-top: 1rpx solid #f2f2f2;
 }
 
-.cancel-btn, .confirm-btn {
+.modal-footer view {
   flex: 1;
-  height: 76rpx;
-  line-height: 76rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
-  border-radius: 38rpx;
+  border-radius: 40rpx;
   font-size: 28rpx;
+  margin: 0 10rpx;
 }
 
 .cancel-btn {
   background: #f5f5f5;
   color: #666;
-  margin-right: 20rpx;
-}
-
-.cancel-btn:active {
-  background: #eee;
 }
 
 .confirm-btn {
   background: #1890ff;
   color: #fff;
-  border-radius: 8rpx;
-  padding: 16rpx 32rpx;
-  font-size: 28rpx;
-  margin-left: 20rpx;
 }
 
-.confirm-btn:active {
-  opacity: 0.9;
+.modal-footer view:active {
+  opacity: 0.8;
+}
+
+/* 兑换码弹窗 */
+.redeem-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.redeem-modal .modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.redeem-modal .modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.redeem-modal .modal-header {
+  padding: 30rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+}
+
+.redeem-modal .modal-header image {
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.redeem-modal .modal-body {
+  padding: 40rpx 30rpx;
+  text-align: center;
+}
+
+.success-icon {
+  margin-bottom: 30rpx;
+}
+
+.success-icon image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.redeem-code {
+  margin-bottom: 20rpx;
+}
+
+.redeem-code .label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.redeem-code .code {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.redeem-tip {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.redeem-modal .modal-footer {
+  padding: 0 30rpx 30rpx;
+}
+
+.redeem-modal .confirm-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #1890ff;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  text-align: center;
 } 

@@ -75,4 +75,30 @@
       </view>
     </view>
   </view>
+
+  <!-- 兑换码弹窗 -->
+  <view class="redeem-modal" wx:if="{{showRedeemModal}}">
+    <view class="modal-mask" bindtap="hideRedeemModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>兑换成功</text>
+        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRedeemModal"></image>
+      </view>
+      <view class="modal-body">
+        <view class="success-icon">
+          <icon type="success" size="100" color="#1890ff"></icon>
+        </view>
+        <view class="redeem-code">
+          <text class="label">兑换码：</text>
+          <text class="code">{{redeemCode}}</text>
+        </view>
+        <view class="redeem-tip">
+          <text>请前往综合楼找老师进行核销</text>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="confirm-btn" bindtap="hideRedeemModal">确定</view>
+      </view>
+    </view>
+  </view>
 </view>

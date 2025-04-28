@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const logger = require('./logger');
 const config = require('../config');
 const path = require('path');
+const { Pool } = require('pg');
+
+// 创建 PostgreSQL 连接池
+const pgPool = new Pool({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD, 
+  port: process.env.PG_PORT,
+});
 
 // 打印环境变量和配置信息
 console.log('当前工作目录:', process.cwd());
@@ -15,6 +25,7 @@ mongoose.set('debug', config.server.debug);
 
 async function connectDB() {
   try {
+    // 连接 MongoDB
     console.log('开始连接数据库...');
     console.log('连接URL:', config.database.url);
     console.log('连接选项:', config.database.options);
@@ -26,19 +37,27 @@ async function connectDB() {
     console.log('- 端口:', conn.connection.port);
     console.log('- 数据库:', conn.connection.name);
     console.log('- 连接状态:', conn.connection.readyState);
+
+    // 测试 PostgreSQL 连接
+    const pgClient = await pgPool.connect();
+    console.log('PostgreSQL 连接成功');
+    pgClient.release();
     
-    logger.info('MongoDB 连接成功:', {
-      host: conn.connection.host,
-      port: conn.connection.port,
-      database: conn.connection.name,
-      readyState: conn.connection.readyState
+    logger.info('数据库连接成功:', {
+      mongodb: {
+        host: conn.connection.host,
+        port: conn.connection.port,
+        database: conn.connection.name,
+        readyState: conn.connection.readyState
+      },
+      postgresql: 'connected'
     });
   } catch (error) {
-    console.error('MongoDB 连接失败:');
+    console.error('数据库连接失败:');
     console.error('- 错误信息:', error.message);
     console.error('- 错误堆栈:', error.stack);
     
-    logger.error('MongoDB 连接失败:', error);
+    logger.error('数据库连接失败:', error);
     process.exit(1);
   }
 }
@@ -71,4 +90,8 @@ process.on('SIGINT', async () => {
   }
 });
 
-module.exports = { connectDB };
+// 导出 PostgreSQL 连接池
+module.exports = { 
+  connectDB,
+  pgPool
+};

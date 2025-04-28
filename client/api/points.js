@@ -33,4 +33,9 @@ export const getPointsRules = () => {
 // 获取积分统计
 export const getPointsStats = () => {
   return request.get('/api/points/stats')
+}
+
+// 获取兑换记录
+export const getExchangeRecords = (params) => {
+  return request.get('/api/points/records', { params })
 } 
