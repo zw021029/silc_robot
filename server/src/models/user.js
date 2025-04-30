@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('../config/index');
+const logger = require('../utils/logger');
 
 // 用户模型
 const userSchema = new Schema({
@@ -111,16 +112,20 @@ userSchema.pre('save', function(next) {
 // 密码比较方法
 userSchema.methods.comparePassword = async function(candidatePassword) {
   try {
-    console.log(`comparePassword 方法: 输入密码="${candidatePassword}"`);
-    console.log(`comparePassword 方法: 存储的哈希密码="${this.password}"`);
+    logger.debug('=== 密码比较开始 ===');
+    logger.debug(`输入密码: "${candidatePassword}"`);
+    logger.debug(`存储的哈希密码: "${this.password}"`);
+    logger.debug(`用户ID: ${this._id}`);
+    logger.debug(`用户名: ${this.username}`);
     
     // 使用bcrypt比较密码
     const result = await bcrypt.compare(candidatePassword, this.password);
-    console.log(`comparePassword 方法: 比较结果=${result}`);
+    logger.debug(`密码比较结果: ${result}`);
+    logger.debug('=== 密码比较结束 ===');
     
     return result;
   } catch (error) {
-    console.error('密码比较出错:', error);
+    logger.error('密码比较出错:', error);
     throw error;
   }
 };

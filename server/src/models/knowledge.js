@@ -20,7 +20,9 @@ const knowledgeArticleSchema = new Schema({
     type: String,
     required: true
   },
-  tags: [String],
+  tags: [{
+    type: String
+  }],
   source: {
     type: String
   },
@@ -29,7 +31,7 @@ const knowledgeArticleSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['active', 'inactive', 'draft'],
+    enum: ['active', 'inactive'],
     default: 'active'
   },
   embeddings: {

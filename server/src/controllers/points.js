@@ -103,7 +103,7 @@ exports.getExchangeItems = async (req, res) => {
   try {
     const client = await pgPool.connect();
     const result = await client.query('SELECT * FROM exchange_items ORDER BY id');
-    logger.info('result', result);
+    logger.debug('商品查询列表', result);
     client.release();
     
     res.json({
