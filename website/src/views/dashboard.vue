@@ -15,12 +15,6 @@
           </template>
           <div class="card-content">
             <div class="number">{{ stats.knowledgeCount }}</div>
-            <div class="trend">
-              <span :class="['change', stats.knowledgeTrend >= 0 ? 'up' : 'down']">
-                {{ stats.knowledgeTrend >= 0 ? '+' : '' }}{{ stats.knowledgeTrend }}%
-              </span>
-              <span class="label">较上月</span>
-            </div>
           </div>
         </el-card>
       </el-col>
@@ -35,12 +29,6 @@
           </template>
           <div class="card-content">
             <div class="number">{{ stats.chatCount }}</div>
-            <div class="trend">
-              <span :class="['change', stats.chatTrend >= 0 ? 'up' : 'down']">
-                {{ stats.chatTrend >= 0 ? '+' : '' }}{{ stats.chatTrend }}%
-              </span>
-              <span class="label">较上月</span>
-            </div>
           </div>
         </el-card>
       </el-col>
@@ -49,18 +37,12 @@
         <el-card class="stat-card">
           <template #header>
             <div class="card-header">
-              <span>平均响应时间</span>
-              <el-icon><Timer /></el-icon>
+              <span>用户总数</span>
+              <el-icon><User /></el-icon>
             </div>
           </template>
           <div class="card-content">
-            <div class="number">{{ stats.avgResponseTime }}ms</div>
-            <div class="trend">
-              <span :class="['change', stats.responseTimeTrend <= 0 ? 'up' : 'down']">
-                {{ stats.responseTimeTrend <= 0 ? '+' : '' }}{{ -stats.responseTimeTrend }}%
-              </span>
-              <span class="label">较上月</span>
-            </div>
+            <div class="number">{{ stats.userCount }}</div>
           </div>
         </el-card>
       </el-col>
@@ -69,18 +51,12 @@
         <el-card class="stat-card">
           <template #header>
             <div class="card-header">
-              <span>用户满意度</span>
-              <el-icon><Star /></el-icon>
+              <span>反馈总数</span>
+              <el-icon><ChatDotRound /></el-icon>
             </div>
           </template>
           <div class="card-content">
-            <div class="number">{{ stats.satisfactionRate }}%</div>
-            <div class="trend">
-              <span :class="['change', stats.satisfactionTrend >= 0 ? 'up' : 'down']">
-                {{ stats.satisfactionTrend >= 0 ? '+' : '' }}{{ stats.satisfactionTrend }}%
-              </span>
-              <span class="label">较上月</span>
-            </div>
+            <div class="number">{{ stats.feedbackCount }}</div>
           </div>
         </el-card>
       </el-col>
@@ -119,7 +95,7 @@
         <el-card class="chart-card">
           <template #header>
             <div class="card-header">
-              <span>用户反馈分析</span>
+              <span>用户反馈统计</span>
             </div>
           </template>
           <div class="chart-container">
@@ -133,31 +109,29 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Collection, ChatLineRound, Timer, Star } from '@element-plus/icons-vue'
+import { Collection, ChatLineRound, ChatDotRound, User } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
-import axios from 'axios'
+import { getStats } from '@/api/admin'
 
 interface Stats {
   knowledgeCount: number
-  knowledgeTrend: number
   chatCount: number
-  chatTrend: number
-  avgResponseTime: number
-  responseTimeTrend: number
-  satisfactionRate: number
-  satisfactionTrend: number
+  userCount: number
+  feedbackCount: number
+  chatTrends: Array<{ day: string; count: number }>
+  knowledgeDistribution: Array<{ name: string; value: number }>
+  feedbackAnalysis: Array<{ name: string; value: number }>
 }
 
 const stats = ref<Stats>({
   knowledgeCount: 0,
-  knowledgeTrend: 0,
   chatCount: 0,
-  chatTrend: 0,
-  avgResponseTime: 0,
-  responseTimeTrend: 0,
-  satisfactionRate: 0,
-  satisfactionTrend: 0
+  userCount: 0,
+  feedbackCount: 0,
+  chatTrends: [],
+  knowledgeDistribution: [],
+  feedbackAnalysis: []
 })
 
 const chatTrendChart = ref<HTMLElement | null>(null)
@@ -166,11 +140,18 @@ const feedbackAnalysisChart = ref<HTMLElement | null>(null)
 
 const fetchStats = async () => {
   try {
-    const response = await axios.get('/api/admin/stats')
-    stats.value = response.data
+    const response = await getStats()
+    stats.value = response
+    initCharts()
   } catch (error) {
     ElMessage.error('获取统计数据失败')
   }
+}
+
+const initCharts = () => {
+  initChatTrendChart()
+  initKnowledgeDistributionChart()
+  initFeedbackAnalysisChart()
 }
 
 const initChatTrendChart = () => {
@@ -178,40 +159,35 @@ const initChatTrendChart = () => {
   const chart = echarts.init(chatTrendChart.value)
   chart.setOption({
     tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['问答数量', '平均响应时间']
+      trigger: 'axis',
+      formatter: (params: any[]) => {
+        const date = params[0].name
+        const count = params[0].value
+        return `${date}<br/>问答数量: ${count}`
+      }
     },
     xAxis: {
       type: 'category',
-      data: ['1月', '2月', '3月', '4月', '5月', '6月']
+      data: stats.value.chatTrends.map(item => item.day),
+      axisLabel: {
+        formatter: (value: string) => {
+          const [year, month, day] = value.split('-')
+          return `${month}-${day}`
+        }
+      }
     },
-    yAxis: [
-      {
-        type: 'value',
-        name: '数量',
-        position: 'left'
-      },
-      {
-        type: 'value',
-        name: '时间(ms)',
-        position: 'right'
+    yAxis: {
+      type: 'value',
+      name: '问答数量'
+    },
+    series: [{
+      data: stats.value.chatTrends.map(item => item.count),
+      type: 'line',
+      smooth: true,
+      areaStyle: {
+        opacity: 0.1
       }
-    ],
-    series: [
-      {
-        name: '问答数量',
-        type: 'line',
-        data: [120, 132, 101, 134, 90, 230]
-      },
-      {
-        name: '平均响应时间',
-        type: 'line',
-        yAxisIndex: 1,
-        data: [220, 182, 191, 234, 290, 330]
-      }
-    ]
+    }]
   })
 }
 
@@ -226,27 +202,18 @@ const initKnowledgeDistributionChart = () => {
       orient: 'vertical',
       left: 'left'
     },
-    series: [
-      {
-        name: '知识库分布',
-        type: 'pie',
-        radius: '50%',
-        data: [
-          { value: 1048, name: '课程咨询' },
-          { value: 735, name: '作业问题' },
-          { value: 580, name: '考试相关' },
-          { value: 484, name: '校园生活' },
-          { value: 300, name: '其他' }
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
+    series: [{
+      type: 'pie',
+      radius: '50%',
+      data: stats.value.knowledgeDistribution,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
         }
       }
-    ]
+    }]
   })
 }
 
@@ -260,50 +227,22 @@ const initFeedbackAnalysisChart = () => {
         type: 'shadow'
       }
     },
-    legend: {
-      data: ['建议', '问题', '其他']
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
     xAxis: {
       type: 'category',
-      data: ['1月', '2月', '3月', '4月', '5月', '6月']
+      data: stats.value.feedbackAnalysis.map(item => item.name)
     },
     yAxis: {
       type: 'value'
     },
-    series: [
-      {
-        name: '建议',
-        type: 'bar',
-        stack: 'total',
-        data: [320, 302, 301, 334, 390, 330]
-      },
-      {
-        name: '问题',
-        type: 'bar',
-        stack: 'total',
-        data: [120, 132, 101, 134, 90, 230]
-      },
-      {
-        name: '其他',
-        type: 'bar',
-        stack: 'total',
-        data: [220, 182, 191, 234, 290, 330]
-      }
-    ]
+    series: [{
+      data: stats.value.feedbackAnalysis.map(item => item.value),
+      type: 'bar'
+    }]
   })
 }
 
 onMounted(() => {
   fetchStats()
-  initChatTrendChart()
-  initKnowledgeDistributionChart()
-  initFeedbackAnalysisChart()
 })
 </script>
 
@@ -340,23 +279,6 @@ onMounted(() => {
   font-weight: bold;
   color: #303133;
   margin-bottom: 8px;
-}
-
-.trend {
-  font-size: 14px;
-  color: #909399;
-}
-
-.change {
-  margin-right: 8px;
-}
-
-.change.up {
-  color: #67c23a;
-}
-
-.change.down {
-  color: #f56c6c;
 }
 
 .chart-row {

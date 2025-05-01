@@ -25,32 +25,25 @@ router.post('/login', adminController.login);
 router.use(verifyToken);
 router.use(auth.adminAuth);
 
-// 用户管理
-router.get('/users', adminController.getUserList);
-router.get('/users/:userId', adminController.getUserDetail);
-router.put('/users/:userId/status', adminController.updateUserStatus);
+// 统计数据
+router.get('/stats', adminController.getStats);
+
+// 知识库管理
+router.get('/knowledge', adminController.getKnowledgeList);
+router.post('/knowledge/upload', adminController.uploadKnowledge);
+router.put('/knowledge/:id', adminController.updateKnowledge);
+router.delete('/knowledge/:id', adminController.deleteKnowledge);
 
 // 对话记录管理
 router.get('/chats', adminController.getChatList);
 router.get('/chats/:chatId', adminController.getChatDetail);
 
-// 知识库管理
-router.get('/knowledge', adminController.getKnowledgeList);
-router.post('/knowledge/upload', adminController.uploadKnowledge);
-router.delete('/knowledge/:id', adminController.deleteKnowledge);
-router.put('/knowledge/:id', adminController.updateKnowledge);
-
-// 统计数据
-router.get('/stats', adminController.getStats);
-
 // 用户反馈
 router.get('/feedback', adminController.getFeedbackList);
 
-// 对话历史相关路由
-router.get('/chat-history', adminController.getChatHistory);
-
-// 知识库管理相关路由
-router.post('/knowledge', validate.validateKnowledge, adminController.addKnowledge);
-router.post('/knowledge/process-file', upload.single('file'), adminController.processTextFile);
+// 用户管理
+router.get('/users', adminController.getUserList);
+router.get('/users/:userId', adminController.getUserDetail);
+router.put('/users/:userId/status', adminController.updateUserStatus);
 
 module.exports = router; 

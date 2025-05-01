@@ -183,27 +183,89 @@ class AdminService {
     }
 
     // 获取统计数据
-    async getStats(startDate, endDate) {
-        const [userCount, chatCount, knowledgeCount] = await Promise.all([
-            User.countDocuments(),
-            Chat.countDocuments(),
-            Knowledge.countDocuments()
-        ]);
+    async getStats() {
+        try {
+            // 获取基础统计数据
+            const [userCount, chatCount, knowledgeCount] = await Promise.all([
+                User.countDocuments(),
+                Chat.countDocuments(),
+                Knowledge.countDocuments()
+            ]);
 
-        const feedbackQuery = `
-            SELECT COUNT(*) as total, 
-                   COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending
-            FROM feedback
-            WHERE created_at BETWEEN $1 AND $2
-        `;
-        const feedbackResult = await pool.query(feedbackQuery, [startDate, endDate]);
+            // 计算最近15天的问答趋势
+            const fifteenDaysAgo = new Date();
+            fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
+            
+            const chatTrends = await Chat.aggregate([
+                {
+                    $match: {
+                        createdAt: { $gte: fifteenDaysAgo }
+                    }
+                },
+                {
+                    $group: {
+                        _id: { 
+                            year: { $year: "$createdAt" },
+                            month: { $month: "$createdAt" },
+                            day: { $dayOfMonth: "$createdAt" }
+                        },
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 }
+                }
+            ]);
 
-        return {
-            userCount,
-            chatCount,
-            knowledgeCount,
-            feedback: feedbackResult.rows[0]
-        };
+            // 计算知识库分布
+            const knowledgeDistribution = await Knowledge.aggregate([
+                {
+                    $group: {
+                        _id: "$category",
+                        count: { $sum: 1 }
+                    }
+                }
+            ]);
+
+            // 计算用户反馈分析
+            const feedbackAnalysis = await pool.query(`
+                SELECT 
+                    feedback_type as type,
+                    COUNT(*) as count
+                FROM feedback
+                WHERE created_at >= $1
+                GROUP BY feedback_type
+            `, [fifteenDaysAgo]);
+
+            // 计算反馈总数
+            const feedbackCount = await pool.query(`
+                SELECT COUNT(*) as total
+                FROM feedback
+            `);
+
+            // 返回数据
+            return {
+                knowledgeCount,
+                chatCount,
+                userCount,
+                feedbackCount: parseInt(feedbackCount.rows[0].total),
+                chatTrends: chatTrends.map(trend => ({
+                    day: `${trend._id.year}-${trend._id.month}-${trend._id.day}`,
+                    count: trend.count
+                })),
+                knowledgeDistribution: knowledgeDistribution.map(dist => ({
+                    name: dist._id,
+                    value: dist.count
+                })),
+                feedbackAnalysis: feedbackAnalysis.rows.map(feedback => ({
+                    name: feedback.type,
+                    value: feedback.count
+                }))
+            };
+        } catch (error) {
+            logger.error('获取统计数据失败:', error);
+            throw error;
+        }
     }
 
     // 获取用户反馈列表

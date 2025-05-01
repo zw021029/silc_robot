@@ -74,23 +74,6 @@ class AdminController {
         }
     }
 
-    // 获取对话历史
-    async getChatHistory(req, res, next) {
-        try {
-            const { page = 1, pageSize = 20, startDate, endDate, userId } = req.query;
-            const result = await adminService.getChatHistory(
-                parseInt(page),
-                parseInt(pageSize),
-                startDate,
-                endDate,
-                userId
-            );
-            res.json(result);
-        } catch (error) {
-            next(error);
-        }
-    }
-
     // 获取用户列表
     async getUserList(req, res, next) {
         try {
@@ -214,9 +197,12 @@ class AdminController {
     // 获取统计数据
     async getStats(req, res, next) {
         try {
-            const { startDate, endDate } = req.query;
-            const result = await adminService.getStats(startDate, endDate);
-            res.json(result);
+            const data = await adminService.getStats();
+            res.json({
+                code: 0,
+                message: 'success',
+                data: data
+            });
         } catch (error) {
             next(error);
         }
