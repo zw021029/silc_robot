@@ -7,7 +7,7 @@ const logger = require('../utils/logger');
 // 提交反馈
 exports.submitFeedback = async (req, res) => {
     try {
-        const { content, contact_info, feedback_type } = req.body;
+        const { content, contact_info, type } = req.body;
         const user_id = req.user.id;
 
         // 检查今日反馈次数是否达到上限
@@ -40,9 +40,10 @@ exports.submitFeedback = async (req, res) => {
 
         try {
             // 插入反馈记录
+            const user_id_str = user_id.toString();
             const result = await db.query(
-                'INSERT INTO feedback (user_id, content, contact_info, feedback_type) VALUES ($1, $2, $3, $4) RETURNING *',
-                [user_id, content, contact_info, feedback_type]
+                'INSERT INTO feedback (user_id, content, contact_info, type) VALUES ($1, $2, $3, $4) RETURNING *',
+                [user_id_str, content, contact_info, type]
             );
 
             let pointsEarned = 0;
@@ -72,7 +73,7 @@ exports.submitFeedback = async (req, res) => {
                     description: '提交反馈获得2积分',
                     metadata: {
                         feedbackId: result.rows[0].id,
-                        feedbackType: feedback_type
+                        feedbackType: type
                     }
                 });
                 await pointsTransaction.save();

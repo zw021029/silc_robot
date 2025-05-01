@@ -21,6 +21,10 @@ const chatSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Message'
   },
+  tag: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -37,6 +41,7 @@ const chatSchema = new Schema({
 chatSchema.index({ userId: 1 });
 chatSchema.index({ robotId: 1 });
 chatSchema.index({ createdAt: -1 });
+chatSchema.index({ tag: 1 });
 
 // 更新时间中间件
 chatSchema.pre('save', function(next) {

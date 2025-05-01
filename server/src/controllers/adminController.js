@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const logger = require('../utils/logger');
+const { AppError } = require('../middlewares/error');
 
 class AdminController {
     // 管理员登录
@@ -24,7 +25,7 @@ class AdminController {
             
             if (!user) {
                 logger.warn(`管理员账号不存在: ${username}`);
-                throw new ApiError(401, '管理员账号不存在');
+                throw new AppError('管理员账号不存在', 401);
             }
 
             logger.debug(`找到管理员用户: id=${user._id}, 用户名=${user.username}, 角色=${user.role}`);
@@ -33,7 +34,7 @@ class AdminController {
             // 检查用户状态
             if (user.status !== 'active') {
                 logger.warn(`管理员账号已被禁用: ${username}`);
-                throw new ApiError(403, '账号已被禁用');
+                throw new AppError('账号已被禁用', 403);
             }
 
             // 验证密码
@@ -43,7 +44,7 @@ class AdminController {
 
             if (!isMatch) {
                 logger.warn(`密码验证失败: ${username}`);
-                throw new ApiError(401, '密码错误');
+                throw new AppError('密码错误', 401);
             }
 
             // 更新最后登录时间
@@ -77,9 +78,86 @@ class AdminController {
     // 获取用户列表
     async getUserList(req, res, next) {
         try {
-            const { page = 1, pageSize = 10 } = req.query;
-            const result = await adminService.getUserList(parseInt(page), parseInt(pageSize));
-            res.json(result);
+            const { 
+                page = 1, 
+                pageSize = 10,
+                search,
+                username,
+                nickname,
+                role,
+                status,
+                email,
+                registerStartDate,
+                registerEndDate,
+                updateStartDate,
+                updateEndDate
+            } = req.query;
+
+            const query = {};
+
+            // 构建查询条件
+            if (search) {
+                query.$or = [
+                    { username: { $regex: search, $options: 'i' } },
+                    { nickname: { $regex: search, $options: 'i' } },
+                    { email: { $regex: search, $options: 'i' } }
+                ];
+            }
+
+            if (username) {
+                query.username = { $regex: username, $options: 'i' };
+            }
+
+            if (nickname) {
+                query.nickname = { $regex: nickname, $options: 'i' };
+            }
+
+            if (role) {
+                query.role = role;
+            }
+
+            if (status) {
+                query.status = status;
+            }
+
+            if (email) {
+                query.email = { $regex: email, $options: 'i' };
+            }
+
+            if (registerStartDate && registerEndDate) {
+                query.createdAt = {
+                    $gte: new Date(registerStartDate),
+                    $lte: new Date(registerEndDate)
+                };
+            }
+
+            if (updateStartDate && updateEndDate) {
+                query.updatedAt = {
+                    $gte: new Date(updateStartDate),
+                    $lte: new Date(updateEndDate)
+                };
+            }
+
+            const skip = (parseInt(page) - 1) * parseInt(pageSize);
+            const [users, total] = await Promise.all([
+                User.find(query)
+                    .select('-password')
+                    .skip(skip)
+                    .limit(parseInt(pageSize))
+                    .sort({ createdAt: -1 }),
+                User.countDocuments(query)
+            ]);
+
+            res.json({
+                code: 0,
+                data: {
+                    list: users,
+                    total,
+                    page: parseInt(page),
+                    pageSize: parseInt(pageSize)
+                },
+                message: 'success'
+            });
         } catch (error) {
             next(error);
         }
@@ -89,7 +167,12 @@ class AdminController {
     async getUserDetail(req, res, next) {
         try {
             const { userId } = req.params;
-            const result = await adminService.getUserDetail(userId);
+            const data = await adminService.getUserDetail(userId);
+            const result = {
+                code: 0,
+                data: data,
+                message: 'success'
+            }
             res.json(result);
         } catch (error) {
             next(error);
@@ -101,7 +184,12 @@ class AdminController {
         try {
             const { userId } = req.params;
             const { status } = req.body;
-            const result = await adminService.updateUserStatus(userId, status);
+            const data = await adminService.updateUserStatus(userId, status);
+            const result = {
+                code: 0,
+                data: data,
+                message: 'success'
+            }
             res.json(result);
         } catch (error) {
             next(error);
@@ -211,8 +299,17 @@ class AdminController {
     // 获取用户反馈列表
     async getFeedbackList(req, res, next) {
         try {
-            const { page = 1, pageSize = 10 } = req.query;
-            const data = await adminService.getFeedbackList(parseInt(page), parseInt(pageSize));
+            const { page = 1, pageSize = 10, search, type, status, username, startDate, endDate } = req.query;
+            const data = await adminService.getFeedbackList(
+                parseInt(page),
+                parseInt(pageSize),
+                search,
+                type,
+                status,
+                username,
+                startDate,
+                endDate
+            );
             const result = {
                 code: 0,
                 data: data,
@@ -227,13 +324,15 @@ class AdminController {
     // 获取对话列表
     async getChatList(req, res, next) {
         try {
-            const { page = 1, pageSize = 20, startDate, endDate, userId } = req.query;
+            const { page = 1, pageSize = 20, search, username, tag, startDate, endDate } = req.query;
             const data = await adminService.getChatList(
                 parseInt(page),
                 parseInt(pageSize),
+                search,
+                username,
+                tag,
                 startDate,
-                endDate,
-                userId
+                endDate
             );
             const result = {
                 code: 0,
@@ -275,6 +374,154 @@ class AdminController {
                 code: 0,
                 data: result
             });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 重置用户密码
+    async resetUserPassword(req, res, next) {
+        try {
+            const { userId } = req.params;
+            const { password } = req.body;
+
+            if (!password) {
+                throw new ApiError(400, '新密码不能为空');
+            }
+
+            const user = await User.findById(userId);
+            if (!user) {
+                throw new ApiError(404, '用户不存在');
+            }
+
+            // 加密密码
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+
+            user.password = hashedPassword;
+            await user.save();
+
+            res.json({
+                code: 0,
+                message: '密码重置成功'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 获取商品列表
+    async getStoreItems(req, res, next) {
+        try {
+            const { page = 1, pageSize = 10 } = req.query;
+            const result = await adminService.getStoreItems(parseInt(page), parseInt(pageSize));
+            res.json({
+                code: 0,
+                data: result,
+                message: 'success'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 添加商品
+    async addStoreItem(req, res, next) {
+        try {
+            const { name, points, description, image, stock } = req.body;
+            const result = await adminService.addStoreItem({ name, points, description, image, stock });
+            res.json({
+                code: 0,
+                data: result,
+                message: 'success'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 更新商品
+    async updateStoreItem(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = req.body;
+            const result = await adminService.updateStoreItem(id, data);
+            res.json({
+                code: 0,
+                data: result,
+                message: 'success'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 删除商品
+    async deleteStoreItem(req, res, next) {
+        try {
+            const { id } = req.params;
+            const result = await adminService.deleteStoreItem(id);
+            res.json({
+                code: 0,
+                data: result,
+                message: 'success'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 获取兑换记录
+    async getExchangeRecords(req, res, next) {
+        try {
+            const { page = 1, pageSize = 10, search, startDate, endDate } = req.query;
+            const data = await adminService.getExchangeRecords(
+                parseInt(page),
+                parseInt(pageSize),
+                search,
+                startDate,
+                endDate
+            );
+            res.json({
+                code: 0,
+                data: data,
+                message: 'success'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 通过兑换码核销
+    async verifyByCode(req, res, next) {
+        try {
+            const { code } = req.body;
+            if (!code) {
+                throw new ApiError(400, '兑换码不能为空');
+            }
+            const result = await adminService.verifyByCode(code);
+            res.json({
+                code: 0,
+                data: result,
+                message: '核销成功'
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // 更新商品状态
+    async updateStoreItemStatus(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+            const data = await adminService.updateStoreItemStatus(id, status);
+            const result = {
+                code: 0,
+                data: data,
+                message: 'success'
+            }
+            res.json(result);
         } catch (error) {
             next(error);
         }

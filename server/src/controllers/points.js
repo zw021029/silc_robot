@@ -102,8 +102,7 @@ exports.getPointsHistory = async (req, res) => {
 exports.getExchangeItems = async (req, res) => {
   try {
     const client = await pgPool.connect();
-    const result = await client.query('SELECT * FROM exchange_items ORDER BY id');
-    logger.debug('商品查询列表', result);
+    const result = await client.query('SELECT * FROM exchange_items WHERE status = $1 ORDER BY id', ['active']);
     client.release();
     
     res.json({
@@ -234,7 +233,7 @@ exports.exchangeItem = async (req, res) => {
       // 创建兑换记录
       await client.query(
         'INSERT INTO exchange_records (order_no, user_id, item_id, redeem_code) VALUES ($1, $2, $3, $4)',
-        [orderNo, userId, itemId, redeemCode]
+        [orderNo, userId.toString(), itemId, redeemCode]
       );
 
       // 更新商品库存
@@ -280,7 +279,7 @@ exports.getExchangeRecords = async (req, res) => {
     // 获取总记录数
     const countResult = await client.query(
       'SELECT COUNT(*) FROM exchange_records WHERE user_id = $1',
-      [userId]
+      [userId.toString()]
     );
     const total = parseInt(countResult.rows[0].count);
 
@@ -292,7 +291,7 @@ exports.getExchangeRecords = async (req, res) => {
       WHERE r.user_id = $1
       ORDER BY r.created_at DESC
       LIMIT $2 OFFSET $3
-    `, [userId, pageSize, offset]);
+    `, [userId.toString(), pageSize, offset]);
 
     client.release();
 

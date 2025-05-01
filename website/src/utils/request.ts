@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { useAuthStore } from '@/stores/auth'
 
 // 创建axios实例
 const request = axios.create({
@@ -14,13 +15,12 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {
-    // 从localStorage获取token
-    const rawToken = localStorage.getItem('token')
-    console.log('从localStorage获取的token:', rawToken)
+    const userStore = useAuthStore()
+    const token = userStore.token
     
-    if (rawToken) {
+    if (token) {
       // 确保token格式正确
-      const authToken = rawToken.startsWith('Bearer ') ? rawToken : `Bearer ${rawToken}`
+      const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`
       // 设置Authorization头
       if (config.headers) {
         config.headers.Authorization = authToken
@@ -58,9 +58,8 @@ request.interceptors.response.use(
   (error) => {
     console.error('请求错误:', error)
     if (error.response?.status === 401) {
-      // token过期或无效，清除token并跳转到登录页
-      localStorage.removeItem('token')
-      window.location.href = '/login'
+      const userStore = useAuthStore()
+      userStore.logout()
     }
     ElMessage.error(error.response?.data?.message || error.message || '请求失败')
     return Promise.reject(error)

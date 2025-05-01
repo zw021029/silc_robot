@@ -282,6 +282,13 @@ exports.getRobotReply = async (userId, message) => {
       // 根据当前选择的机器人调整回复风格
       const content = exports.adjustReplyStyle(bestMatch.content, user.selectedRobot === '悉文' ? 'xiwen' : 'xihui');
       
+      // 更新当前对话的标签
+      const currentChat = await Chat.findOne({ userId }).sort({ createdAt: -1 });
+      if (currentChat) {
+        currentChat.tag = bestMatch.category;
+        await currentChat.save();
+      }
+      
       return {
         _id: bestMatch._id,
         id: bestMatch._id,

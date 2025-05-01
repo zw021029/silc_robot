@@ -1,3 +1,5 @@
+import type { User } from './user'
+
 // 登录表单
 export interface LoginForm {
     username: string
@@ -25,7 +27,7 @@ export interface LoginForm {
   // 用户列表响应
   export interface UserListResponse {
     total: number
-    list: UserInfo[]
+    list: User[]
   }
   
   // 对话记录

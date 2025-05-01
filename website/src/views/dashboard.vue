@@ -91,7 +91,7 @@
     </el-row>
 
     <el-row :gutter="20" class="chart-row">
-      <el-col :span="24">
+      <el-col :span="12">
         <el-card class="chart-card">
           <template #header>
             <div class="card-header">
@@ -100,6 +100,19 @@
           </template>
           <div class="chart-container">
             <div ref="feedbackAnalysisChart" style="width: 100%; height: 300px"></div>
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :span="12">
+        <el-card class="chart-card">
+          <template #header>
+            <div class="card-header">
+              <span>问答关键词</span>
+            </div>
+          </template>
+          <div class="chart-container">
+            <div ref="wordCloudChart" style="width: 100%; height: 300px"></div>
           </div>
         </el-card>
       </el-col>
@@ -112,6 +125,7 @@ import { ref, onMounted } from 'vue'
 import { Collection, ChatLineRound, ChatDotRound, User } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
+import 'echarts-wordcloud'
 import { getStats } from '@/api/admin'
 
 interface Stats {
@@ -122,6 +136,7 @@ interface Stats {
   chatTrends: Array<{ day: string; count: number }>
   knowledgeDistribution: Array<{ name: string; value: number }>
   feedbackAnalysis: Array<{ name: string; value: number }>
+  chatKeywords: Array<{ name: string; value: number }>
 }
 
 const stats = ref<Stats>({
@@ -131,18 +146,21 @@ const stats = ref<Stats>({
   feedbackCount: 0,
   chatTrends: [],
   knowledgeDistribution: [],
-  feedbackAnalysis: []
+  feedbackAnalysis: [],
+  chatKeywords: []
 })
 
 const chatTrendChart = ref<HTMLElement | null>(null)
 const knowledgeDistributionChart = ref<HTMLElement | null>(null)
 const feedbackAnalysisChart = ref<HTMLElement | null>(null)
+const wordCloudChart = ref<HTMLElement | null>(null)
 
 const fetchStats = async () => {
   try {
     const response = await getStats()
     stats.value = response
     initCharts()
+    initWordCloudChart()
   } catch (error) {
     ElMessage.error('获取统计数据失败')
   }
@@ -229,14 +247,69 @@ const initFeedbackAnalysisChart = () => {
     },
     xAxis: {
       type: 'category',
-      data: stats.value.feedbackAnalysis.map(item => item.name)
+      data: stats.value.feedbackAnalysis.map(item => {
+        const typeMap: Record<string, string> = {
+          'feature': '功能建议',
+          'bug': '问题反馈',
+          'other': '其他'
+        }
+        return typeMap[item.name] || item.name
+      })
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
+      name: '数量'
     },
     series: [{
       data: stats.value.feedbackAnalysis.map(item => item.value),
-      type: 'bar'
+      type: 'bar',
+      itemStyle: {
+        color: '#409eff'
+      }
+    }]
+  })
+}
+
+const initWordCloudChart = () => {
+  if (!wordCloudChart.value) return
+  const chart = echarts.init(wordCloudChart.value)
+  chart.setOption({
+    tooltip: {
+      show: true
+    },
+    series: [{
+      type: 'wordCloud',
+      shape: 'circle',
+      left: 'center',
+      top: 'center',
+      width: '90%',
+      height: '90%',
+      right: null,
+      bottom: null,
+      sizeRange: [12, 60],
+      rotationRange: [-90, 90],
+      rotationStep: 45,
+      gridSize: 8,
+      drawOutOfBound: false,
+      textStyle: {
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        color: function () {
+          return 'rgb(' + [
+            Math.round(Math.random() * 160),
+            Math.round(Math.random() * 160),
+            Math.round(Math.random() * 160)
+          ].join(',') + ')';
+        }
+      },
+      emphasis: {
+        focus: 'self',
+        textStyle: {
+          shadowBlur: 10,
+          shadowColor: '#333'
+        }
+      },
+      data: stats.value.chatKeywords
     }]
   })
 }

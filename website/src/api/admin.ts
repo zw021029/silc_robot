@@ -41,7 +41,10 @@ export const getChatList = (params: {
   page: number; 
   pageSize: number;
   search?: string;
-  status?: string;
+  username?: string;
+  tag?: string;
+  startDate?: string;
+  endDate?: string;
 }) => {
   return request.get('/api/admin/chats', { params })
 }
@@ -54,14 +57,36 @@ export const getChatDetail = (chatId: string) => {
 /*feedback*/
 
 // 获取用户反馈
-export const getFeedbackList = (params: { page: number; pageSize: number, search?: string, type?: string, status?: string }) => {
-  return request.get('/api/admin/feedback', { params })
+export const getFeedbackList = (params: { 
+    page: number; 
+    pageSize: number; 
+    search?: string; 
+    type?: string; 
+    status?: string;
+    username?: string;
+    startDate?: string;
+    endDate?: string;
+}) => {
+    return request.get('/api/admin/feedback', { params })
 }
 
 /*user*/
 
 // 获取用户列表
-export const getUserList = (params: { page: number; pageSize: number }) => {
+export const getUserList = (params: { 
+  page: number; 
+  pageSize: number;
+  search?: string;
+  username?: string;
+  nickname?: string;
+  role?: string;
+  status?: string;
+  email?: string;
+  registerStartDate?: string;
+  registerEndDate?: string;
+  updateStartDate?: string;
+  updateEndDate?: string;
+}) => {
   return request.get('/api/admin/users', { params })
 }
 
@@ -71,6 +96,57 @@ export const getUserDetail = (userId: string) => {
 }
 
 // 更新用户状态
-export const updateUserStatus = (userId: string, status: number) => {
-  return request.put(`/api/admin/users/${userId}/status`, { status })
+export const updateUserStatus = (userId: string, data: { status: string }) => {
+  return request.put(`/api/admin/users/${userId}/status`, data)
+}
+
+// 重置用户密码
+export const resetUserPassword = (userId: string, password: string) => {
+  return request.put(`/api/admin/users/${userId}/password`, { password })
+}
+
+/*store*/
+
+// 获取商品列表
+export const getStoreItems = (params: { page: number; pageSize: number }) => {
+  return request.get('/api/admin/store/items', { params })
+}
+
+// 添加商品
+export const addStoreItem = (data: { name: string; points: number; description: string; image: string; stock: number }) => {
+  return request.post('/api/admin/store/items', data)
+}
+
+// 更新商品
+export const updateStoreItem = (id: string, data: { name: string; points: number; description: string; image: string; stock: number }) => {
+  return request.put(`/api/admin/store/items/${id}`, data)
+}
+
+// 删除商品
+export const deleteStoreItem = (id: string) => {
+  return request.delete<{
+    message: string;
+    hasRecords: boolean;
+  }>(`/api/admin/store/items/${id}`)
+}
+
+// 获取兑换记录
+export const getExchangeRecords = (params: { 
+  page: number; 
+  pageSize: number;
+  search?: string;
+  startDate?: string;
+  endDate?: string;
+}) => {
+  return request.get('/api/admin/store/records', { params })
+}
+
+// 核销兑换码
+export const verifyByCode = (code: string) => {
+  return request.post('/api/admin/store/records/verify', { code })
+}
+
+// 更新商品状态
+export const updateStoreItemStatus = (id: string, status: 'active' | 'inactive') => {
+  return request.put(`/api/admin/store/items/${id}/status`, { status })
 }

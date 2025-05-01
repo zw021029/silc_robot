@@ -24,8 +24,8 @@
         class="filter-select"
         @change="handleSearch"
       >
-        <el-option label="建议" value="suggestion" />
-        <el-option label="问题" value="problem" />
+        <el-option label="问题反馈" value="bug" />
+        <el-option label="功能建议" value="feature" />
         <el-option label="其他" value="other" />
       </el-select>
       <el-select
@@ -39,6 +39,16 @@
         <el-option label="处理中" value="processing" />
         <el-option label="已解决" value="resolved" />
       </el-select>
+      <el-date-picker
+        v-model="dateRange"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        value-format="YYYY-MM-DD"
+        class="date-picker"
+        @change="handleSearch"
+      />
     </div>
 
     <el-table
@@ -47,11 +57,19 @@
       style="width: 100%"
       border
     >
+      <el-table-column prop="username" label="用户名" width="120" />
       <el-table-column prop="content" label="反馈内容" min-width="300" show-overflow-tooltip />
-      <el-table-column prop="feedback_type" label="类型" width="100">
+      <el-table-column prop="type" label="类型" width="100">
         <template #default="{ row }">
-          <el-tag :type="getTypeTag(row.feedback_type)">
-            {{ getTypeText(row.feedback_type) }}
+          <el-tag :type="getTypeTag(row.type)">
+            {{ getTypeText(row.type) }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="status" label="处理状态" width="100">
+        <template #default="{ row }">
+          <el-tag :type="getStatusTag(row.status)">
+            {{ getStatusText(row.status) }}
           </el-tag>
         </template>
       </el-table-column>
@@ -90,12 +108,20 @@
     >
       <div v-if="currentFeedback" class="feedback-detail">
         <el-descriptions :column="1" border>
+          <el-descriptions-item label="用户名">
+            {{ currentFeedback.username }}
+          </el-descriptions-item>
           <el-descriptions-item label="反馈内容">
             {{ currentFeedback.content }}
           </el-descriptions-item>
           <el-descriptions-item label="反馈类型">
-            <el-tag :type="getTypeTag(currentFeedback.feedback_type)">
-              {{ getTypeText(currentFeedback.feedback_type) }}
+            <el-tag :type="getTypeTag(currentFeedback.type)">
+              {{ getTypeText(currentFeedback.type) }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="处理状态">
+            <el-tag :type="getStatusTag(currentFeedback.status)">
+              {{ getStatusText(currentFeedback.status) }}
             </el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="联系方式">
@@ -122,8 +148,10 @@ import { formatDateTime } from '@/utils/date'
 
 interface FeedbackItem {
   id: number
+  username: string
   content: string
-  feedback_type: string
+  type: string
+  status: string
   created_at: string
   user_id: string
   contact_info: string
@@ -134,6 +162,7 @@ const feedbackList = ref<FeedbackItem[]>([])
 const searchQuery = ref('')
 const filterType = ref('')
 const filterStatus = ref('')
+const dateRange = ref<[string, string] | null>(null)
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -142,15 +171,20 @@ const currentFeedback = ref<FeedbackItem | null>(null)
 
 const getTypeTag = (type: string) => {
   const typeMap: Record<string, string> = {
-    '功能建议': 'success',
-    '问题反馈': 'danger',
-    '其他': 'info'
+    'feature': 'success',
+    'bug': 'danger',
+    'other': 'info'
   }
   return typeMap[type] || 'info'
 }
 
 const getTypeText = (type: string) => {
-  return type || '其他'
+  const typeMap: Record<string, string> = {
+    'feature': '功能建议',
+    'bug': '问题反馈',
+    'other': '其他'
+  }
+  return typeMap[type] || '其他'
 }
 
 const getStatusTag = (status: string) => {
@@ -179,7 +213,9 @@ const fetchFeedbackList = async () => {
       pageSize: pageSize.value,
       search: searchQuery.value,
       type: filterType.value,
-      status: filterStatus.value
+      status: filterStatus.value,
+      startDate: dateRange.value?.[0],
+      endDate: dateRange.value?.[1]
     })
     feedbackList.value = response.list
     total.value = response.total
@@ -222,9 +258,6 @@ onMounted(() => {
 <style scoped>
 .feedback-container {
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .page-header {
@@ -240,6 +273,7 @@ onMounted(() => {
   display: flex;
   gap: 16px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .search-input {
@@ -248,6 +282,10 @@ onMounted(() => {
 
 .filter-select {
   width: 120px;
+}
+
+.date-picker {
+  width: 300px;
 }
 
 .pagination {

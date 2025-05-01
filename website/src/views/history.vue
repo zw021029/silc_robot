@@ -5,43 +5,36 @@
     </div>
 
     <div class="search-bar">
-      <el-input
-        v-model="searchQuery"
-        placeholder="搜索对话内容"
-        class="search-input"
-        clearable
-        @clear="handleSearch"
-        @input="handleSearch"
-      >
+      <el-input v-model="searchQuery" placeholder="搜索对话内容" class="search-input" clearable @clear="handleSearch"
+        @input="handleSearch">
         <template #prefix>
-          <el-icon><Search /></el-icon>
+          <el-icon>
+            <Search />
+          </el-icon>
         </template>
       </el-input>
-      <el-select
-        v-model="filterStatus"
-        placeholder="筛选状态"
-        clearable
-        class="filter-select"
-        @change="handleSearch"
-      >
-        <el-option label="成功" value="success" />
-        <el-option label="失败" value="error" />
+      <el-input v-model="usernameQuery" placeholder="搜索用户名" class="search-input" clearable @clear="handleSearch"
+        @input="handleSearch">
+        <template #prefix>
+          <el-icon>
+            <User />
+          </el-icon>
+        </template>
+      </el-input>
+      <el-select v-model="filterTag" placeholder="筛选标签" clearable class="filter-select" @change="handleSearch">
+        <el-option v-for="tag in availableTags" :key="tag" :label="tag" :value="tag" />
       </el-select>
+      <el-date-picker v-model="dateRange" type="daterange" range-separator="至" start-placeholder="开始日期"
+        end-placeholder="结束日期" @change="handleSearch" />
     </div>
 
-    <el-table
-      v-loading="loading"
-      :data="chatList"
-      style="width: 100%"
-      border
-    >
+    <el-table v-loading="loading" :data="chatList" style="width: 100%" border>
+      <el-table-column prop="username" label="用户名" width="120" />
       <el-table-column prop="question" label="问题" min-width="200" show-overflow-tooltip />
       <el-table-column prop="answer" label="回答" min-width="300" show-overflow-tooltip />
-      <el-table-column prop="status" label="状态" width="100">
+      <el-table-column prop="tag" label="标签" width="120">
         <template #default="{ row }">
-          <el-tag :type="row.status === 'success' ? 'success' : 'danger'">
-            {{ row.status === 'success' ? '成功' : '失败' }}
-          </el-tag>
+          <el-tag v-if="row.tag">{{ row.tag }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="createdAt" label="创建时间" width="180">
@@ -59,27 +52,17 @@
     </el-table>
 
     <div class="pagination">
-      <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :total="total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
+      <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :total="total"
+        :page-sizes="[10, 20, 50, 100]" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" />
     </div>
 
     <!-- 详情对话框 -->
-    <el-dialog
-      v-model="detailVisible"
-      title="对话详情"
-      width="800px"
-    >
+    <el-dialog v-model="detailVisible" title="对话详情" width="800px">
       <div v-if="currentChat" class="chat-detail">
         <div class="chat-message">
           <div class="message-header">
-            <span class="user-label">用户</span>
+            <span class="user-label">{{ currentChat.username }}</span>
             <span class="time">{{ formatDate(currentChat.createdAt) }}</span>
           </div>
           <div class="message-content">{{ currentChat.question }}</div>
@@ -93,10 +76,9 @@
         </div>
         <div class="chat-info">
           <el-descriptions :column="2" border>
-            <el-descriptions-item label="状态">
-              <el-tag :type="currentChat.status === 'success' ? 'success' : 'danger'">
-                {{ currentChat.status === 'success' ? '成功' : '失败' }}
-              </el-tag>
+            <el-descriptions-item label="标签">
+              <el-tag v-if="currentChat.tag">{{ currentChat.tag }}</el-tag>
+              <span v-else>无</span>
             </el-descriptions-item>
             <el-descriptions-item label="耗时">
               {{ currentChat.duration }}ms
@@ -116,16 +98,17 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { Search } from '@element-plus/icons-vue'
+import { Search, User } from '@element-plus/icons-vue'
 import { getChatList, getChatDetail } from '@/api/admin'
 import { ElMessage } from 'element-plus'
 import { formatDateTime } from '@/utils/date'
 
 interface ChatItem {
   id: string
+  username: string
   question: string
   answer: string
-  status: 'success' | 'error'
+  tag: string
   createdAt: string
   updatedAt: string
   duration: number
@@ -136,7 +119,10 @@ interface ChatItem {
 const loading = ref(false)
 const chatList = ref<ChatItem[]>([])
 const searchQuery = ref('')
-const filterStatus = ref('')
+const usernameQuery = ref('')
+const filterTag = ref('')
+const dateRange = ref<string[]>([])
+const availableTags = ref<string[]>([])
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -150,10 +136,22 @@ const fetchChatList = async () => {
       page: currentPage.value,
       pageSize: pageSize.value,
       search: searchQuery.value,
-      status: filterStatus.value
+      username: usernameQuery.value,
+      tag: filterTag.value,
+      startDate: dateRange.value?.[0] || '',
+      endDate: dateRange.value?.[1] || ''
     })
     chatList.value = response.items
     total.value = response.total
+    // 更新可用标签列表
+    const tags = new Set<string>()
+    response.items.forEach((item: { tag?: string }) => {
+      if (item.tag) {
+        tags.add(item.tag)
+      }
+    })
+
+    availableTags.value = Array.from(tags)
   } catch (error) {
     ElMessage.error('获取对话记录失败')
   } finally {
@@ -179,7 +177,10 @@ const handleCurrentChange = (val: number) => {
 const handleViewDetail = async (row: ChatItem) => {
   try {
     const response = await getChatDetail(row.id)
-    currentChat.value = response
+    currentChat.value = {
+      ...response,
+      username: row.username
+    }
     detailVisible.value = true
   } catch (error) {
     ElMessage.error('获取对话详情失败')
@@ -198,9 +199,6 @@ onMounted(() => {
 <style scoped>
 .history-container {
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .page-header {
@@ -273,4 +271,4 @@ onMounted(() => {
 .chat-info {
   margin-top: 20px;
 }
-</style> 
+</style>

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Items from '@/views/Items.vue'
+import Records from '@/views/Records.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,6 +23,18 @@ const router = createRouter({
         {
           path: '',
           component: () => import('@/views/dashboard.vue')
+        }
+      ]
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: () => import('@/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/users.vue')
         }
       ]
     },
@@ -59,7 +73,43 @@ const router = createRouter({
           component: () => import('@/views/feedback.vue')
         }
       ]
-    }
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: () => import('@/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/settings.vue')
+        }
+      ]
+    },
+    {
+      path: '/items',
+      name: 'Items',
+      component: () => import('@/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/Items.vue')
+        }
+      ]
+    },
+    {
+      path: '/records',
+      name: 'Records',
+      component: () => import('@/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/Records.vue')
+        }
+      ]
+    },
   ]
 })
 

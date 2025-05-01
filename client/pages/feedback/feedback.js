@@ -44,7 +44,7 @@ Page({
       const res = await postFeedback({
         content: feedbackContent,
         contact_info: contactInfo,
-        feedback_type: typeArray[typeIndex]
+        type: typeArray[typeIndex]
       });
 
       if (res.success) {

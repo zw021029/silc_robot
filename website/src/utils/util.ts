@@ -21,7 +21,7 @@ export const formatTime = (date: Date | string | number, format = 'YYYY-MM-DD HH
 // 防抖函数
 export const debounce = (fn: Function, delay = 300) => {
   let timer: number | null = null
-  return function (...args: any[]) {
+  return function (this: any, ...args: any[]) {
     if (timer) clearTimeout(timer)
     timer = window.setTimeout(() => {
       fn.apply(this, args)
@@ -32,7 +32,7 @@ export const debounce = (fn: Function, delay = 300) => {
 // 节流函数
 export const throttle = (fn: Function, delay = 300) => {
   let timer: number | null = null
-  return function (...args: any[]) {
+  return function (this: any, ...args: any[]) {
     if (timer) return
     timer = window.setTimeout(() => {
       fn.apply(this, args)

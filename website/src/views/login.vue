@@ -46,11 +46,10 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { User, Lock } from '@element-plus/icons-vue'
-import request from '@/utils/request'
-import { adminLogin } from '@/api/admin'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 const loginFormRef = ref()
 const loading = ref(false)
 
@@ -70,16 +69,12 @@ const handleLogin = async () => {
   
   loading.value = true
   try {
-    console.log('发送登录请求:', loginForm)
-    const response = await adminLogin(loginForm)
-    console.log('登录响应:', response)
-    if (response.success && response.data && response.data.token) {
-      localStorage.setItem('token', response.data.token)
-      localStorage.setItem('userInfo', JSON.stringify(response.data.user))
+    const success = await authStore.login(loginForm)
+    if (success) {
       ElMessage.success('登录成功')
       router.push('/dashboard')
     } else {
-      ElMessage.error('登录失败：响应格式错误')
+      ElMessage.error('登录失败，请检查用户名和密码')
     }
   } catch (error) {
     console.error('登录错误:', error)

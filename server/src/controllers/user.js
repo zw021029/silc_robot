@@ -50,50 +50,26 @@ exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    console.log(`尝试登录: 用户名=${username}, 密码=${password}`);
-
     // 查找用户
     const user = await User.findOne({ username });
     if (!user) {
-      console.log(`用户不存在: ${username}`);
-      return res.status(404).json({ message: '用户不存在' });
+      // 即使用户不存在，也执行一次虚假的 bcrypt 比较，消耗相同时间
+      await bcrypt.compare(password, '$2a$10$fakehashfakehashfakehashfake'); // 虚假哈希
+      return res.status(401).json({ message: '用户名或密码错误' }); // 模糊提示
     }
 
-    console.log(`找到用户: id=${user._id}, 用户名=${user.username}, 密码哈希=${user.password}`);
+    console.log(`找到用户: id=${user._id}, 用户名=${user.username}`);
 
-    // 临时解决方案：硬编码管理员密码验证
-    // 注意：这是临时措施，仅用于解决当前问题，应尽快移除此代码
     let isMatch = false;
-
-    // 管理员账户特殊处理
-    if (user.role === 'admin' && (username === 'admin' || username === 'superadmin')) {
-      // 特定管理员账户的固定密码
-      if (username === 'admin' && password === 'admin123') {
-        isMatch = true;
-      } else if (username === 'superadmin' && (password === 'admin888' || password === 'admin123')) {
-        isMatch = true;
-      }
-      console.log(`管理员特殊密码验证: ${isMatch ? '通过' : '失败'}`);
-    } else {
-      // 普通用户账户特殊处理
-      if (password === '123456') {
-        isMatch = true;
-        console.log('默认密码123456验证通过');
-      } else {
-        // 尝试标准验证
-        const bcrypt = require('bcryptjs');
-        isMatch = await bcrypt.compare(password, user.password);
-        console.log(`标准密码验证结果: ${isMatch ? '通过' : '失败'}`);
-      }
-    }
-
+    isMatch = await bcrypt.compare(password, user.password);
+    console.log(`标准密码验证结果: ${isMatch ? '通过' : '失败'}`);
     if (!isMatch) {
-      return res.status(401).json({ message: '密码错误' });
+      return res.status(401).json({ message: '用户名或密码错误' });
     }
 
     // 检查用户状态
     if (user.status !== 'active') {
-      console.log(`用户状态不是active: ${user.status}`);
+      logger.dev(`用户状态不是active: ${user.status}`);
       return res.status(403).json({ message: '账号已被禁用' });
     }
 
@@ -410,15 +386,15 @@ exports.selectRobot = async (req, res) => {
 exports.wechatLogin = async (req, res) => {
   try {
     const { code, userInfo } = req.body;
-    
+
     // 调用微信接口获取openid和session_key
     const appid = config.wechat.appid;
     const secret = config.wechat.secret;
     const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`;
-    
+
     const response = await fetch(url);
     const data = await response.json();
-    
+
     if (data.errcode) {
       return res.status(400).json({
         code: 400,
@@ -431,7 +407,7 @@ exports.wechatLogin = async (req, res) => {
 
     // 查找用户
     let user = await User.findOne({ openid });
-    
+
     if (!user) {
       // 创建新用户
       user = new User({
@@ -446,7 +422,7 @@ exports.wechatLogin = async (req, res) => {
         city: userInfo.city,
         language: userInfo.language
       });
-      
+
       await user.save();
     }
 

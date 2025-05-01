@@ -36,6 +36,11 @@
           {{ formatDate(row.createdAt) }}
         </template>
       </el-table-column>
+      <el-table-column prop="updatedAt" label="修改时间" width="180">
+        <template #default="{ row }">
+          {{ formatDate(row.updatedAt) }}
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="200" fixed="right">
         <template #default="{ row }">
           <el-button-group>
@@ -261,9 +266,6 @@ onMounted(() => {
 <style scoped>
 .knowledge-container {
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .page-header {
