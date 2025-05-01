@@ -27,7 +27,7 @@ export const getPointsStats = () => {
 
 // 获取系统整体统计数据
 export const getSystemStats = () => {
-  return request.get('/api/stats/system')
+  return request.get('/api/admin/stats')
 }
 
 // 导出统计数据
