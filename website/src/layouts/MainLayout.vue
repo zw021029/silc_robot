@@ -37,11 +37,6 @@
           <el-icon><List /></el-icon>
           <span>兑换记录</span>
         </router-link>
-
-        <router-link to="/settings" class="nav-item">
-          <el-icon><Setting /></el-icon>
-          <span>系统设置</span>
-        </router-link>
       </nav>
     </aside>
 
@@ -57,8 +52,7 @@
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item command="settings">个人设置</el-dropdown-item>
-                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+                <el-dropdown-item command="logout" >退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>

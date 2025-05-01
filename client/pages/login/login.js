@@ -112,13 +112,13 @@ Page({
         app.globalData.userInfo = res.user
       }
       
-      // 用户是管理员
-      if (res.user && (res.user.role === 'admin' || res.user.isAdmin === true)) {
-        wx.setStorageSync('isAdmin', true)
-        app.globalData.isAdmin = true
-        reLaunch('/pages/admin/index')
-        return
-      }
+      // // 用户是管理员
+      // if (res.user && (res.user.role === 'admin' || res.user.isAdmin === true)) {
+      //   wx.setStorageSync('isAdmin', true)
+      //   app.globalData.isAdmin = true
+      //   reLaunch('/pages/admin/index')
+      //   return
+      // }
       
       // 普通用户处理逻辑
       if (res.user && res.user.selectedRobot) {
@@ -159,13 +159,13 @@ Page({
         app.globalData.userInfo = res.data.user
       }
       
-      // 用户是管理员
-      if (res.data.user && (res.data.user.role === 'admin' || res.data.user.isAdmin === true)) {
-        wx.setStorageSync('isAdmin', true)
-        app.globalData.isAdmin = true
-        reLaunch('/pages/admin/index')
-        return
-      }
+      // // 用户是管理员
+      // if (res.data.user && (res.data.user.role === 'admin' || res.data.user.isAdmin === true)) {
+      //   wx.setStorageSync('isAdmin', true)
+      //   app.globalData.isAdmin = true
+      //   reLaunch('/pages/admin/index')
+      //   return
+      // }
       
       // 获取页面栈
       const pages = getCurrentPages()

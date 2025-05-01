@@ -75,18 +75,6 @@ const router = createRouter({
       ]
     },
     {
-      path: '/settings',
-      name: 'Settings',
-      component: () => import('@/layouts/MainLayout.vue'),
-      meta: { requiresAuth: true },
-      children: [
-        {
-          path: '',
-          component: () => import('@/views/settings.vue')
-        }
-      ]
-    },
-    {
       path: '/items',
       name: 'Items',
       component: () => import('@/layouts/MainLayout.vue'),
