@@ -37,7 +37,6 @@
   </view>
 
   <view class="empty" wx:if="{{!loading && historyList.length === 0}}">
-    <image src="/assets/images/empty.png" class="empty-icon" />
     <text>暂无历史记录</text>
   </view>
 </view> 

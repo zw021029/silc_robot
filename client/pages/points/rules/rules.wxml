@@ -17,7 +17,6 @@
     
     <!-- 空状态 -->
     <view class="empty-state" wx:if="{{!rules || rules.length === 0 && !loading}}">
-      <image src="/assets/icons/empty.png" mode="aspectFit"></image>
       <text>暂无积分规则</text>
     </view>
   </view>

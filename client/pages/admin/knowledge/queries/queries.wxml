@@ -93,7 +93,6 @@
 
     <!-- 空状态 -->
     <view class="empty" wx:if="{{queryList.length === 0 && !loading}}">
-      <image src="/assets/images/empty.png" mode="aspectFit"></image>
       <text>暂无调用记录</text>
     </view>
   </scroll-view>

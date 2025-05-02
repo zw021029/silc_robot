@@ -45,7 +45,6 @@
 
   <!-- 空状态 -->
   <view class="empty" wx:if="{{userList.length === 0 && !loading}}">
-    <image src="/assets/images/empty.png" mode="aspectFit"></image>
     <text>暂无用户数据</text>
   </view>
 </view> 

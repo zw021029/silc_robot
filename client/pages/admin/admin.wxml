@@ -81,7 +81,6 @@
   </view>
 
   <view class="empty" wx:if="{{!loading && users.length === 0 && chats.length === 0}}">
-    <image src="/assets/images/empty.png" class="empty-icon" />
     <text>暂无数据</text>
   </view>
 </view> 

@@ -62,7 +62,6 @@
       
       <!-- 空状态 -->
       <view class="empty-state" wx:if="{{pointsList.length === 0 && !loading}}">
-        <image src="/assets/icons/empty.png" mode="aspectFit"></image>
         <text>暂无积分记录</text>
       </view>
     </view>
@@ -71,7 +70,6 @@
     <view class="load-more" wx:if="{{hasMore && pointsList.length > 0}}" bindtap="loadMore">
       <text wx:if="{{!loading}}">加载更多</text>
       <view class="loading" wx:else>
-        <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
         <text>加载中...</text>
       </view>
     </view>

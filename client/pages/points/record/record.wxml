@@ -27,7 +27,6 @@
     
     <!-- 空状态 -->
     <view class="empty" wx:if="{{recordList.length === 0 && !loading}}">
-      <image class="empty-image" src="/assets/icons/empty.png" mode="aspectFit"></image>
       <text>暂无兑换记录</text>
     </view>
   </view>
@@ -38,7 +37,6 @@
     <view class="modal-content">
       <view class="modal-header">
         <text>兑换详情</text>
-        <image class="close-btn" src="/assets/icons/close.png" mode="aspectFit" bindtap="hideDetail"></image>
       </view>
       <view class="modal-body">
         <view class="detail-item">
@@ -75,7 +73,6 @@
   <view class="load-more" wx:if="{{hasMore && recordList.length > 0}}">
     <text wx:if="{{!loading}}">加载更多</text>
     <view class="loading" wx:else>
-      <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
       <text>加载中...</text>
     </view>
   </view>

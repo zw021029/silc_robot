@@ -38,10 +38,6 @@ Page({
    */
   async getUserInfoFromServer() {
     try {
-      wx.showLoading({
-        title: '加载中...'
-      })
-      
       const res = await getUserInfo()
       
       // 检查响应格式

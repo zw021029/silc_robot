@@ -59,7 +59,6 @@ Page({
   // 加载积分统计
   async loadPointsStats() {
     try {
-      wx.showLoading({ title: '加载中' })
       const res = await getPointsStats()
       if (res.success) {
         this.setData({

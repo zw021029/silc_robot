@@ -44,7 +44,6 @@
       </view>
     </block>
     <view class="empty" wx:else>
-      <image class="empty-image" src="/assets/icons/empty.png" mode="aspectFit"></image>
       <text>暂无可兑换商品</text>
     </view>
   </view>
@@ -55,7 +54,6 @@
     <view class="modal-content">
       <view class="modal-header">
         <text>确认兑换</text>
-        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideConfirmModal"></image>
       </view>
       <view class="modal-body">
         <view class="item-preview">
@@ -82,7 +80,6 @@
     <view class="modal-content">
       <view class="modal-header">
         <text>兑换成功</text>
-        <image src="/assets/icons/close.png" mode="aspectFit" bindtap="hideRedeemModal"></image>
       </view>
       <view class="modal-body">
         <view class="success-icon">

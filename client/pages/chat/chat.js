@@ -48,6 +48,8 @@ Page({
     showShareMenu: false,
     currentShareMessage: null,
     sending: false,
+    inputFocus: false,
+    keyboardHeight: 0,
     robot: null,
     currentRobot: null,
     scrollTop: 0,
@@ -58,7 +60,7 @@ Page({
     userInfo: null,
     isPulling: false,  // 是否正在下拉
     pullDistance: 0,   // 下拉距离
-    lastScrollTop: 0   // 上次滚动位置
+    lastScrollTop: 0,   // 上次滚动位置
   },
 
   async onLoad(options) {
@@ -1013,6 +1015,43 @@ Page({
   onTouchEnd() {
     if (this.data.isPulling) {
       this.setData({ isPulling: false, pullDistance: 0 });
+    }
+  },
+
+  onInputFocus(e) {
+    const keyboardHeight = e.detail.height || 0;
+    // 减去tabbar的高度（98rpx）
+    const finalKeyboardHeight = Math.max(0, keyboardHeight - 98);
+    
+    this.setData({
+      inputFocus: true,
+      keyboardHeight: finalKeyboardHeight
+    });
+    
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 300);
+  },
+
+  onInputBlur() {
+    this.setData({
+      inputFocus: false,
+      keyboardHeight: 0
+    });
+  },
+
+  // 监听键盘高度变化
+  onKeyboardHeightChange(e) {
+    const keyboardHeight = e.detail.height;
+    // 减去tabbar的高度（98rpx）
+    const finalKeyboardHeight = Math.max(0, keyboardHeight - 98);
+    
+    this.setData({
+      keyboardHeight: finalKeyboardHeight
+    });
+    
+    if (keyboardHeight > 0) {
+      this.scrollToBottom();
     }
   },
 }) 

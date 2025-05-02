@@ -26,7 +26,6 @@
     </block>
     
     <view class="empty-list" wx:if="{{notifications.length === 0 && !loading}}">
-      <image class="empty-icon" src="/assets/icons/empty.png" mode="aspectFit"></image>
       <text class="empty-text">暂无通知消息</text>
     </view>
   </view>

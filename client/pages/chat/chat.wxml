@@ -58,8 +58,20 @@
     </view>
   </scroll-view>
   <!-- 输入区域 -->
-  <view class="input-area">
-    <input class="message-input" value="{{inputValue}}" placeholder="输入消息..." bindinput="onInput" bindconfirm="onConfirm" confirm-type="send" adjust-position="{{false}}" />
+  <view class="input-area" style="transform: translateY(-{{keyboardHeight}}px)">
+    <input class="message-input" 
+           value="{{inputValue}}" 
+           placeholder="输入消息..." 
+           bindinput="onInput" 
+           bindconfirm="onConfirm" 
+           confirm-type="send" 
+           adjust-position="{{false}}"
+           cursor-spacing="20"
+           hold-keyboard="{{true}}"
+           focus="{{inputFocus}}"
+           bindfocus="onInputFocus"
+           bindblur="onInputBlur"
+           bindkeyboardheightchange="onKeyboardHeightChange" />
     <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="onSend">发送</view>
   </view>
 </view>

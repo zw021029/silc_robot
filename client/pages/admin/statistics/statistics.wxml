@@ -8,7 +8,6 @@
     <picker mode="selector" range="{{dateRanges}}" value="{{dateRangeIndex}}" bindchange="handleDateRangeChange">
       <view class="date-picker">
         <text>{{dateRanges[dateRangeIndex]}}</text>
-        <image src="/assets/icons/arrow-down.png" mode="aspectFit" class="arrow"></image>
       </view>
     </picker>
   </view>
@@ -112,7 +111,6 @@
 
   <!-- 加载中 -->
   <view class="loading" wx:if="{{loading}}">
-    <image src="/assets/icons/loading.gif" mode="aspectFit"></image>
     <text>加载中...</text>
   </view>
 </view> 
