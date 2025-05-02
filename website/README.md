@@ -1,33 +1,41 @@
-# silc_robot
+# SILC Robot 网站
 
-This template should help get you started developing with Vue 3 in Vite.
+基于Vue 3和TypeScript开发的前端网站，提供机器人控制界面、状态监控和用户管理等功能。
 
-## Recommended IDE Setup
+## 系统要求
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js 16+
+- npm 7+
+- Vue 3.2+
 
-## Type Support for `.vue` Imports in TS
+## 安装步骤
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+1. 安装依赖
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2. 配置环境变量
+```bash
+cp .env.example .env # 编辑.env文件，设置必要的环境变量
+```
 
-```sh
+## 使用方法
+
+1. 启动开发服务器
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+2. 构建生产版本
+```bash
 npm run build
 ```
+
+## 部署说明
+
+1. 运行`npm run build`构建生产版本
+
+2. 将`dist/`文件夹下的内容放到服务器上，可以通过`scp`命令，注意`/var/www/silc-robot/`目录的所有者应该设置为`www-data`，权限设置为`755`
+
+3. 配置服务器上的Nginx
