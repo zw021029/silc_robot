@@ -1,4 +1,4 @@
-import { getHistoryList, deleteHistory, searchHistory } from '../../api/history'
+import { getHistoryList, deleteHistory, searchHistory, getHotQuestions } from '../../api/history'
 import { formatTime } from '../../utils/util'
 
 Page({
@@ -14,11 +14,13 @@ Page({
     stats: {
       total: 0,
       today: 0
-    }
+    },
+    hotQuestions: []
   },
 
   onLoad() {
     this.loadHistoryList()
+    this.getHotQuestions()
   },
 
   // 加载历史记录列表
@@ -143,5 +145,23 @@ Page({
     if (this.data.hasMore) {
       this.loadHistoryList()
     }
-  }
+  },
+
+  // 获取热门问题
+  async getHotQuestions() {
+    try {
+      const res = await getHotQuestions()
+      if (res.success) {
+        this.setData({
+          hotQuestions: res.data
+        })
+      }
+    } catch (error) {
+      console.error('获取热门问题失败:', error)
+      wx.showToast({
+        title: '获取热门问题失败',
+        icon: 'none'
+      })
+    }
+  },
 }) 

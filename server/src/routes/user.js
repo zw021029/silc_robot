@@ -5,15 +5,18 @@ const { authenticateToken } = require('../middlewares/auth');
 const validate = require('../middlewares/validate');
 
 // 验证token
+// ~ 没有使用
 router.get('/verify', userController.verifyUserToken);
 
 // 发送验证码
+// TODO 没有接入服务
 router.post('/send-code', validate.validatePhone, userController.sendVerificationCode);
 
 // 用户登录
 router.post('/login', userController.login);
 
 // 用户注册
+// TODO 没有接入服务
 router.post('/register', userController.register);
 
 // 获取用户信息
@@ -26,9 +29,11 @@ router.put('/info', authenticateToken, userController.updateUserInfo);
 router.post('/select-robot', authenticateToken, userController.selectRobot);
 
 // 获取用户列表（管理员）
+// ~ 没有使用
 router.get('/list', authenticateToken, userController.getUserList);
 
 // 更新用户信息
+// ~ 没有使用
 router.put('/profile', authenticateToken, userController.updateProfile);
 
 // 微信登录

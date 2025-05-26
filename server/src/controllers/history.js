@@ -2,6 +2,8 @@ const Message = require('../models/message');
 const User = require('../models/user');
 const Robot = require('../models/robot');
 const logger = require('../utils/logger');
+const historyService = require('../services/history');
+const { handleError } = require('../middlewares/error');
 
 // 获取历史记录列表
 exports.getHistoryList = async (req, res) => {
@@ -228,4 +230,17 @@ exports.getHistoryStats = async (req, res) => {
       error: '获取历史记录统计失败'
     });
   }
+};
+
+// 获取热门问题
+exports.getHotQuestions = async (req, res) => {
+    try {
+        const hotQuestions = await historyService.getHotQuestions();
+        res.json({
+            success: true,
+            data: hotQuestions
+        });
+    } catch (error) {
+        handleError(error, res);
+    }
 }; 

@@ -1,42 +1,92 @@
-<view class="container" enablePullDownRefresh="true">
-  <view class="history-list">
-    <view 
-      class="history-item"
-      wx:for="{{historyList}}"
-      wx:key="_id"
-      data-history="{{item}}"
-      bindtap="handleViewDetail"
-    >
-      <view class="history-header">
-        <image 
-          class="robot-avatar" 
-          src="/assets/images/{{item.robotId}}.png"
-        />
-        <text class="robot-name" wx:if="{{item.robotName === 'xiwen'}}">悉文</text>
-        <text class="robot-name" wx:elif="{{item.robotName === 'xihui'}}">悉荟</text>
-        <text class="robot-name" wx:else>悉文</text>
-        <text class="history-time">{{item.formattedTime}}</text>
+<view class="container">
+  <!-- 热门问题区域 -->
+  <view class="hot-questions-section">
+    <view class="section-header">
+      <view class="section-title">
+        <text class="icon">🔥</text>
+        <text>大家都在问</text>
       </view>
-      <view class="history-content">
-        <text class="question">{{item.question || item.content}}</text>
-        <text class="answer">{{item.answer || item.reply}}</text>
-      </view>
-      <!-- <view class="history-footer">
-        <text class="score">评分: {{item.score !== null ? item.score : '未评分'}}</text>
-        <text class="points">获得积分: +{{item.points || 0}}</text>
-      </view> -->
+      <text class="section-subtitle">热门问题TOP3</text>
+    </view>
+    <view class="hot-questions-list">
+      <block wx:for="{{hotQuestions}}" wx:key="question">
+        <view class="hot-question-item">
+          <view class="rank-badge">{{index + 1}}</view>
+          <view class="question-content">
+            <view class="question-text">{{item.question}}</view>
+            <view class="question-count">
+              <text class="icon">👥</text>
+              <text>{{item.count}}次提问</text>
+            </view>
+          </view>
+        </view>
+      </block>
     </view>
   </view>
 
-  <view class="loading" wx:if="{{loading}}">
-    <text>加载中...</text>
-  </view>
+  <!-- 历史记录区域 -->
+  <view class="history-section">
+    <view class="section-header">
+      <view class="section-title">
+        <text class="icon">📝</text>
+        <text>历史记录</text>
+      </view>
+      <text class="section-subtitle">共{{stats.total}}条记录</text>
+    </view>
+    <scroll-view 
+      class="history-scroll" 
+      scroll-y="true" 
+      enable-flex="true"
+      bindscrolltolower="onReachBottom"
+      refresher-enabled="{{true}}"
+      bindrefresherrefresh="onPullDownRefresh"
+    >
+      <view class="history-list">
+        <view 
+          class="history-item"
+          wx:for="{{historyList}}"
+          wx:key="_id"
+          data-history="{{item}}"
+          bindtap="handleViewDetail"
+        >
+          <view class="history-header">
+            <view class="robot-info">
+              <image 
+                class="robot-avatar" 
+                src="/assets/images/{{item.robotId}}.png"
+              />
+              <text class="robot-name" wx:if="{{item.robotName === 'xiwen'}}">悉文</text>
+              <text class="robot-name" wx:elif="{{item.robotName === 'xihui'}}">悉荟</text>
+              <text class="robot-name" wx:else>悉文</text>
+            </view>
+            <text class="history-time">{{item.formattedTime}}</text>
+          </view>
+          <view class="history-content">
+            <view class="question">
+              <text class="label">Q</text>
+              <text class="text">{{item.question || item.content}}</text>
+            </view>
+            <view class="answer">
+              <text class="label">A</text>
+              <text class="text">{{item.answer || item.reply}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
 
-  <view class="no-more" wx:if="{{!hasMore && historyList.length > 0}}">
-    <text>没有更多记录了</text>
-  </view>
+      <view class="loading" wx:if="{{loading}}">
+        <view class="loading-icon"></view>
+        <text>加载中...</text>
+      </view>
 
-  <view class="empty" wx:if="{{!loading && historyList.length === 0}}">
-    <text>暂无历史记录</text>
+      <view class="no-more" wx:if="{{!hasMore && historyList.length > 0}}">
+        <text>— 已经到底啦 —</text>
+      </view>
+
+      <view class="empty" wx:if="{{!loading && historyList.length === 0}}">
+        <image class="empty-icon" src="/assets/images/empty.png" />
+        <text>暂无历史记录</text>
+      </view>
+    </scroll-view>
   </view>
 </view> 

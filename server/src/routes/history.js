@@ -15,4 +15,7 @@ router.delete('/:id', auth.verifyToken, historyController.deleteHistory);
 // 获取历史记录统计
 router.get('/stats', auth.verifyToken, historyController.getHistoryStats);
 
+// 获取热门问题
+router.get('/hot-questions', auth.verifyToken, historyController.getHotQuestions);
+
 module.exports = router; 

@@ -20,12 +20,12 @@ export const getKnowledgeList = (params: { page: number; pageSize: number; categ
 }
 
 // 上传知识库文件
-export const uploadKnowledge = (data: FormData) => {
+export const uploadKnowledge = (data: FormData) => {    // TODO 传参标明要传递什么参数，还以为是上传文件
   return request.post('/api/admin/knowledge/upload', data)
 }
 
 // 修改知识库
-export const updateKnowledge = (id: string, data: any) => {
+export const updateKnowledge = (id: string, data: any) => {// TODO 传参标明要传递什么参数
   return request.put(`/api/admin/knowledge/${id}`, data)
 }
 
@@ -122,6 +122,11 @@ export const updateStoreItem = (id: string, data: { name: string; points: number
   return request.put(`/api/admin/store/items/${id}`, data)
 }
 
+// 更新商品状态
+export const updateStoreItemStatus = (id: string, status: 'active' | 'inactive') => {
+  return request.put(`/api/admin/store/items/${id}/status`, { status })
+}
+
 // 删除商品
 export const deleteStoreItem = (id: string) => {
   return request.delete<{
@@ -129,6 +134,8 @@ export const deleteStoreItem = (id: string) => {
     hasRecords: boolean;
   }>(`/api/admin/store/items/${id}`)
 }
+
+/*exchange*/
 
 // 获取兑换记录
 export const getExchangeRecords = (params: { 
@@ -143,10 +150,5 @@ export const getExchangeRecords = (params: {
 
 // 核销兑换码
 export const verifyByCode = (code: string) => {
-  return request.post('/api/admin/store/records/verify', { code })
-}
-
-// 更新商品状态
-export const updateStoreItemStatus = (id: string, status: 'active' | 'inactive') => {
-  return request.put(`/api/admin/store/items/${id}/status`, { status })
+  return request.post('/api/admin/store/records/verify', { code })  // TODO 核销失败返回500
 }

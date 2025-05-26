@@ -117,6 +117,31 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <!-- 热门问题区域 -->
+    <el-row :gutter="20" class="chart-row">
+      <el-col :span="24">
+        <el-card class="chart-card">
+          <template #header>
+            <div class="card-header">
+              <span>热门问题 TOP5</span>
+            </div>
+          </template>
+          <div class="hot-questions-container">
+            <div v-for="(item, index) in stats.hotQuestions" :key="index" class="hot-question-item">
+              <div class="rank-badge">{{ index + 1 }}</div>
+              <div class="question-content">
+                <div class="question-text">{{ item.question }}</div>
+                <div class="question-count">
+                  <el-icon><User /></el-icon>
+                  <span>{{ item.count }}次提问</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -137,6 +162,7 @@ interface Stats {
   knowledgeDistribution: Array<{ name: string; value: number }>
   feedbackAnalysis: Array<{ name: string; value: number }>
   chatKeywords: Array<{ name: string; value: number }>
+  hotQuestions: Array<{ question: string; count: number }>
 }
 
 const stats = ref<Stats>({
@@ -147,7 +173,8 @@ const stats = ref<Stats>({
   chatTrends: [],
   knowledgeDistribution: [],
   feedbackAnalysis: [],
-  chatKeywords: []
+  chatKeywords: [],
+  hotQuestions: []
 })
 
 const chatTrendChart = ref<HTMLElement | null>(null)
@@ -364,5 +391,60 @@ onMounted(() => {
 
 .chart-container {
   padding: 20px;
+}
+
+.hot-questions-container {
+  padding: 20px;
+}
+
+.hot-question-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.hot-question-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.rank-badge {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.question-content {
+  flex: 1;
+}
+
+.question-text {
+  font-size: 16px;
+  color: #303133;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.question-count {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #909399;
+}
+
+.question-count .el-icon {
+  margin-right: 4px;
 }
 </style> 

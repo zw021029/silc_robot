@@ -23,7 +23,8 @@ export default defineConfig({
     proxy: {
       // 配置代理规则
       '/api': {
-        target: 'https://silc-robot.sirius1y.top',
+        target: 'https://silcai.cn',
+        // target: 'http://localhost:3005',
         changeOrigin: true,
       }
     }

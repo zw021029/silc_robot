@@ -196,6 +196,34 @@ class AdminService {
                 Knowledge.countDocuments()
             ]);
 
+            // 获取热门问题
+            const hotQuestions = await Message.aggregate([
+                {
+                    $match: {
+                        type: 'user'  // 只匹配用户发送的消息
+                    }
+                },
+                {
+                    $group: {
+                        _id: '$content',
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $sort: { count: -1 }
+                },
+                {
+                    $limit: 5
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        question: '$_id',
+                        count: 1
+                    }
+                }
+            ]);
+
             // 计算最近15天的问答趋势
             const fifteenDaysAgo = new Date();
             fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 15);
@@ -268,7 +296,8 @@ class AdminService {
                     name: feedback.type,
                     value: feedback.count
                 })),
-                chatKeywords: chatKeywords
+                chatKeywords: chatKeywords,
+                hotQuestions: hotQuestions
             };
         } catch (error) {
             logger.error('获取统计数据失败:', error);

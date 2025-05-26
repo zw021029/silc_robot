@@ -28,4 +28,9 @@ export const getHistoryStats = () => {
 // 搜索历史记录
 export const searchHistory = (keyword) => {
   return request.get('/api/history/search', { params: { keyword } })
+}
+
+// 获取热门问题
+export const getHotQuestions = () => {
+  return request.get('/api/history/hot-questions')
 } 
