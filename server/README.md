@@ -14,7 +14,7 @@
 
 ## 系统要求
 
-- Node.js 14+
+- Node.js 16+
 - MongoDB 4.4+
 - Redis 6+
 - PostgreSQL 13+
@@ -37,33 +37,79 @@ server/
 
 ## 安装步骤
 
-1. 安装依赖
+### 确保已经安装了node npm
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 22
+
+# Verify the Node.js version:
+node -v # Should print "v22.16.0".
+nvm current # Should print "v22.16.0".
+
+# Verify npm version:
+npm -v # Should print "10.9.2".
+
+```
+
+### 安装依赖
 ```bash
 npm install
 ```
 
-2. 配置环境变量
+### 配置环境变量
 ```bash
 cp .env.example .env # 编辑.env文件，设置必要的环境变量
 ```
 
-3. 安装和配置数据库
+### 安装数据库
 
-### MongoDB
-```bash
-# 安装MongoDB
-sudo apt update
-sudo apt install mongodb
+#### MongoDB
 
-# 启动MongoDB服务
-sudo systemctl start mongodb
-sudo systemctl enable mongodb
+1. **导入 MongoDB 公开 GPG 密钥**：
+   在终端中运行以下命令来确保软件包签名验证能够工作。
+   ```bash
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+   --dearmor
+   ```
 
-# 初始化数据库
-mongosh < scripts/init-mongo.js
-```
+2. **创建 MongoDB 列表文件**：
 
-### PostgreSQL
+   ```bash
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+   ```
+
+3. **更新本地包数据库**：
+   更新你的包数据库：
+   ```bash
+   sudo apt-get update
+   ```
+
+4. **安装 MongoDB 包**：
+   现在你可以安装 MongoDB：
+   ```bash
+   sudo apt-get install -y mongodb-org
+   ```
+
+5. **启动 MongoDB**：
+   使用以下命令启动 MongoDB 服务：
+   ```bash
+   sudo systemctl start mongod
+   ```
+
+6. **设置开机自启**：
+   如果希望 MongoDB 随系统启动自动运行，可以执行：
+   ```bash
+   sudo systemctl enable mongod
+   ```
+
+#### PostgreSQL
 ```bash
 # 安装PostgreSQL
 sudo apt update
@@ -74,10 +120,10 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 
 # 创建数据库和用户
-sudo -u postgres psql -f scripts/init-pg.sql
+sudo -u postgres psql -f scripts/pg-init.sql
 ```
 
-### Redis
+#### Redis
 ```bash
 # 安装Redis
 sudo apt update
@@ -87,6 +133,32 @@ sudo apt install redis-server
 sudo systemctl start redis-server
 sudo systemctl enable redis-server
 ```
+
+### 使用 pm2 管理
+
+#### 安装 PM2
+npm install pm2 -g
+
+#### 启动应用
+pm2 start app.js
+
+#### 查看应用状态
+pm2 list
+
+#### 停止/重启/删除应用
+pm2 stop <app_name|id>
+pm2 restart <app_name|id>
+pm2 delete <app_name|id>
+
+#### 日志查看
+pm2 logs
+
+#### 监控应用
+pm2 monit
+
+#### 设置开机自启
+pm2 startup
+pm2 save
 
 ## 数据库管理
 
