@@ -9,14 +9,12 @@ const validate = require('../middlewares/validate');
 router.get('/verify', userController.verifyUserToken);
 
 // 发送验证码
-// TODO 没有接入服务
 router.post('/send-code', validate.validatePhone, userController.sendVerificationCode);
 
 // 用户登录
 router.post('/login', userController.login);
 
 // 用户注册
-// TODO 没有接入服务
 router.post('/register', userController.register);
 
 // 获取用户信息

@@ -8,7 +8,7 @@ module.exports = {
     debug: process.env.DEBUG || true,
     baseUrl: process.env.API_BASE_URL || 'http://localhost:3005'
   },
-  
+
   // 数据库配置
   database: {
     url: process.env.MONGODB_URI || 'mongodb://sirius:132239@127.0.0.1:27017/silc_robot',
@@ -64,6 +64,20 @@ module.exports = {
   // 微信配置
   wechat: {
     appid: process.env.WECHAT_APPID || 'your-appid-here',
-    secret: process.env.WECHAT_SECRET || 'your-secret-here'
+    secret: process.env.WECHAT_APPID || 'your-secret-here'
+  },
+
+  // tencent cloud SMS 配置
+  tencentSms: {
+    credential: {
+      secretId: process.env.SMS_SECRECT_ID || "SecretId",
+      secretKey: process.env.SMS_SECRECT_KEY || "SecretKey",
+    },
+    region: "",
+    profile: {
+      httpProfile: {
+        endpoint: "sms.tencentcloudapi.com",
+      },
+    },
   }
 };

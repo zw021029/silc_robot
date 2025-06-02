@@ -1,10 +1,5 @@
 -- sudo -u postgres psql -f pq_init.sql
 
--- 强制断开所有现有连接
-SELECT pg_terminate_backend(pg_stat_activity.pid) 
-FROM pg_stat_activity 
-WHERE pg_stat_activity.datname = 'silc_robot';
-
 -- 如果存在同名数据库则删除
 DROP DATABASE IF EXISTS silc_robot;
 

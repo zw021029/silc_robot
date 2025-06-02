@@ -7,21 +7,56 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const fetch = require('node-fetch');
+const smsService = require('../utils/sendsms');
 
 // 发送验证码
 exports.sendVerificationCode = async (req, res) => {
   try {
     const { phone } = req.body;
 
-    // 生成6位随机验证码
-    const code = Math.random().toString().slice(-6);
+    // 验证手机号格式
+    if (!/^(?:\+86|0086)?1[3-9]\d{9}$/.test(phone)) {
+      return res.status(400).json({
+        code: 400,
+        message: '无效的手机号码格式'
+      });
+    }
 
-    // TODO: 调用短信服务发送验证码
-    // 这里需要集成实际的短信服务，比如阿里云短信、腾讯云短信等
+    // 检查是否频繁发送
+    const lastSentTime = await redis.get(`verification_code_time:${phone}`);
+    if (lastSentTime) {
+      return res.status(429).json({
+        code: 429,
+        message: '请求过于频繁，请稍后再试'
+      });
+    }
 
-    // 将验证码保存到数据库或缓存中
-    // 设置5分钟过期
+    // 生成6位数字验证码
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+
+    // 调用短信服务发送验证码
+    if (process.env.NODE_ENV === 'production') {
+      try {
+        const result = await smsService.sendVerificationCode(phone, code);
+        logger.info('短信发送成功', {
+          phone,
+          requestId: result.requestId,
+          fee: result.details[0].fee
+        });
+      } catch (error) {
+        logger.error('短信发送失败:', error);
+        return res.status(500).json({
+          code: 500,
+          message: '短信发送失败，请稍后重试',
+          error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+      }
+    }
+
+    // 将验证码保存到Redis，设置5分钟过期
     await redis.set(`verification_code:${phone}`, code, 'EX', 300);
+    // 设置发送频率限制，1分钟内不能重复发送
+    await redis.set(`verification_code_time:${phone}`, Date.now(), 'EX', 60);
 
     // 开发环境下直接返回验证码
     if (process.env.NODE_ENV === 'development') {
@@ -108,46 +143,99 @@ exports.login = async (req, res) => {
 // 用户注册
 exports.register = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, phone, code } = req.body;
+
+    // 验证必填字段
+    if (!username || !password || !phone || !code) {
+      return res.status(400).json({
+        code: 400,
+        message: '请填写所有必填字段'
+      });
+    }
+
+    // 验证手机号格式
+    if (!/^(?:\+86|0086)?1[3-9]\d{9}$/.test(phone)) {
+      return res.status(400).json({
+        code: 400,
+        message: '无效的手机号码格式'
+      });
+    }
+
+    // 检查验证码
+    const verificationCode = await redis.get(`verification_code:${phone}`);
+    if (!verificationCode) {
+      return res.status(400).json({
+        code: 400,
+        message: '验证码已过期，请重新获取'
+      });
+    }
+    
+    if (verificationCode !== code) {
+      return res.status(400).json({
+        code: 400,
+        message: '验证码错误'
+      });
+    }
 
     // 检查用户名是否已存在
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: '用户名已存在' });
+      return res.status(400).json({
+        code: 400,
+        message: '用户名已存在'
+      });
     }
 
-    // 检查邮箱是否已存在
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) {
-      return res.status(400).json({ message: '邮箱已存在' });
+    // 检查手机号是否已存在
+    const existingPhone = await User.findOne({ phone });
+    if (existingPhone) {
+      return res.status(400).json({
+        code: 400,
+        message: '该手机号已注册'
+      });
     }
 
     // 创建新用户
     const user = new User({
       username,
-      password,
-      email
+      password, // 密码加密在model层处理
+      phone,
+      registerTime: new Date(),
+      lastLogin: new Date()
     });
 
     await user.save();
+
+    // 注册成功后删除验证码
+    await redis.del(`verification_code:${phone}`);
+    await redis.del(`verification_code_time:${phone}`);
 
     // 生成token
     const token = generateToken(user);
 
     // 返回用户信息和token
     res.status(201).json({
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        selectedRobot: user.selectedRobot
+      code: 200,
+      message: '注册成功',
+      data: {
+        token,
+        user: {
+          id: user._id,
+          username: user.username,
+          phone: user.phone,
+          role: user.role,
+          selectedRobot: user.selectedRobot,
+          registerTime: user.registerTime,
+          lastLogin: user.lastLogin
+        }
       }
     });
   } catch (error) {
     logger.error('注册失败:', error);
-    res.status(500).json({ message: '服务器错误' });
+    res.status(500).json({
+      code: 500,
+      message: '服务器错误，注册失败'
+    });
   }
 };
 
