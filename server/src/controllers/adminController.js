@@ -394,11 +394,8 @@ class AdminController {
                 throw new ApiError(404, '用户不存在');
             }
 
-            // 加密密码
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(password, salt);
-
-            user.password = hashedPassword;
+            // 直接设置新密码，让模型中间件处理加密
+            user.password = password;
             await user.save();
 
             res.json({

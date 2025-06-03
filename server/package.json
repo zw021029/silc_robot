@@ -30,6 +30,7 @@
     "pg": "^8.15.6",
     "segmentit": "^2.0.3",
     "stopwords-zh": "^0.4.0",
+    "tencentcloud-sdk-nodejs-sms": "^4.1.24",
     "winston": "^3.11.0",
     "ws": "^8.18.1",
     "xlsx": "^0.18.5"
